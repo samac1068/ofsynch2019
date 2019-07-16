@@ -1,0 +1,701 @@
+{
+  "damps": [
+    {
+      "Hidden": 0,
+      "ID": 1,
+      "cyc_id": 26,
+      "cycstr": "32-34",
+      "description": "He desires to paint you the dreamiest, shadiest, quietest, most enchanting landscape.",
+      "ma_12301d": 0,
+      "ma_12302": 1,
+      "ma_12304": 0,
+      "ma_12304a": 1,
+      "ma_12304b": 0,
+      "mobcap": "another value here",
+      "op_id": 1,
+      "oplongname": "Blah blah",
+      "opshortname": "Operation 1",
+      "pay_operation_id": 1,
+      "payop": "OEF",
+      "record_status_id": 2,
+      "recordstatusdesc": "Updated",
+      "tcs_operation_id": 1,
+      "tcsop": "OEF",
+      "transfer_status_id": 3,
+      "transferstatusdesc": "Resent to NIPR",
+      "uic_to_NIPR": 1,
+      "conusa_opid": 2,
+      "conusashortname": "OIF",
+      "orderOpCount": 2,
+      "missionidcount": 0
+    },
+    {
+      "Hidden": 1,
+      "ID": 2,
+      "cyc_id": 27,
+      "cycstr": "33-35",
+      "description": "Nothing will content them but the extremest limit of the land.",
+      "ma_12301d": 1,
+      "ma_12302": 0,
+      "ma_12304": 1,
+      "ma_12304a": 0,
+      "ma_12304b": 1,
+      "mobcap": "Something here",
+      "op_id": 2,
+      "oplongname": "Something longer here",
+      "opshortname": "Operation 2",
+      "pay_operation_id": 2,
+      "payop": "OIF",
+      "record_status_id": 1,
+      "recordstatusdesc": "Insert",
+      "tcs_operation_id": 2,
+      "tcsop": "OIF",
+      "transfer_status_id": 4,
+      "transferstatusdesc": "Completed",
+      "uic_to_NIPR": 1,
+      "conusa_opid": 1,
+      "conusashortname": "OEF",
+      "orderOpCount": 2
+    }
+  ],
+  "operations":[
+    {
+      "op_id": 1,
+      "operation": "Operation 1",
+      "unitrqmt_visible": true,
+      "operation_long":"blah blah",
+      "CRC": false,
+      "toNIPR": true
+    },
+    {
+      "op_id": 2,
+      "operation": "Operation 2",
+      "unitrqmt_visible": true,
+      "operation_long":"blah blah",
+      "CRC": false,
+      "toNIPR": true
+    },
+    {
+      "op_id": 3,
+      "operation": "Operation 3",
+      "unitrqmt_visible": true,
+      "operation_long":"some comment for three",
+      "CRC": false,
+      "toNIPR": true
+    },
+    {
+      "op_id": 4,
+      "operation": "Operation 4",
+      "unitrqmt_visible": true,
+      "operation_long":"some comment for four",
+      "CRC": false,
+      "toNIPR": true
+    }
+  ],
+  "geoloc":[
+    {
+      "geoloccd": "MBTC",
+      "arloc": null,
+      "armyGeoAreaCd": null,
+      "awisDataSorcId": "GEOFILE",
+      "cindAreaCd": 3,
+      "cntryCd": "CA",
+      "coastlineid": null,
+      "dateLastChng": "10/30/2009",
+      "dateRecdCancel": null,
+      "dateRecdCreat": "3/1/1989",
+      "geoGraphicCoord": "560215N0963030W",
+      "geoLocationName": "KELSEY",
+      "gsaCityCd": null,
+      "gsaCountryCd": null,
+      "gsaStateCd": null,
+      "icas": "CZEE",
+      "instlnName": null,
+      "instlnTypeCd": "APT",
+      "logPlngRptgCd": "3D",
+      "oceanAreaCd": null,
+      "primaryGetLocCd": "MBTC",
+      "provinceCd": null,
+      "recordOwnerUic": "DMABAA",
+      "recordStatusCd": "A",
+      "stanma": "KELSEY",
+      "stAbbrn": null,
+      "stCd": null,
+      "tacticalZoneCd": null,
+      "utmGridCoord": null,
+      "worldAreaCdId": null,
+      "wtrAreaCd": null,
+      "recordClassnCd": null,
+      "Longitude": "-96.50833333",
+      "Latitude": "56.0375"
+    },
+    {
+      "geoloccd": "MC00",
+      "arloc": null,
+      "armyGeoAreaCd": null,
+      "awisDataSorcId": "GEOFILE",
+      "cindAreaCd": 5,
+      "cntryCd": "MO",
+      "coastlineid": null,
+      "dateLastChng": "10/30/2009",
+      "dateRecdCancel": null,
+      "dateRecdCreat": "3/1/1989",
+      "geoGraphicCoord": "221359N1133459E",
+      "geoLocationName": "MACAU",
+      "gsaCityCd": null,
+      "gsaCountryCd": null,
+      "gsaStateCd": null,
+      "icas": null,
+      "instlnName": "MACAU OPA AREA",
+      "instlnTypeCd": "OPA",
+      "logPlngRptgCd": "5C",
+      "oceanAreaCd": null,
+      "primaryGetLocCd": "MC00",
+      "provinceCd": null,
+      "recordOwnerUic": "DJJ010",
+      "recordStatusCd": "A",
+      "stanma": "MACAU",
+      "stAbbrn": null,
+      "stCd": null,
+      "tacticalZoneCd": null,
+      "utmGridCoord": "49QGE663609",
+      "worldAreaCdId": null,
+      "wtrAreaCd": null,
+      "recordClassnCd": null,
+      "Longitude": "113.5930556",
+      "Latitude": "22.23305556"
+    }
+  ],
+  "locationid":[
+    {
+      "id": 2095,
+      "opid": 1,
+      "operation": "OEF-HOA",
+      "locationid": 1861,
+      "missionlocation": "SOME FICTIONAL PLACE"
+    },
+    {
+      "id": 8860,
+      "opid": 1,
+      "operation": "SFOR",
+      "locationid": 2499,
+      "missionlocation": "SOME OTHER FICTIONAL PLACE"
+    }
+  ],
+  "missionassign":[
+    {
+      "id": 1,
+      "opid": 1,
+      "locationid": 678
+    },
+    {
+      "id": 8752,
+      "opid": 2,
+      "locationid": 1681
+    }
+  ],
+  "transfer":[
+    {
+      "transferStatusId": 1,
+      "transferStatusDescription": "Awaiting Transfer to NIPR"
+    },
+    {
+      "transferStatusId": 2,
+      "transferStatusDescription": "Sent to NIPR"
+    },
+    {
+      "transferStatusId": 3,
+      "transferStatusDescription": "Resent to NIPR"
+    },
+    {
+      "transferStatusId": 4,
+      "transferStatusDescription": "Completed"
+    },
+    {
+      "transferStatusId": 5,
+      "transferStatusDescription": "Error"
+    },
+    {
+      "transferStatusId": 6,
+      "transferStatusDescription": "Received from NIPR"
+    }
+  ],
+  "record":[
+    {
+      "recordStatusId": 1,
+      "recordStatusDescription": "Insert"
+    },
+    {
+      "recordStatusId": 2,
+      "recordStatusDescription": "Update"
+    },
+    {
+      "recordStatusId": 3,
+      "recordStatusDescription": "Delete"
+    },
+    {
+      "recordStatusId": 4,
+      "recordStatusDescription": "Approved"
+    },
+    {
+      "recordStatusId": 5,
+      "recordStatusDescription": "Closed"
+    },
+    {
+      "recordStatusId": 6,
+      "recordStatusDescription": "Rejected"
+    },
+    {
+      "recordStatusId": 7,
+      "recordStatusDescription": "Killed"
+    }
+  ],
+  "states":[
+    {
+      "stateCode": "AL",
+      "stateName": "Alabama",
+      "rrc": 81,
+      "conusa": 1,
+      "flexabbrev": null,
+      "fema": 4
+    },
+    {
+      "stateCode": "AK",
+      "stateName": "Alaska",
+      "rrc": null,
+      "conusa": null,
+      "flexabbrev": null,
+      "fema": 10
+    },
+    {
+      "stateCode": "AZ",
+      "stateName": "Arizona",
+      "rrc": 63,
+      "conusa": 5,
+      "flexabbrev": null,
+      "fema": 9
+    },
+    {
+      "stateCode": "AR",
+      "stateName": "Arkansas",
+      "rrc": 90,
+      "conusa": 5,
+      "flexabbrev": null,
+      "fema": 6
+    }
+  ],
+  "country":[
+    {
+      "country": "AFGHANISTAN",
+      "countrycoe": "AF"
+    },
+    {
+      "country": "ALAND ISLANDS",
+      "countrycoe": "AX"
+    },
+    {
+      "country": "ALBANIA",
+      "countrycoe": "AL"
+    },
+    {
+      "country": "ALGERIA",
+      "countrycoe": "DZ"
+    },
+    {
+      "country": "AMERICAN SAMOA",
+      "countrycoe": "AS"
+    },
+    {
+      "country": "ANDORRA",
+      "countrycoe": "AD"
+    }
+  ],
+  "funtype":[
+    {
+      "id": 1,
+      "fundtype": "Officer"
+    },
+    {
+      "id": 2,
+      "fundtype": "Enlisted"
+    },
+    {
+      "id": 3,
+      "fundtype": "Travel"
+    }
+  ],
+  "orders":[
+    {
+      "id": 15,
+      "operation": "OIF",
+      "opid": 2,
+      "cycle": "9-Jul",
+      "cycid": 5,
+      "visible": 0,
+      "fpopid": 34,
+      "description": "OIF 07-09",
+      "planid": null,
+      "ordid": null
+    },
+    {
+      "id": 16,
+      "operation": "OEF",
+      "opid": 1,
+      "cycle": "9-Jul",
+      "cycid": 5,
+      "visible": 0,
+      "fpopid": 35,
+      "description": "OEF 07-09",
+      "planid": 3,
+      "ordid": null
+    }
+  ],
+  "pay":[
+    {
+      "pay_operation_id": 1,
+      "payoperation": "OEF",
+      "opDescription": "OPERATION ENDURING FREEDOM",
+      "recordStatusId": 1,
+      "recordStatusDescription": "Insert",
+      "transferStatusId": 4,
+      "transferStatusDescription": "Complete"
+    },
+    {
+      "pay_operation_id": 2,
+      "payoperation": "OIF",
+      "opDescription": "OPERATION IRAQI FREEDOM",
+      "recordStatusId": 2,
+      "recordStatusDescription": "Update",
+      "transferStatusId": 4,
+      "transferStatusDescription": "Complete"
+    }
+  ],
+  "tcs":[
+    {
+      "tcs_operation_id": 1,
+      "tcsoperation": "OEF",
+      "opDescription": "OPERATION ENDURING FREEDOM",
+      "recordStatusId": 1,
+      "recordStatusDescription": "Insert",
+      "transferStatusId": 4,
+      "transferStatusDescription": "Complete"
+    },
+    {
+      "tcs_operation_id": 2,
+      "tcsoperation": "OIF",
+      "opDescription": "OPERATION IRAQI FREEDOM",
+      "recordStatusId": 2,
+      "recordStatusDescription": "Update",
+      "transferStatusId": 4,
+      "transferStatusDescription": "Complete"
+    }
+  ],
+  "conusa":[
+    {
+      "opid": 1,
+      "opShortName": "OEF",
+      "opLongName": "OPERATION ENDURING FREEDOM",
+      "opAuthId": 2,
+      "opHidden": 0,
+      "recordStatusDescription": null,
+      "transferStatusDescription": null
+    },
+    {
+      "opid": 2,
+      "opShortName": "OIF",
+      "opLongName": "OPERATION IRAQI FREEDOM",
+      "opAuthId": 2,
+      "opHidden": 0,
+      "recordStatusDescription": null,
+      "transferStatusDescription": null
+    }
+  ],
+  "location":[
+    {
+      "locationid": 4,
+      "location": "BOSNIA AND HERZEGOVINA",
+      "missionconus": 0,
+      "country": "BOSNIA AND HERZEGOVINA",
+      "countrycode": "BK",
+      "installation": "BOSNIA AND HERZEGOVINA",
+      "display": "BOSNIA AND HERZEGOVINA",
+      "state": null,
+      "hidden": 0,
+      "geolocation": "BK00",
+      "geocoordination": "440000N018000E",
+      "zipcode": 4631,
+      "recordStatusDescription": "Update",
+      "transferStatusDescription": "Complete",
+      "latitude": "43.842451",
+      "longitude": "18.253784",
+      "arloc": "BA000",
+      "uncc": "BA",
+      "cz": 0
+    },
+    {
+      "locationid": 8,
+      "location": "GERMANY",
+      "missionconus": 0,
+      "country": "GERMANY",
+      "countrycode": "DE",
+      "installation": "GERMANY",
+      "display": "GERMANY",
+      "state": null,
+      "hidden": 0,
+      "geolocation": "GM00",
+      "geocoordination": "523059N0132359E",
+      "zipcode": 4631,
+      "recordStatusDescription": "Update",
+      "transferStatusDescription": "Complete",
+      "latitude": "50.736544",
+      "longitude": "10.195313",
+      "arloc": "DE000",
+      "uncc": "DE",
+      "cz": 0
+    }
+  ],
+  "fundcites":[
+    {
+      "fundid": 99,
+      "fundcode": "21 0 2020.0000 B1 B1TC 135197 21T1/T2 VIRQ F4210 AZVN2E 12161",
+      "fundEffDate": "10/1/2019",
+      "fundtype": 3,
+      "cic": "2020B1AZVN12161",
+      "mdc": 0,
+      "isconusbase": 0,
+      "fy1": 0,
+      "fy2": 0,
+      "fy3": 0,
+      "dept": 21,
+      "fy": 2010,
+      "bdn": 2020,
+      "limit": 0,
+      "oa": "B1",
+      "asn": "B1TC",
+      "ams": "135197",
+      "eor": "21T1/T2",
+      "mdep": "VIRQ",
+      "fcc": "F4210",
+      "statusid": 0,
+      "apc": "AZVN2E",
+      "fsn": 12161
+    },
+    {
+      "fundid": 100,
+      "fundcode": "21 0 2020.0000 B1 B1TC 135197 21T1/T2 VFRE F4210 AZVN2E 12161",
+      "fundEffDate": "10/1/2019",
+      "fundtype": 3,
+      "cic": "2020B1AZVP12161",
+      "mdc": 0,
+      "isconusbase": 0,
+      "fy1": 0,
+      "fy2": 0,
+      "fy3": 0,
+      "dept": 21,
+      "fy": 2010,
+      "bdn": 2020,
+      "limit": 0,
+      "oa": "B1",
+      "asn": "B1TC",
+      "ams": "135197",
+      "eor": "21T1/T2",
+      "mdep": "VFRE",
+      "fcc": "F4209",
+      "statusid": 0,
+      "apc": "AZVP2E",
+      "fsn": 12161
+    }
+  ],
+  "tpfdd":[
+    {
+      "pid": "101AD",
+      "descriptionShort": "OEF Short",
+      "descriptionLong": "OEF Long",
+      "cdate": null,
+      "type": "EXEC",
+      "active": 0,
+      "deploy": 0,
+      "operationId": 1
+    },
+    {
+      "pid": "103AD",
+      "descriptionShort": "OIF Short",
+      "descriptionLong": "OIF Long",
+      "cdate": null,
+      "type": "EXEC",
+      "active": 0,
+      "deploy": 0,
+      "operationId": 2
+    }
+  ],
+  "cycle":[
+    {
+      "cyc_id": 27,
+      "cycle": "33-35",
+      "fy": 33,
+      "hidden": 1,
+      "recordStatusDescription": "Update",
+      "transferStatusDescription": "Completed"
+    },
+    {
+      "cyc_id": 26,
+      "cycle": "32-34",
+      "fy": 32,
+      "hidden": 0,
+      "recordStatusDescription": "Update",
+      "transferStatusDescription": "Completed"
+    },
+    {
+      "cyc_id": 25,
+      "cycle": "31-33",
+      "fy": 31,
+      "hidden": 0,
+      "recordStatusDescription": "Update",
+      "transferStatusDescription": "Completed"
+    },
+    {
+      "cyc_id": 24,
+      "cycle": "30-32",
+      "fy": 30,
+      "hidden": 0,
+      "recordStatusDescription": "Update",
+      "transferStatusDescription": "Completed"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  },
+  "data_columns": {
+    "ofs_damps" : [
+        {
+          "data_column_id": 2,
+          "data_column_nm": "Hidden",
+          "data_column_display_nm": "HIDDEN",
+          "data_column_width": 55,
+          "data_column_disabled": 0,
+          "data_column_renderer": "CheckBoxRenderer"
+        },
+        {
+          "data_column_id": 1,
+          "data_column_nm": "ID",
+          "data_column_display_nm": "ID",
+          "data_column_width": 40,
+          "data_column_disabled": 0,
+          "data_column_renderer": null
+        },
+        {
+          "data_column_id": 3,
+          "data_column_nm": "description",
+          "data_column_display_nm": "DESCRIPTION",
+          "data_column_width": null,
+          "data_column_disabled": 0,
+          "data_column_renderer": null
+        },
+        {
+          "data_column_id": 6,
+          "data_column_nm": "payop",
+          "data_column_display_nm": "PAY",
+          "data_column_width": 130,
+          "data_column_disabled": 0,
+          "data_column_renderer": null
+        },
+        {
+          "data_column_id": 7,
+          "data_column_nm": "tcsop",
+          "data_column_display_nm": "TCS",
+          "data_column_width": 130,
+          "data_column_disabled": 0,
+          "data_column_renderer": null
+        },
+        {
+          "data_column_id": 8,
+          "data_column_nm": "opshortname",
+          "data_column_display_nm": "CONUSA",
+          "data_column_width": 130,
+          "data_column_disabled": 0,
+          "data_column_renderer": null
+        },
+        {
+          "data_column_id": 16,
+          "data_column_nm": "recordstatusdesc",
+          "data_column_display_nm": "RECORD STATUS",
+          "data_column_width": 70,
+          "data_column_disabled": 0,
+          "data_column_renderer": null
+        },
+        {
+          "data_column_id": 17,
+          "data_column_nm": "transferstatusdesc",
+          "data_column_display_nm": "TRANSFER STATUS",
+          "data_column_width": 70,
+          "data_column_disabled": 0,
+          "data_column_renderer": null
+        }
+    ],
+    "ofs_orders" : [
+      {
+        "data_column_id": 2,
+        "data_column_nm": "visible",
+        "data_column_display_nm": "VISIBLE",
+        "data_column_width": 55,
+        "data_column_disabled": 0,
+        "data_column_renderer": "CheckBoxRenderer"
+      },
+      {
+        "data_column_id": 1,
+        "data_column_nm": "ID",
+        "data_column_display_nm": "ID",
+        "data_column_width": 40,
+        "data_column_disabled": 0,
+        "data_column_renderer": null
+      },
+      {
+        "data_column_id": 3,
+        "data_column_nm": "operation",
+        "data_column_display_nm": "OPERATION",
+        "data_column_width": null,
+        "data_column_disabled": 0,
+        "data_column_renderer": null
+      },
+      {
+        "data_column_id": 4,
+        "data_column_nm": "cycle",
+        "data_column_display_nm": "CYCLE",
+        "data_column_width": 55,
+        "data_column_disabled": 0,
+        "data_column_renderer": null
+      },
+      {
+        "data_column_id": 7,
+        "data_column_nm": "fpop",
+        "data_column_display_nm": "ASSIGNED DAMPS",
+        "data_column_width": 150,
+        "data_column_disabled": 0,
+        "data_column_renderer": null
+      },
+      {
+        "data_column_id": 5,
+        "data_column_nm": "planid",
+        "data_column_display_nm": "PLANNING",
+        "data_column_width": 60,
+        "data_column_disabled": 0,
+        "data_column_renderer": null
+      },
+      {
+        "data_column_id": 6,
+        "data_column_nm": "ordid",
+        "data_column_display_nm": "ORDERS",
+        "data_column_width": 60,
+        "data_column_disabled": 0,
+        "data_column_renderer": null
+      }
+    ]
+  }
+}

@@ -1,0 +1,48 @@
+{
+    "damps": 
+      [ 
+        {"header": "ID", "columnDef": "ID", "width": 40, "checkbox": false, "hidden": false},
+        {"header": "Hidden", "columnDef": "Hidden", "width": 60, "checkbox": true, "hidden": false},
+        {"header": "Description", "columnDef": "description", "width": 300, "checkbox": false, "hidden": false},
+        {"header": "Pay OP", "columnDef": "payop", "width": 100, "checkbox": false, "hidden": false},
+        {"header": "TCS OP", "columnDef": "tcsop", "width": 100, "checkbox": false, "hidden": false},
+        {"header": "Short Name", "columnDef": "opshortname", "width": 120, "checkbox": false, "hidden": false},
+        {"header": "Record Status", "columnDef": "recordstatusdesc", "width": 60, "checkbox": false, "hidden": false},
+        {"header": "Transfer Status", "columnDef": "transferstatusdesc", "width": 60, "checkbox": false, "hidden": false},
+        {"header": "12301D", "columnDef": "ma_12301d", "width": 60, "checkbox": true, "hidden": false},
+        {"header": "12302", "columnDef": "ma_12302", "width": 60, "checkbox": true, "hidden": false},
+        {"header": "12304", "columnDef": "ma_12304", "width": 60, "checkbox": true, "hidden": false},
+        {"header": "12304A", "columnDef": "ma_12304a", "width": 60, "checkbox": true, "hidden": false},
+        {"header": "12304B", "columnDef": "ma_12304b", "width": 60, "checkbox": true, "hidden": false},
+        {"header": "MOBCAP", "columnDef": "mobcap", "width": 80, "checkbox": false, "hidden": false},
+        {"header": "Cycle", "columnDef": "cycstr", "width": 60, "checkbox": false, "hidden": false},
+        {"header": "Long Name", "columnDef": "oplongname", "width": 60, "checkbox": false, "hidden": false},
+        {"header": "UIC to NIPR", "columnDef": "uic_to_NIPR", "width": 60, "checkbox": true, "hidden": false}
+      ],
+      "orders": 
+      [ 
+        {"header": "Visible", "columnDef": "Visible", "width": 55, "checkbox": true, "hidden": false},
+        {"header": "ID", "columnDef": "ID", "width": 40, "checkbox": false, "hidden": false},
+        {"header": "OPERATION", "columnDef": "operation", "width": 230, "checkbox": false, "hidden": false},
+        {"header": "CYCLE", "columnDef": "cycle", "width": 55, "checkbox": false, "hidden": false},
+        {"header": "PLANNING", "columnDef": "PlainID", "width": 60, "checkbox": false, "hidden": false},
+        {"header": "ORDERS", "columnDef": "OrdID", "width": 60, "checkbox": false, "hidden": false},
+        {"header": "ASSIGNED DAMPS", "columnDef": "FPOp", "width": 150, "checkbox": false, "hidden": false}
+      ],
+      "pay": 
+      [ 
+        {"header": "ID", "columnDef": "ID", "width": 40, "checkbox": false, "hidden": false},
+        {"header": "OPERATION", "columnDef": "operation", "width": 140, "checkbox": false, "hidden": false},
+        {"header": "DESCRIPTION", "columnDef": "description", "width": 230, "checkbox": false, "hidden": false},
+        {"header": "RECORD STATUS", "columnDef": "recordstatusdesc", "width": 60, "checkbox": false, "hidden": false},
+        {"header": "TRANSFER STATUS", "columnDef": "transferstatusdesc", "width": 60, "checkbox": false, "hidden": false}
+      ],
+      "tcs": 
+      [ 
+        {"header": "ID", "columnDef": "ID", "width": 40, "checkbox": false, "hidden": false},
+        {"header": "OPERATION", "columnDef": "operation", "width": 140, "checkbox": false, "hidden": false},
+        {"header": "DESCRIPTION", "columnDef": "description", "width": 230, "checkbox": false, "hidden": false},
+        {"header": "RECORD STATUS", "columnDef": "recordstatusdesc", "width": 60, "checkbox": false, "hidden": false},
+        {"header": "TRANSFER STATUS", "columnDef": "transferstatusdesc", "width": 60, "checkbox": false, "hidden": false}
+      ]
+  }
