@@ -1,7 +1,8 @@
 import { DataService } from './../../services/data.service';
 import { CommService } from './../../services/comm.service';
 import { DatastoreService } from './../../services/datastore.service';
-import { Component, OnInit, ViewChild, ElementRef, HostListener, Renderer2 } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, HostListener, Renderer2, Input, ViewChildren } from '@angular/core';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-datawindow',
@@ -11,85 +12,43 @@ import { Component, OnInit, ViewChild, ElementRef, HostListener, Renderer2 } fro
 
 export class DatawindowComponent implements OnInit {
   @ViewChild('rightcol', {static: false}) rightcol: ElementRef;
-  
+   
   dgData: any = []; //Currently loaded information
   colData: any = []; //current column list
   colWidthData: string[] = [];
   colHeadData: string[] = [];
   showEditor: boolean = false;  //Display the edit panel or hide it.  Default is hidden
   availWidth: number; 
-  //selectColumns: any[] = [];
   isNewRecord: boolean = false;
-  //manualColumns: any [];
   subOpList: string [];
   curOperation: string;
-
- constructor(private ds: DatastoreService, private comm: CommService, private data:DataService) { }
+  allDataLoaded: boolean = false;
+  
+ constructor(private ds: DatastoreService, private comm: CommService, private data:DataService, private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
     this.data.getColumnData().subscribe((results) => { //Initiator
       for(var i = 0; i < this.ds.btnData.length; i++) {
-        if(results[this.ds.btnData[i]] != undefined && results[this.ds.btnData[i]] != null){
-          for(var k =0; k < results[this.ds.btnData[i]].length; k++)
+        if(results[this.ds.btnData[i][0]] != undefined && results[this.ds.btnData[i][0]] != null){
+          for(var k =0; k < results[this.ds.btnData[i][0]].length; k++)
           {
-            if(!results[this.ds.btnData[i]][k]['hidden'])
-              this.ds.columnHeaders[this.ds.btnData[i]] = results[this.ds.btnData[i]];
+            if(!results[this.ds.btnData[i][0]][k]['hidden'])
+              this.ds.columnHeaders[this.ds.btnData[i][0]] = results[this.ds.btnData[i][0]];
           }
+        }
+        else
+        {
+           if(this.ds.curSelectedButton != "" && this.ds.curSelectedButton != undefined)
+             alert("Unable to retrieve the column headers for the selected operation.  Please confirm dg-columns.json");
         }
       }
     });
 
     //Subscriptions
     this.comm.navbarClicked.subscribe(() => {
+      this.allDataLoaded = false;
       this.curOperation = this.ds.curSelectedButton;
-      this.data.getOperationData().subscribe((results) => {
-        // Load the returning data to be displayed
-        this.dgData = results;
-        this.ds.opsData[this.ds.curSelectedButton] = results;
-        
-        // Load the list of column headers for the selected operation
-        this.colHeadData = this.ds.columnHeaders[this.ds.curSelectedButton];
-      });
-      
-      this.availWidth = this.rightcol.nativeElement.offsetWidth;
-      this.setTableResize();
-
-      //Load the necessary suboperation information for the selected operation
-      switch(this.ds.curSelectedButton){
-        case "damps":
-          this.subOpList = ["pay","tcs","conusa","operations","cycle"];
-          break;
-        case "orders":
-          this.subOpList = ["operations","cycle","damps"];
-          break;
-        case "pay":
-          this.subOpList = [];
-          break;
-        case "tcs":
-          this.subOpList = [];
-          break;
-        case "conusa":
-          this.subOpList = [];
-          break;
-        case "missionlocation":
-          this.subOpList = ["country","status"];
-          break;
-        case "fundcites":
-          this.subOpList = ["fundtype"];
-          break;
-        case "operations":
-          this.subOpList = [];
-          break;
-        case "tpfdd":
-          this.subOpList = ["opeartions", "tpfdd"];
-          break;
-        case "cycles":
-          this.subOpList = [];
-          break;
-      }
-      
-      // Grab the support data for the selected operation button
-      this.getSubOpData(this.subOpList);
+      this.loadSelectedButton()
     });
 
     // Canceled clicked
@@ -97,9 +56,67 @@ export class DatawindowComponent implements OnInit {
       this.isNewRecord = false;
       this.showEditor = false;
     });
+
+    //Reload of Datagrid signaled
+    this.comm.signalReload.subscribe(() => {
+      this.showEditor = false;
+      this.reloadSelectedOperation();
+    });
   }
 
   //Function Handler
+  loadSelectedButton() {
+    this.spinner.show();  // Display the Loading animation
+    this.data.getOperationData().subscribe((results) => {
+      // Load the returning data to be displayed
+      this.dgData = results;
+      this.ds.opsData[this.ds.curSelectedButton] = results;
+      
+      // Load the list of column headers for the selected operation
+      this.colHeadData = this.ds.columnHeaders[this.ds.curSelectedButton];
+    });
+    
+    this.availWidth = this.rightcol.nativeElement.offsetWidth;
+    this.setTableResize();
+
+    //Load the necessary suboperation information for the selected operation
+    switch(this.ds.curSelectedButton){
+      case "damps":
+        this.subOpList = ["pay","tcs","conusa","operations","cycles"];
+        break;
+      case "orders":
+        this.subOpList = ["operations","cycles","damps"];
+        break;
+      case "pay":
+        this.subOpList = [];
+        break;
+      case "tcs":
+        this.subOpList = [];
+        break;
+      case "conusa":
+        this.subOpList = [];
+        break;
+      case "missionlocation":
+        this.subOpList = ["country","states"];
+        break;
+      case "fundcites":
+        this.subOpList = ["fundtypes"];
+        break;
+      case "operations":
+        this.subOpList = [];
+        break;
+      case "tpfdd":
+        this.subOpList = ["operations"];
+        break;
+      case "cycles":
+        this.subOpList = [];
+        break;
+    }
+    
+    // Grab the support data for the selected operation button
+    this.getSubOpData(this.subOpList);
+  }
+  
   getSubOpData(operation: string []){
     if(operation != null && operation != undefined) {
       operation.forEach((obj) => {
@@ -108,6 +125,31 @@ export class DatawindowComponent implements OnInit {
         });
       });
     }
+  }
+
+  reloadSelectedOperation(){
+    this.spinner.show();  // Display the Loading animation
+    this.data.getOperationData().subscribe((results) => {
+      // Load the returning data to be displayed
+      this.dgData = results;
+      this.ds.opsData[this.ds.curSelectedButton] = results;
+      
+      // Load the list of column headers for the selected operation
+      this.colHeadData = this.ds.columnHeaders[this.ds.curSelectedButton];
+    });
+    
+    this.availWidth = this.rightcol.nativeElement.offsetWidth;
+    this.setTableResize();
+  }
+
+  handleLoaderAni(){
+    this.spinner.hide();
+    this.allDataLoaded = true;
+  }
+
+  showLoaderAni() {
+    this.spinner.show();
+    this.allDataLoaded = false;
   }
 
   sepClickHandler() {
@@ -165,8 +207,8 @@ export class DatawindowComponent implements OnInit {
     this.comm.createNewClicked.emit();
   }
 
-  editRecordHandler(id: number) {
-    this.ds.curSelectedRecord = this.ds.getSelectedRow(this.dgData, id);
+  editRecordHandler(selectedRow: any) {
+    this.ds.curSelectedRecord = selectedRow;
     this.isNewRecord = false;
     this.showEditor = true;
     this.comm.editRecClicked.emit();

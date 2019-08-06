@@ -11,13 +11,16 @@ export class DatastoreService {
   private _passKey: string = "4A3F6BD3-61FB-467B-83D0-0EFBAF72AFC4";
   private _connectid: string  = 'MobCopConnectionString';
   private _appVersion: string = '2.0.0 (ALPHA)';
-  private _inHerdon: boolean = true;
+  private _useLocalServer: boolean = false;
 
   curSelectedButton: string = "";
   tblColumns:any = {};
   tblData:any = {};
   opsData: any = {};
-  btnData: string[] = ["damps", "orders", "pay","tcs", "conusa", "missionlocation", "fundcites", "operations", "tpfdd", "cycles"];
+  btnData: any[] = [
+                    ["damps","ID"], ["orders","ID"], ["pay","ID"],["tcs","ID"], ["conusa","ID"], 
+                    ["missionlocation","ID"], ["fundcites","ID"], ["operations","ID"], ["tpfdd","ID"], ["cycles","ID"]
+                  ];
   btnStatus: boolean[] = [false, false, false, false, false, false, false, false, false, false];
   columnHeaders = {};
   curSelectedRecord: any = null;
@@ -31,11 +34,11 @@ export class DatastoreService {
     return this._appVersion;
   }
 
-  isLocalServer() {
-    return this._inHerdon;
+  useLocalServer() {
+    return this._useLocalServer;
   }
 
-  /// Global Services
+   /// Global Services
   public getSelectedRow(arr: any, id: number) {
     return arr.find(x => x.ID == id);
   }

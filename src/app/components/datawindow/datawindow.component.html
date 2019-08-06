@@ -1,8 +1,13 @@
 <div class="box">
+  <!-- Left Side Update Section -->  
   <div #leftcol class="leftcol" [ngClass]="showEditor?'leftcol':'leftcol_hide'">
-    <app-update-panel [isNewRecord]="isNewRecord" [curSelectedButton]="curOperation"></app-update-panel>
+    <app-update-panel [isNewRecord]="isNewRecord" [curSelectedButton]="curOperation"></app-update-panel> <!-- Left panel content -->
   </div>
-  <div class="sep" (click)="sepClickHandler()"><img style="margin-top: 250px" src="../../../assets/images/open_close_icon.png"></div>
+
+  <!-- Section Separator -->
+  <div class="sep" [ngClass]="showEditor?'leftcol':'leftcol_hide'"></div>
+  
+  <!-- Right Side Data Grid -->
   <div #rightcol class="rightcol" [ngClass]="showEditor ? 'rightcol' : 'rightcol_wide'">
     <div style="margin-bottom: 10px">
       <button class="btn btnCustom" style="margin-top: -20px;margin-right:30px;color:white;font-size:12px; border: 1px solid darkslategray;" 
@@ -27,17 +32,22 @@
 
       <!-- Row Information -->
       <tbody>
-        <tr *ngFor="let row of dgData; let i = index" class="mat-cell">
-          <td style="text-align:center"><img src="../../../assets/images/cog.png" title="Click to edit record" (click)="editRecordHandler(row.ID)" class="clickitem" /></td>
-          <td *ngFor="let col of colHeadData" [ngStyle]="{'text-align': (col.checkbox) ? 'center' : 'left'}">
+        <tr *ngFor="let row of dgData; let i = index; let last = last;" class="mat-cell">
+          <td style="text-align:center"><img src="../../../assets/images/cog.png" title="Click to edit record" (click)="editRecordHandler(row)" class="clickitem" /></td>
+          <td #dglist *ngFor="let col of colHeadData;" [ngStyle]="{'text-align': (col.checkbox) ? 'center' : 'left'}">
               {{ (col.checkbox) ?  "" : row[col.columnDef] }}
             <img [src]="((row[col.columnDef] == true && col.checkbox) ? '../../../assets/images/cbox_checked.png':'../../../assets/images/cbox_open.png')" width='15' height='15' 
                 [ngStyle]="{'display': (col.checkbox) ? '' : 'none'}"/>
+            <ng-container *ngIf="last">{{ handleLoaderAni() }}</ng-container>
           </td>  
         </tr>
-        
       </tbody>
     </table>
 
+    <div id="spinner" [hidden]="allDataLoaded" class="dgloader rightcol" [ngClass]="showEditor ? 'rightcol' : 'rightcol_wide'">
+      <ngx-spinner bdOpacity = 0.9 bdColor = "#333333" size = "medium" color = "#fff" type = "timer" [fullScreen] = "false">
+        <p style="color: white" >Stand By Loading Data...</p>
+      </ngx-spinner>
+    </div>  
   </div>
 </div>

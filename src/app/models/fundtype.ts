@@ -1,4 +1,4 @@
 export class Fundtype {
-    id: number;
-    fundtype: string;
+    ID: number;
+    FUNDTYPE: string;
 }

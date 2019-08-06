@@ -1,4 +1,4 @@
 export class Transfer {
-    transferStatusId: number;
-    transferStatusDescription: string;
+    Transfer_Status_ID: number;
+    Transfer_Status_Description: string;
 }

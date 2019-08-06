@@ -2,11 +2,24 @@ import { DatastoreService } from './services/datastore.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+// App Components
 import { AppComponent } from './app.component';
 import { BannerComponent } from './components/banner/banner.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { OfsbuttonComponent } from './components/ofsbutton/ofsbutton.component';
 import { DatawindowComponent } from './components/datawindow/datawindow.component';
+import { OrdersComponent } from './components/updaters/orders/orders.component';
+import { PayComponent } from './components/updaters/pay/pay.component';
+import { TcsComponent } from './components/updaters/tcs/tcs.component';
+import { ConusaComponent } from './components/updaters/conusa/conusa.component';
+import { MissionlocationComponent } from './components/updaters/missionlocation/missionlocation.component';
+import { FundcitesComponent } from './components/updaters/fundcites/fundcites.component';
+import { OperationsComponent } from './components/updaters/operations/operations.component';
+import { TpfddComponent } from './components/updaters/tpfdd/tpfdd.component';
+import { BtnGroupComponent } from './components/updaters/btn-group/btn-group.component';
+import { ConfirmDialogComponent } from './dialog/confirm-dialog/confirm-dialog.component';
+
+// Services
 import { CommService } from './services/comm.service';
 import { DataService } from './services/data.service';
 import { HttpClientModule } from '@angular/common/http';
@@ -27,8 +40,15 @@ import { MatSelectModule } from '@angular/material/select';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DampsComponent } from './components/updaters/damps/damps.component';
 import { MatCardModule } from '@angular/material/card';
-import { BtnGroupComponent } from './components/updaters/btn-group/btn-group.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { FormsModule } from '@angular/forms';
+
+// 3rd Party Items
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { MatNativeDateModule } from '@angular/material/core';
+import { CyclesComponent } from './components/updaters/cycles/cycles.component';
+
 
 @NgModule({
   declarations: [
@@ -38,8 +58,18 @@ import { FormsModule } from '@angular/forms';
     OfsbuttonComponent,
     DatawindowComponent,
     UpdatePanelComponent,
+    BtnGroupComponent,
+    ConfirmDialogComponent,
     DampsComponent,
-    BtnGroupComponent
+    OrdersComponent,
+    PayComponent,
+    TcsComponent,
+    ConusaComponent,
+    MissionlocationComponent,
+    FundcitesComponent,
+    OperationsComponent,
+    TpfddComponent,
+    CyclesComponent
   ],
   imports: [
     BrowserModule,
@@ -57,13 +87,18 @@ import { FormsModule } from '@angular/forms';
     MatSelectModule,
     ReactiveFormsModule,
     MatCardModule,
-    FormsModule
+    MatDatepickerModule,
+    MatNativeDateModule,
+    FormsModule,
+    NgbModule,
+    NgxSpinnerModule
   ],
   providers: [
     DatastoreService,
     CommService,
     DataService
   ],
+  entryComponents: [ ConfirmDialogComponent ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

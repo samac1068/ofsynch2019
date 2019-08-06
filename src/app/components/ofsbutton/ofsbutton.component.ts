@@ -1,5 +1,7 @@
+import { CommService } from './../../services/comm.service';
 import { Component, OnInit, Input, Output } from '@angular/core';
 import { EventEmitter } from '@angular/core';
+import { DatastoreService } from 'src/app/services/datastore.service';
 
 @Component({
   selector: 'ofsbutton',
@@ -17,15 +19,19 @@ export class OfsbuttonComponent implements OnInit {
   @Output() btnClickEvt = new EventEmitter();
 
   imgPath: string;
-  bgColorArr: string[] = ["#66903B", "#395E13", "#786643"];
-  txtColorArr: string[] = ["#FFFFFF", "#FFFF00"];
+  bgColorArr: string[] = ["#66903B", "#395E13", "#786643", "#693B4B"];
+  txtColorArr: string[] = ["#FFFFFF", "#FFFF00", "#000000"];
   txtIndex: number = 0;
   toggle: boolean = false;
 
-  constructor() { }
+  constructor(private ds: DatastoreService, private comm: CommService) { }
 
   ngOnInit() {
     this.imgPath = `../../../assets/images/${this.imgname}.png`;
+
+    this.comm.navbarClicked.subscribe(() => {
+      this.confirmBtnStatus();
+    });
   }
 
   handleMouseDown(){
@@ -33,7 +39,6 @@ export class OfsbuttonComponent implements OnInit {
   }
 
   handleMouseUp(){
-    this.toggle = false;
     this.btnClickEvt.emit(this.label.toLowerCase().replace(" ", ""));
   }
 
@@ -45,13 +50,18 @@ export class OfsbuttonComponent implements OnInit {
     this.txtIndex = 0;
   }
 
+  confirmBtnStatus() {
+    // If this button is not currently selected, then change BG color and toggle
+    this.toggle = (this.ds.curSelectedButton == this.label.toLowerCase());
+  }
+
   buttonShift(): Object{
     if(this.txtIndex == 1 && !this.toggle)
       return {'background-color': this.bgColorArr[1]};
 
 
     if(this.toggle)
-      return {'margin-left': '2px', 'margin-top': '7px', 'background-color' : this.bgColorArr[2]};
+      return {'margin-left': '2px', 'margin-top': '7px', 'background-color' : this.bgColorArr[3]};
     else
       return {'margin-left': '0', 'margin-top': '5px', 'background-color': this.bgColorArr[0]};
   }

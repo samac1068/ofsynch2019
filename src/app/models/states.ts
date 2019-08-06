@@ -1,8 +1,8 @@
 export class States {
-    stateCode: string;
-    stateName: string;
-    rrc: number;
-    conusa: number;
+    state_cd: string;
+    state_name: string;
+    RRC: number;
+    CONUSA: number;
     flexabbrev: string;
-    fema: number;
+    FEMA: number;
 }

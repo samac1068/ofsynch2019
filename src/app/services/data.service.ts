@@ -1,8 +1,19 @@
 import { DatastoreService } from './datastore.service';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { throwError, Observable } from 'rxjs';
 import {catchError} from 'rxjs/operators';
+import { Damps } from '../models/damps';
+
+const httpHeaders = {
+  headers: new HttpHeaders ({
+    'Content-Type': 'application/json'
+  })
+};
+
+const httpOpt = {
+  headers: httpHeaders
+}; 
 
 @Injectable({
   providedIn: 'root'
@@ -10,17 +21,20 @@ import {catchError} from 'rxjs/operators';
 export class DataService {
 
   wsURL: string = "https://mobcop.aoc.army.pentagon.smil.mil/MOBAPI/OFS";
-
+  wsLocal: string = "http://localhost:62441/api/Values";
+  
   constructor(private http: HttpClient, private ds: DatastoreService) { }
 
   // Error Handling
-  private errorHandler(error){
+  private errorHandler(error: any){
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {
       // client-side error
+      console.log(error);
       errorMessage = `Error: ${error.error.message}`;
     } else {
       // server-side error
+      console.log(error);
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
 
@@ -31,7 +45,7 @@ export class DataService {
 
   // This will identify which server is being targeted.
   identifyWSServer(): string {
-    return (this.ds.isLocalServer()) ? `http://localhost:3004/` : `${this.wsURL}`;
+    return (this.ds.useLocalServer) ? this.wsLocal : this.wsURL;
   }
 
   // Retrieve Data from local file
@@ -42,15 +56,23 @@ export class DataService {
 
   // Retrieve Data from Server
   getOperationData(): Observable<any> {
-    var fullDomain: string = this.identifyWSServer() + ((!this.ds.isLocalServer()) ? `/GetOperationData/${this.ds.getPassKey()}/` : "");
-    return (this.http.get<any>(fullDomain + this.ds.curSelectedButton)
+    var fullDomain: string = this.identifyWSServer() + `/GetOperationData`;
+    const  params = new  HttpParams().set('id', this.ds.getPassKey()).set('op', this.ds.curSelectedButton);
+    return (this.http.get<any>(fullDomain, { params })
       .pipe(catchError(this.errorHandler)));
   }
 
   //Retrive the sub operation data from the server
   getSubOperationData(subop: string): Observable<any> {
-    var fullDomain: string = this.identifyWSServer() + ((!this.ds.isLocalServer()) ? `/GetOperationData/${this.ds.getPassKey()}/` : "");
-    return (this.http.get<any>(fullDomain + subop)
+    var fullDomain: string = this.identifyWSServer() + `/GetOperationData`;
+    const  params = new  HttpParams().set('id', this.ds.getPassKey()).set('op', subop);
+    return (this.http.get<any>(fullDomain, { params })
       .pipe(catchError(this.errorHandler)));
+  }
+
+  modifyFPOperationRecord(): Observable<any> {
+    var fullDomain: string = this.identifyWSServer() + `/UpdateFPOperationData`;
+    return (this.http.post<Damps>(fullDomain + "?id=" + this.ds.getPassKey(), this.ds.curSelectedRecord, httpHeaders )
+    .pipe(catchError(this.errorHandler)));
   }
 }

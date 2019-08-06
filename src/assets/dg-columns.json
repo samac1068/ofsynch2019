@@ -2,22 +2,22 @@
     "damps": 
       [ 
         {"header": "ID", "columnDef": "ID", "width": 40, "checkbox": false, "hidden": false},
-        {"header": "Hidden", "columnDef": "Hidden", "width": 60, "checkbox": true, "hidden": false},
-        {"header": "Description", "columnDef": "description", "width": 300, "checkbox": false, "hidden": false},
-        {"header": "Pay OP", "columnDef": "payop", "width": 100, "checkbox": false, "hidden": false},
-        {"header": "TCS OP", "columnDef": "tcsop", "width": 100, "checkbox": false, "hidden": false},
-        {"header": "Short Name", "columnDef": "opshortname", "width": 120, "checkbox": false, "hidden": false},
-        {"header": "Record Status", "columnDef": "recordstatusdesc", "width": 60, "checkbox": false, "hidden": false},
-        {"header": "Transfer Status", "columnDef": "transferstatusdesc", "width": 60, "checkbox": false, "hidden": false},
-        {"header": "12301D", "columnDef": "ma_12301d", "width": 60, "checkbox": true, "hidden": false},
-        {"header": "12302", "columnDef": "ma_12302", "width": 60, "checkbox": true, "hidden": false},
-        {"header": "12304", "columnDef": "ma_12304", "width": 60, "checkbox": true, "hidden": false},
-        {"header": "12304A", "columnDef": "ma_12304a", "width": 60, "checkbox": true, "hidden": false},
-        {"header": "12304B", "columnDef": "ma_12304b", "width": 60, "checkbox": true, "hidden": false},
-        {"header": "MOBCAP", "columnDef": "mobcap", "width": 80, "checkbox": false, "hidden": false},
-        {"header": "Cycle", "columnDef": "cycstr", "width": 60, "checkbox": false, "hidden": false},
-        {"header": "Long Name", "columnDef": "oplongname", "width": 60, "checkbox": false, "hidden": false},
-        {"header": "UIC to NIPR", "columnDef": "uic_to_NIPR", "width": 60, "checkbox": true, "hidden": false}
+        {"header": "Hidden", "columnDef": "hidden", "width": 60, "checkbox": true, "hidden": false},
+        {"header": "Description", "columnDef": "Description", "width": 300, "checkbox": false, "hidden": false},
+        {"header": "Pay OP", "columnDef": "PAY_Operation", "width": 100, "checkbox": false, "hidden": false},
+        {"header": "TCS OP", "columnDef": "TCS_Operation", "width": 100, "checkbox": false, "hidden": false},
+        {"header": "Short Name", "columnDef": "opShortName", "width": 120, "checkbox": false, "hidden": false},
+        {"header": "Record Status", "columnDef": "Record_Status_Description", "width": 60, "checkbox": false, "hidden": false},
+        {"header": "Transfer Status", "columnDef": "Transfer_Status_Description", "width": 60, "checkbox": false, "hidden": false},
+        {"header": "12301D", "columnDef": "ma12301_d", "width": 60, "checkbox": true, "hidden": false},
+        {"header": "12302", "columnDef": "ma12302", "width": 60, "checkbox": true, "hidden": false},
+        {"header": "12304", "columnDef": "ma12304", "width": 60, "checkbox": true, "hidden": false},
+        {"header": "12304A", "columnDef": "ma12304_a", "width": 60, "checkbox": true, "hidden": false},
+        {"header": "12304B", "columnDef": "ma12304_b", "width": 60, "checkbox": true, "hidden": false},
+        {"header": "MOBCAP", "columnDef": "MOBCAP", "width": 80, "checkbox": false, "hidden": false},
+        {"header": "Cycle", "columnDef": "Cycle", "width": 60, "checkbox": false, "hidden": false},
+        {"header": "Long Name", "columnDef": "opLongName", "width": 60, "checkbox": false, "hidden": false},
+        {"header": "UIC to NIPR", "columnDef": "UIC_ToNipr", "width": 60, "checkbox": true, "hidden": false}
       ],
       "orders": 
       [ 
@@ -31,18 +31,103 @@
       ],
       "pay": 
       [ 
-        {"header": "ID", "columnDef": "ID", "width": 40, "checkbox": false, "hidden": false},
-        {"header": "OPERATION", "columnDef": "operation", "width": 140, "checkbox": false, "hidden": false},
-        {"header": "DESCRIPTION", "columnDef": "description", "width": 230, "checkbox": false, "hidden": false},
-        {"header": "RECORD STATUS", "columnDef": "recordstatusdesc", "width": 60, "checkbox": false, "hidden": false},
-        {"header": "TRANSFER STATUS", "columnDef": "transferstatusdesc", "width": 60, "checkbox": false, "hidden": false}
+        {"header": "ID", "columnDef": "PAY_Operation_ID", "width": 40, "checkbox": false, "hidden": false},
+        {"header": "OPERATION", "columnDef": "PAY_Operation", "width": 140, "checkbox": false, "hidden": false},
+        {"header": "DESCRIPTION", "columnDef": "PAY_Operation_Description", "width": 230, "checkbox": false, "hidden": false},
+        {"header": "RECORD STATUS", "columnDef": "Record_Status_Description", "width": 60, "checkbox": false, "hidden": false},
+        {"header": "TRANSFER STATUS", "columnDef": "Transfer_Status_Description", "width": 60, "checkbox": false, "hidden": false}
       ],
       "tcs": 
       [ 
-        {"header": "ID", "columnDef": "ID", "width": 40, "checkbox": false, "hidden": false},
+        {"header": "ID", "columnDef": "TCS_Operation_ID", "width": 40, "checkbox": false, "hidden": false},
+        {"header": "OPERATION", "columnDef": "TCS_Operation", "width": 140, "checkbox": false, "hidden": false},
+        {"header": "DESCRIPTION", "columnDef": "TCS_Operation_Description", "width": 230, "checkbox": false, "hidden": false},
+        {"header": "RECORD STATUS", "columnDef": "Record_Status_Description", "width": 60, "checkbox": false, "hidden": false},
+        {"header": "TRANSFER STATUS", "columnDef": "Transfer_Status_Description", "width": 60, "checkbox": false, "hidden": false}
+      ],
+      "conusa": 
+      [ 
+        {"header": "ID", "columnDef": "opId", "width": 40, "checkbox": false, "hidden": false},
+        {"header": "SHORTNAME", "columnDef": "opShortName", "width": 140, "checkbox": false, "hidden": false},
+        {"header": "LONGNAME", "columnDef": "opLongName", "width": 230, "checkbox": false, "hidden": false},
+        {"header": "AUTH ID", "columnDef": "opAuthId", "width": 40, "checkbox": false, "hidden": false},
+        {"header": "HIDDEN", "columnDef": "opHidden", "width": 40, "checkbox": false, "hidden": false},
+        {"header": "RECORD STATUS", "columnDef": "Record_Status_Description", "width": 60, "checkbox": false, "hidden": false},
+        {"header": "TRANSFER STATUS", "columnDef": "Transfer_Status_Description", "width": 60, "checkbox": false, "hidden": false}
+      ],
+      "operations": 
+      [ 
+        {"header": "ID", "columnDef": "op_id", "width": 40, "checkbox": false, "hidden": false},
         {"header": "OPERATION", "columnDef": "operation", "width": 140, "checkbox": false, "hidden": false},
-        {"header": "DESCRIPTION", "columnDef": "description", "width": 230, "checkbox": false, "hidden": false},
-        {"header": "RECORD STATUS", "columnDef": "recordstatusdesc", "width": 60, "checkbox": false, "hidden": false},
-        {"header": "TRANSFER STATUS", "columnDef": "transferstatusdesc", "width": 60, "checkbox": false, "hidden": false}
+        {"header": "VISIBLE", "columnDef": "unitrqmt_visible", "width": 40, "checkbox": false, "hidden": false},
+        {"header": "LONG NAME", "columnDef": "operation_long", "width": 230, "checkbox": false, "hidden": false},
+        {"header": "TO CRC", "columnDef": "CRC", "width": 40, "checkbox": false, "hidden": false},
+        {"header": "TO NIPR", "columnDef": "toNIPR", "width": 40, "checkbox": false, "hidden": false}
+      ],
+      "cycles": 
+      [ 
+        {"header": "PID", "columnDef": "CYC_ID", "width": 40, "checkbox": false, "hidden": false},
+        {"header": "CYCLE", "columnDef": "cycle", "width": 140, "checkbox": false, "hidden": false},
+        {"header": "FY", "columnDef": "FY", "width": 40, "checkbox": false, "hidden": false},
+        {"header": "HIDDEN", "columnDef": "hidden", "width": 40, "checkbox": false, "hidden": false},
+        {"header": "RECORD STATUS", "columnDef": "Record_Status_Description", "width": 60, "checkbox": false, "hidden": false},
+        {"header": "TRANSFER STATUS", "columnDef": "Transfer_Status_Description", "width": 60, "checkbox": false, "hidden": false}
+      ],
+      "missionlocation": 
+      [ 
+        {"header": "ID", "columnDef": "lngMissionLocationID", "width": 40, "checkbox": false, "hidden": false},
+        {"header": "LOCATION", "columnDef": "strMissionLocation", "width": 140, "checkbox": false, "hidden": false},
+        {"header": "CONUS", "columnDef": "MissionConus", "width": 40, "checkbox": true, "hidden": false},
+        {"header": "COUNTRY", "columnDef": "Country", "width": 140, "checkbox": false, "hidden": false},
+        {"header": "COUNTRY CODE", "columnDef": "CountryCode", "width": 60, "checkbox": false, "hidden": false},
+        {"header": "STATE", "columnDef": "STATEAB", "width": 50, "checkbox": false, "hidden": false},
+        {"header": "ZIP CODE", "columnDef": "ZipCode", "width": 70, "checkbox": false, "hidden": false},
+        {"header": "INSTALLATION", "columnDef": "Installation", "width": 140, "checkbox": false, "hidden": false},
+        {"header": "GEO LOCATION", "columnDef": "GeoLocation", "width": 70, "checkbox": false, "hidden": false},
+        {"header": "GEO COORDS", "columnDef": "Geographic_Coord", "width": 100, "checkbox": false, "hidden": false},
+        {"header": "LATITUDE", "columnDef": "Latitude", "width": 80, "checkbox": false, "hidden": false},
+        {"header": "LONGITUDE", "columnDef": "Longitude", "width": 80, "checkbox": false, "hidden": false},
+        {"header": "UNC ONTRY CODE", "columnDef": "UN_CC", "width": 100, "checkbox": false, "hidden": false},
+        {"header": "ARLOC", "columnDef": "UN_CC", "width": 80, "checkbox": false, "hidden": false},
+        {"header": "COMBAT ZONE", "columnDef": "CZ", "width": 40, "checkbox": true, "hidden": false},
+        {"header": "RECORD STATUS", "columnDef": "Record_Status_Description", "width": 60, "checkbox": false, "hidden": false},
+        {"header": "TRANSFER STATUS", "columnDef": "Transfer_Status_Description", "width": 60, "checkbox": false, "hidden": false}
+      ],
+      "fundcites": 
+      [ 
+        {"header": "FUND ID", "columnDef": "FundId", "width": 40, "checkbox": false, "hidden": false},
+        {"header": "FUND CODE", "columnDef": "FundCode", "width": 300, "checkbox": false, "hidden": false},
+        {"header": "EFFECTIVE DATE", "columnDef": "FundEffDate", "width": 80, "checkbox": false, "hidden": false},
+        {"header": "FUND TYPE", "columnDef": "FundType", "width": 40, "checkbox": false, "hidden": false},
+        {"header": "CIC", "columnDef": "CIC", "width": 200, "checkbox": false, "hidden": false},
+        {"header": "MDC", "columnDef": "MDC", "width": 40, "checkbox": false, "hidden": false},
+        {"header": "CONUS BASED", "columnDef": "IsConusBase", "width": 40, "checkbox": true, "hidden": false},
+        {"header": "FY1", "columnDef": "FY1", "width": 40, "checkbox": false, "hidden": false},
+        {"header": "FY2", "columnDef": "FY2", "width": 40, "checkbox": false, "hidden": false},
+        {"header": "FY3", "columnDef": "FY3", "width": 40, "checkbox": false, "hidden": false},
+        {"header": "DEPT", "columnDef": "DEPT", "width": 40, "checkbox": false, "hidden": false},
+        {"header": "FY", "columnDef": "FY", "width": 40, "checkbox": false, "hidden": false},
+        {"header": "BSN", "columnDef": "BSN", "width": 40, "checkbox": false, "hidden": false},
+        {"header": "LIMIT", "columnDef": "LIMIT", "width": 40, "checkbox": false, "hidden": false},
+        {"header": "OA", "columnDef": "OA", "width": 40, "checkbox": false, "hidden": false},
+        {"header": "ASN", "columnDef": "ASN", "width": 40, "checkbox": false, "hidden": false},
+        {"header": "AMS", "columnDef": "AMS", "width": 90, "checkbox": false, "hidden": false},
+        {"header": "EOR", "columnDef": "EOR", "width": 50, "checkbox": false, "hidden": false},
+        {"header": "MDEP", "columnDef": "MDEP", "width": 40, "checkbox": false, "hidden": false},
+        {"header": "FCC", "columnDef": "FCC", "width": 50, "checkbox": false, "hidden": false},
+        {"header": "STATUS ID", "columnDef": "STATUS_ID", "width": 50, "checkbox": false, "hidden": false},
+        {"header": "APC", "columnDef": "APC", "width": 60, "checkbox": false, "hidden": false},
+        {"header": "FSN", "columnDef": "FSN", "width": 50, "checkbox": false, "hidden": false}
+      ],
+      "tpfdd": 
+      [ 
+        {"header": "PID", "columnDef": "PID", "width": 60, "checkbox": false, "hidden": false},
+        {"header": "OPERATION", "columnDef": "DESCRIPTION_SHORT", "width": 140, "checkbox": false, "hidden": false},
+        {"header": "DESCRIPTION", "columnDef": "DESCRIPTION_LONG", "width": 240, "checkbox": false, "hidden": false},
+        {"header": "CDATE", "columnDef": "CDATE", "width": 60, "checkbox": false, "hidden": false},
+        {"header": "TYPE", "columnDef": "TYPE", "width": 50, "checkbox": false, "hidden": false},
+        {"header": "ACTIVE", "columnDef": "ACTIVE", "width": 50, "checkbox": true, "hidden": false},
+        {"header": "DEPLOY", "columnDef": "DEPLOY", "width": 50, "checkbox": true, "hidden": false},
+        {"header": "OPERATION ID", "columnDef": "operation_id", "width": 60, "checkbox": false, "hidden": false}
       ]
   }

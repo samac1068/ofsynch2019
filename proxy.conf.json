@@ -1,0 +1,11 @@
+{
+    "/OFS": {
+        "target" : "http://localhost:49986/",
+        "secure": false,
+        "logLevel": "debug",
+        "pathRewrite": {
+            "^/ofs": ""
+          },
+        "changeOrigin": true
+    }
+}

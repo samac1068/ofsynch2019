@@ -1,8 +1,8 @@
 export class Cycle {
     cyc_id: number;
     cycle: string;
-    fy: number;
+    FY: number;
     hidden: boolean;
-    recordStatusDescription: string;
-    transferStatusDescription: string;
+    Record_Status_Description: string;
+    Transfer_Status_Description: string;
 }

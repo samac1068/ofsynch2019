@@ -39,7 +39,7 @@
 
 
 .rightcol_wide {
-    width: 98vw;
+    width: 99vw;
     overflow: auto;
 }
 
@@ -80,5 +80,17 @@ th.mat-sort-header-sorted {
 
 .clickitem {
     cursor: pointer;
+}
 
+#container {
+    position: relative;
+    overflow: hidden;
+}
+
+.dgloader {
+    position: absolute;
+    z-index: 10;
+    overflow: hidden;
+    top: 125px;
+    left: 3px;
 }

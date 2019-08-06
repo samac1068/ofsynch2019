@@ -1,118 +1,120 @@
 <div class="container page">
-    <div class="row">
-          <div class="col-lg"><span class="setleft" style="font-weight: bold">ID: <span class="idtxt">{{ dampsData.ID }}</span></span></div>
-          <div class="col-lg"><mat-checkbox class="setright" style="font-weight: bold" [(checked)]="dampsData.Hidden">Hidden</mat-checkbox></div>
-    </div>
+  <div class="row">
+        <div class="col-lg"><span class="setleft" style="font-weight: bold">ID: <span class="idtxt">{{ selRec.ID }}</span></span></div>
+        <div class="col-lg"><mat-checkbox id="hidden" class="setright" style="font-weight: bold" [(ngModel)]="selRec.hidden" 
+          (change)="storeAllChanges($event)">Hidden</mat-checkbox></div>
+  </div>
 
-    <!-- Description -->
-    <div class="row">
-      <div class="col-lg">
-        <mat-form-field appearance="outline" style="width:100%">
-          <mat-label>Description:</mat-label>
-          <input matInput [(value)]="dampsData.description">
-        </mat-form-field>  
-      </div>
+  <!-- Description -->
+  <div class="row">
+    <div class="col-lg">
+      <mat-form-field appearance="outline" style="width:100%">
+        <mat-label>Description:</mat-label>
+        <input matInput id="description" [formControl]="descControl" required [(ngModel)]="selRec.Description"  (focusout)="textChanges($event)">
+      </mat-form-field>  
     </div>
-    
-    <!-- Operations -->
-    <div class="row">
+  </div>
+  
+  <!-- Operations -->
+  <div class="row">
+    <div class="col-lg">
+        <mat-form-field style="width:100%">
+            <mat-label>Operation</mat-label>
+            <mat-select id="operation" [formControl]="opControl" required [(ngModel)]="selRec.Op_ID" (selectionChange)="storeAllChanges($event)">
+              <mat-option>--</mat-option>
+              <mat-option *ngFor="let op of operations" [(value)]="op.op_id">
+                {{ op.operation_long }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="opControl.hasError('required')">Please choose an Operation</mat-error>
+          </mat-form-field>
+    </div>
+  </div>
+
+  <!-- Cycle -->
+  <div class="row">
       <div class="col-lg">
           <mat-form-field style="width:100%">
-              <mat-label>Operation</mat-label>
-              <mat-select [formControl]="opControl" required [(ngModel)]="dampsData.op_id" (ngModelChange)="storeAllChanges()">
+              <mat-label>Cycle</mat-label>
+              <mat-select id="cycle" [formControl]="cycleControl" required [(ngModel)]="selRec.Cyc_ID" (selectionChange)="storeAllChanges($event)">
                 <mat-option>--</mat-option>
-                <mat-option *ngFor="let op of operations" [value]="op.op_id">
-                  {{ op.operation }}
+                <mat-option *ngFor="let c of cycles" [(value)]="c.CYC_ID">
+                  {{ c.cycle }}
                 </mat-option>
               </mat-select>
-              <mat-error *ngIf="opControl.hasError('required')">Please choose an operation</mat-error>
+              <mat-error *ngIf="cycleControl.hasError('required')">Please choose a Cycle</mat-error>
             </mat-form-field>
       </div>
     </div>
 
-    <!-- Cycle -->
-    <div class="row">
-        <div class="col-lg">
-            <mat-form-field style="width:100%">
-                <mat-label>Cycle</mat-label>
-                <mat-select [formControl]="cycleControl" required [(ngModel)]="dampsData.cyc_id">
-                  <mat-option>--</mat-option>
-                  <mat-option *ngFor="let c of cycle" [value]="c.cyc_id">
-                    {{ c.cycle }}
-                  </mat-option>
-                </mat-select>
-                <mat-error *ngIf="cycleControl.hasError('required')">Please choose a cycle</mat-error>
-              </mat-form-field>
-        </div>
-      </div>
-
-    <!-- Pay -->
-    <div class="row">
-        <div class="col-lg">
-            <mat-form-field style="width:100%">
-                <mat-label>Pay</mat-label>
-                <mat-select [formControl]="payControl" required [(ngModel)]="dampsData.pay_operation_id">
-                  <mat-option>--</mat-option>
-                  <mat-option *ngFor="let p of pay" [value]="p.pay_operation_id">
-                    {{ p.opDescription }}
-                  </mat-option>
-                </mat-select>
-                <mat-error *ngIf="payControl.hasError('required')">Please choose a pay</mat-error>
-              </mat-form-field>
-        </div>
-      </div>
-
-    <!-- TCS -->
-    <div class="row">
-        <div class="col-lg">
-            <mat-form-field style="width:100%">
-                <mat-label>TCS</mat-label>
-                <mat-select [formControl]="tcsControl" required [(ngModel)]="dampsData.tcs_operation_id">
-                  <mat-option>--</mat-option>
-                  <mat-option *ngFor="let t of tcs" [value]="t.tcs_operation_id">
-                    {{ t.opDescription }}
-                  </mat-option>
-                </mat-select>
-                <mat-error *ngIf="tcsControl.hasError('required')">Please choose a TCS</mat-error>
-              </mat-form-field>
-        </div>
-      </div>
-    
-    <!-- CONUSA -->
-    <div class="row">
-        <div class="col-lg">
-            <mat-form-field style="width:100%">
-                <mat-label>CONUSA</mat-label>
-                <mat-select [formControl]="conusaControl" required [(ngModel)]="dampsData.conusa_opid">
-                  <mat-option>--</mat-option>
-                  <mat-option *ngFor="let co of conusa" [value]="co.opid">
-                    {{ co.opShortName }}
-                  </mat-option>
-                </mat-select>
-                <mat-error *ngIf="conusaControl.hasError('required')">Please choose a CONUSA</mat-error>
-              </mat-form-field>
-        </div>
-      </div>  
-
-    <!-- MOBCAP -->
-    <div class="row">
-        <div class="col-lg">
-          <mat-form-field appearance="standard" style="width:35%; float: right;">
-              <mat-label>MOBCAP:</mat-label>
-            <input matInput [(value)]="dampsData.mobcap">
-          </mat-form-field>  
+  <!-- Pay -->
+  <div class="row">
+      <div class="col-lg">
+          <mat-form-field style="width:100%">
+              <mat-label>Pay</mat-label>
+              <mat-select id="pay" [formControl]="payControl" required [(ngModel)]="selRec.PAY_Operation_ID" (selectionChange)="storeAllChanges($event)">
+                <mat-option>--</mat-option>
+                <mat-option *ngFor="let p of pay" [(value)]="p.PAY_Operation_ID">
+                  {{ p.PAY_Operation_Description | uppercase }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="payControl.hasError('required')">Please choose a PAY</mat-error>
+            </mat-form-field>
       </div>
     </div>
 
-    <span style="font-weight: bold">Mob Authorities</span>
-    <mat-card>
-        <mat-checkbox [(checked)]="dampsData.ma_12301d">12301(D)</mat-checkbox>
-        <mat-checkbox [(checked)]="dampsData.ma_12302">12302</mat-checkbox>
-        <mat-checkbox [(checked)]="dampsData.ma_12304">12304</mat-checkbox>
-        <mat-checkbox [(checked)]="dampsData.ma_12304a">12304(A)</mat-checkbox>
-        <mat-checkbox [(checked)]="dampsData.ma_12304b">12304(B)</mat-checkbox>
-        <mat-checkbox [(checked)]="dampsData.ma_12302border">12302 Border</mat-checkbox>
-    </mat-card>
+  <!-- TCS -->
+  <div class="row">
+      <div class="col-lg">
+          <mat-form-field style="width:100%">
+              <mat-label>TCS</mat-label>
+              <mat-select id="tcs" [formControl]="tcsControl" required [(ngModel)]="selRec.TCS_Operation_ID" (selectionChange)="storeAllChanges($event)">
+                <mat-option>--</mat-option>
+                <mat-option *ngFor="let t of tcs" [(value)]="t.TCS_Operation_ID">
+                  {{ t.TCS_Operation_Description | uppercase }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="tcsControl.hasError('required')">Please choose a TCS</mat-error>
+            </mat-form-field>
+      </div>
+    </div>
+  
+  <!-- CONUSA -->
+  <div class="row">
+      <div class="col-lg">
+          <mat-form-field style="width:100%">
+              <mat-label>CONUSA</mat-label>
+              <mat-select id="conusa" [formControl]="conusaControl" required [(ngModel)]="selRec.Conusa_OpID" (selectionChange)="storeAllChanges($event)">
+                <mat-option>--</mat-option>
+                <mat-option *ngFor="let co of conusa" [(value)]="co.opId">
+                  {{ co.opLongName | uppercase}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="conusaControl.hasError('required')">Please choose a CONUSA</mat-error>
+            </mat-form-field>
+      </div>
+    </div>  
 
-    <app-btn-group [isNewRecord]="isNewRecord"></app-btn-group>
+  <!-- MOBCAP -->
+  <div class="row">
+      <div class="col-lg">
+        <mat-form-field appearance="standard" style="width:35%; float: right;">
+            <mat-label>MOBCAP:</mat-label>
+          <input matInput id="mobcap" [value]="selRec.MOBCAP" [(ngModel)]="selRec.MOBCAP" (focusout)="textChanges($event)">
+        </mat-form-field>  
+    </div>
   </div>
+
+  <span style="font-weight: bold">Mob Authorities</span>
+  <mat-card>
+      <mat-checkbox id="ma12301_d" [(ngModel)]="selRec.ma12301_d" (change)="storeAllChanges($event)">12301(D)</mat-checkbox>
+      <mat-checkbox id="ma12302" [(ngModel)]="selRec.ma12302" (change)="storeAllChanges($event)">12302</mat-checkbox>
+      <mat-checkbox id="ma12304" [(ngModel)]="selRec.ma12304" (change)="storeAllChanges($event)">12304</mat-checkbox>
+      <mat-checkbox id="ma12304_a" [(ngModel)]="selRec.ma12304_a" (change)="storeAllChanges($event)">12304(A)</mat-checkbox>
+      <mat-checkbox id="ma12304_b" [(ngModel)]="selRec.ma12304_b" (change)="storeAllChanges($event)">12304(B)</mat-checkbox>
+      <mat-checkbox id="ma12302_border" [(ngModel)]="selRec.ma_12302_border" (change)="storeAllChanges($event)">12302 Border</mat-checkbox>
+  </mat-card>
+
+  <!-- Button Group -->
+  <app-btn-group [isNewRecord]="isNewRecord"></app-btn-group>
+</div>

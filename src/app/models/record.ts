@@ -1,4 +1,4 @@
 export class Record {
-    recordStatusId: number;
-    recordStatusDescription: string;
+    Record_Status_ID: number;
+    Record_Status_Description: string;
 }
