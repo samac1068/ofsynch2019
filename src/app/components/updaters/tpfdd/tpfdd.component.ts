@@ -56,11 +56,14 @@ export class TpfddComponent implements OnInit {
     });
 
     this.comm.editRecClicked.subscribe(() => {
-      //if(this.ds.curSelectedButton == "damps") {
         this.chgArr = [];
         this.selRec = this.ds.curSelectedRecord;
+        
+        //Modify the CDATE
+        if(this.selRec.CDATE != null)
+            this.selRec.CDATE = new Date(this.selRec.CDATE);
+        
         this.updateDataLoad();
-      //}
     });
   }
 

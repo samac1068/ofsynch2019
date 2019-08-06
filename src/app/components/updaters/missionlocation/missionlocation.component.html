@@ -1,13 +1,13 @@
 <div class="container page">
   <div class="row">
         <div class="col-lg"><span class="setleft" style="font-weight: bold">ID: <span class="idtxt">{{ selRec.lngMissionLocationID }}</span></span></div>
-        <div class="col-lg"><mat-checkbox id="hidden" class="setright" style="font-weight: bold" [(checked)]="selRec.opHidden" 
+        <div class="col-lg"><mat-checkbox id="hidden" class="setright" style="font-weight: bold" [(ngModel)]="selRec.opHidden" 
           (change)="storeAllChanges($event)">Hidden</mat-checkbox></div>
   </div>
 
   <!-- Combat Zone -->
   <div class="row">
-    <div class="col-lg"><mat-checkbox id="combatzone" class="setright" style="font-weight: bold" [(checked)]="selRec.CZ" 
+    <div class="col-lg"><mat-checkbox id="combatzone" class="setright" style="font-weight: bold" [(ngModel)]="selRec.CZ" 
       (change)="storeAllChanges($event)">Combat Zone</mat-checkbox></div>
 </div>
 

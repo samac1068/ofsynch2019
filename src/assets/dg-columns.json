@@ -21,13 +21,13 @@
       ],
       "orders": 
       [ 
-        {"header": "Visible", "columnDef": "Visible", "width": 55, "checkbox": true, "hidden": false},
-        {"header": "ID", "columnDef": "ID", "width": 40, "checkbox": false, "hidden": false},
+        {"header": "Visible", "columnDef": "visible", "width": 55, "checkbox": true, "hidden": false},
+        {"header": "ID", "columnDef": "id", "width": 40, "checkbox": false, "hidden": false},
         {"header": "OPERATION", "columnDef": "operation", "width": 230, "checkbox": false, "hidden": false},
         {"header": "CYCLE", "columnDef": "cycle", "width": 55, "checkbox": false, "hidden": false},
-        {"header": "PLANNING", "columnDef": "PlainID", "width": 60, "checkbox": false, "hidden": false},
-        {"header": "ORDERS", "columnDef": "OrdID", "width": 60, "checkbox": false, "hidden": false},
-        {"header": "ASSIGNED DAMPS", "columnDef": "FPOp", "width": 150, "checkbox": false, "hidden": false}
+        {"header": "PLANNING", "columnDef": "plan_id", "width": 60, "checkbox": false, "hidden": false},
+        {"header": "ORDERS", "columnDef": "ord_id", "width": 60, "checkbox": false, "hidden": false},
+        {"header": "ASSIGNED DAMPS", "columnDef": "Description", "width": 150, "checkbox": false, "hidden": false}
       ],
       "pay": 
       [ 

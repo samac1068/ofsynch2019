@@ -1,7 +1,7 @@
 <div class="container page">
   <div class="row">
         <div class="col-lg"><span class="setleft" style="font-weight: bold">ID: <span class="idtxt">{{ selRec.ID }}</span></span></div>
-        <div class="col-lg"><mat-checkbox id="visible" class="setright" style="font-weight: bold" [(checked)]="selRec.visible" 
+        <div class="col-lg"><mat-checkbox id="visible" class="setright" style="font-weight: bold" [(ngModel)]="selRec.visible" 
           (change)="storeAllChanges($event)">Visible</mat-checkbox></div>
   </div>
 
@@ -10,7 +10,7 @@
     <div class="col-lg">
         <mat-form-field style="width:100%">
             <mat-label>Operation</mat-label>
-            <mat-select id="operation" [formControl]="opControl" required [(ngModel)]="selRec.Op_ID" (selectionChange)="storeAllChanges($event)">
+            <mat-select id="operation" [formControl]="opControl" required [(ngModel)]="selRec.op_id" (selectionChange)="storeAllChanges($event)">
               <mat-option>--</mat-option>
               <mat-option *ngFor="let op of operations" [(value)]="op.op_id">
                 {{ op.operation_long }}
@@ -26,7 +26,7 @@
       <div class="col-lg">
           <mat-form-field style="width:100%">
               <mat-label>Cycle</mat-label>
-              <mat-select id="cycle" [formControl]="cycleControl" required [(ngModel)]="selRec.Cyc_ID" (selectionChange)="storeAllChanges($event)">
+              <mat-select id="cycle" [formControl]="cycleControl" required [(ngModel)]="selRec.cyc_id" (selectionChange)="storeAllChanges($event)">
                 <mat-option>--</mat-option>
                 <mat-option *ngFor="let c of cycles" [(value)]="c.CYC_ID">
                   {{ c.cycle }}
@@ -41,11 +41,11 @@
   <div class="row">
       <div class="col-lg">
           <mat-form-field style="width:100%">
-              <mat-label>Pay</mat-label>
+              <mat-label>Description</mat-label>
               <mat-select id="damps" [formControl]="dampsControl" required [(ngModel)]="selRec.fpop_id" (selectionChange)="storeAllChanges($event)">
                 <mat-option>--</mat-option>
                 <mat-option *ngFor="let d of damps" [(value)]="d.ID">
-                  {{ d.opLongName | uppercase }}
+                  {{ d.Description | uppercase }}
                 </mat-option>
               </mat-select>
               <mat-error *ngIf="dampsControl.hasError('required')">Please choose a DAMPS Op</mat-error>
@@ -55,7 +55,7 @@
 
   <div class="row">
     <div class="col-lg">
-      <mat-checkbox id="ma12301_d" [(checked)]="selRec.ma12301_d" (change)="storeAllChanges($event)">Visible in Planning</mat-checkbox>
+      <mat-checkbox id="ma12301_d" [(ngModel)]="selRec.ma12301_d" (change)="storeAllChanges($event)">Visible in Planning</mat-checkbox>
     </div>
   </div>  
 

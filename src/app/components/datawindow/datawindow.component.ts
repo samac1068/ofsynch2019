@@ -48,6 +48,8 @@ export class DatawindowComponent implements OnInit {
     this.comm.navbarClicked.subscribe(() => {
       this.allDataLoaded = false;
       this.curOperation = this.ds.curSelectedButton;
+      this.showEditor = false;
+      this.isNewRecord = false;
       this.loadSelectedButton()
     });
 
@@ -69,8 +71,8 @@ export class DatawindowComponent implements OnInit {
     this.spinner.show();  // Display the Loading animation
     this.data.getOperationData().subscribe((results) => {
       // Load the returning data to be displayed
-      this.dgData = results;
-      this.ds.opsData[this.ds.curSelectedButton] = results;
+      this.dgData = results
+      this.ds.opsData[this.ds.curSelectedButton] = this.dgData; //results;
       
       // Load the list of column headers for the selected operation
       this.colHeadData = this.ds.columnHeaders[this.ds.curSelectedButton];

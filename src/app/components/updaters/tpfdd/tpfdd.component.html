@@ -32,7 +32,7 @@
     <div class="col-lg">
         <mat-form-field style="width:100%">
           <mat-label>Operation</mat-label>
-          <mat-select id="operation" [formControl]="opControl" required [(ngModel)]="selRec.Op_ID" (selectionChange)="storeAllChanges($event)">
+          <mat-select id="operation" [formControl]="opControl" required [(ngModel)]="selRec.operation_id" (selectionChange)="storeAllChanges($event)">
             <mat-option>--</mat-option>
             <mat-option *ngFor="let op of operations" [(value)]="op.op_id">
               {{ op.operation_long }}

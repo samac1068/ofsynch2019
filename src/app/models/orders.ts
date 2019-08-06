@@ -1,12 +1,12 @@
 export class Orders {
     id: number;
     operation: string;
-    opid: number;
+    op_id: number;
     cycle: string;
-    cycid: number;
+    cyc_id: number;
     visible: boolean;
-    fpopid: number;
-    description: string;
-    planid: number;
-    ordid: number;
+    fpop_id: number;
+    Description: string;
+    plan_id: number;
+    ord_id: number;
 }
