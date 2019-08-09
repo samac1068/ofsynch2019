@@ -27,6 +27,7 @@ export class DatawindowComponent implements OnInit {
  constructor(private ds: DatastoreService, private comm: CommService, private data:DataService, private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
+    //Confirm that we have the confirmed location for the API
     this.data.getColumnData().subscribe((results) => { //Initiator
       for(var i = 0; i < this.ds.btnData.length; i++) {
         if(results[this.ds.btnData[i][0]] != undefined && results[this.ds.btnData[i][0]] != null){

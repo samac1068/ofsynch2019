@@ -9,7 +9,7 @@ export class Damps {
     TCS_Operation: string;
     Conusa_OpID: number;
     ConusaShortName: string;
-    MOBCAP: string;
+    MOBCAP: number;
     ma12301_d: boolean;
     ma12302: boolean;
     ma12304: boolean;

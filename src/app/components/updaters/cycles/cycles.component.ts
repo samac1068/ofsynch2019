@@ -1,3 +1,4 @@
+import { Cycle } from './../../../models/cycle';
 import { ConfirmDialogService } from './../../../dialog/confirm-dialog/confirm-dialog.service';
 import { CommService } from './../../../services/comm.service';
 import { Component, OnInit, Input } from '@angular/core';
@@ -17,6 +18,7 @@ export class CyclesComponent implements OnInit {
   //Data providers
   selRec: any = {};
   chgArr: string[] = [];
+  invalidMsg: string[] = [];
 
   //Form Validators
   cycleControl = new FormControl('', [Validators.required]);
@@ -26,36 +28,51 @@ export class CyclesComponent implements OnInit {
 
   ngOnInit() {
     this.comm.submitRecClicked.subscribe(() => {
-      //if(this.ds.curSelectedButton == "damps") {
-        //console.log("submit has been clicked", this.chgArr.length);
-        if(this.chgArr.length > 0) {
-          this.cds.confirm('DAMPS - Submission', 'Confirm you want to submit the ' + this.chgArr.length + ' change(s)?', 'Yes', 'No')
+      if(this.chgArr.length > 0) {
+        this.ValidateFormData();
+        if(this.invalidMsg.length == 0){
+          this.cds.confirm('CYCLE - Submission', 'Confirm you want to submit the ' + this.chgArr.length + ' change(s)?', 'Yes', 'No')
           .then((confirmed) => { 
             if (confirmed) {
-              /* this.data.getTestDisplayOfObject(this.operations)  // We are going to do a test saving
-              .subscribe(results => console.log(results)); */
-              console.log("yeah gonna save in a minute.") ;
+              this.ds.curSelectedRecord = this.selRec;
+              this.data.updateCycleRecord()
+              .subscribe((results) => {
+                if(results.ID == 0) 
+                  this.cds.acknowledge('Operation Status', 'Failed - Reason: ' + results.processMsg, 'OK');
+                else
+                {
+                  this.resetAllFields();
+                  this.comm.signalReload.emit();
+                  this.cds.acknowledge('Operation Status', 'Operation Successful!', 'OK');
+                }
+              });
             }
           })
           .catch(() => console.log('User dismissed the dialog'));
         }
-      //}
+        else
+          this.cds.acknowledge('Incomplete Form', 'You must ' + this.invalidMsg.join(', ') + '.', 'OK', 'lg');
+      }
+      else
+        this.cds.acknowledge('Invalid Submission', "You have not made any changes to this record.", 'OK');
     });
 
     this.comm.createNewClicked.subscribe(() => {
-      //if(this.ds.curSelectedButton == "damps") {
-        this.chgArr = [];
-        this.updateDataLoad();
-      //}
+      this.chgArr = [];
+      this.selRec = new Cycle();
+      this.setDefaultItems();
+      this.updateDataLoad();
     });
-
+  
     this.comm.editRecClicked.subscribe(() => {
-      //if(this.ds.curSelectedButton == "damps") {
         this.chgArr = [];
         this.selRec = this.ds.curSelectedRecord;
         this.updateDataLoad();
-      //}
     });
+  }
+
+  setDefaultItems(){
+    //this.selRec.ID = 0;  //Indication that this is a new record.
   }
 
   // Used to get the latest batch of stored DDL information
@@ -75,5 +92,15 @@ export class CyclesComponent implements OnInit {
   textChanges(e){
     if(this.chgArr.indexOf(e.target.id) == -1)
       this.chgArr.push(e.target.id);
+  }
+
+  ValidateFormData() {
+    // Check each of the list form controls to make sure they are valid
+    this.invalidMsg = [];
+
+    if(this.cycleControl.invalid) this.invalidMsg.push("enter a cycle");
+    if(this.fyControl.invalid) this.invalidMsg.push("enter a FY");
+     
+    return null;
   }
 }

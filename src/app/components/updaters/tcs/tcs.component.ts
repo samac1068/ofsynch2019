@@ -4,6 +4,7 @@ import { CommService } from 'src/app/services/comm.service';
 import { DatastoreService } from 'src/app/services/datastore.service';
 import { ConfirmDialogService } from 'src/app/dialog/confirm-dialog/confirm-dialog.service';
 import { DataService } from 'src/app/services/data.service';
+import { TCS } from 'src/app/models/tcs';
 
 @Component({
   selector: 'app-tcs',
@@ -16,6 +17,7 @@ export class TcsComponent implements OnInit {
   
   selRec: any = {};
   chgArr: string[] = [];
+  invalidMsg: string[] = [];
   
   opControl = new FormControl('', [Validators.required]);
   descControl = new FormControl('', [Validators.required]);
@@ -24,37 +26,51 @@ export class TcsComponent implements OnInit {
 
   ngOnInit() {
     this.comm.submitRecClicked.subscribe(() => {
-      //if(this.ds.curSelectedButton == "orders") {
-        //console.log("submit has been clicked", this.chgArr.length);
-        if(this.chgArr.length > 0) {
+      if(this.chgArr.length > 0) {
+        this.ValidateFormData();
+        if(this.invalidMsg.length == 0){
           this.cds.confirm('TCS - Submission', 'Confirm you want to submit the ' + this.chgArr.length + ' change(s)?', 'Yes', 'No')
           .then((confirmed) => { 
             if (confirmed) {
-              /* this.data.getTestDisplayOfObject(this.operations)  // We are going to do a test saving
-              .subscribe(results => console.log(results)); */
-              console.log("yeah gonna save in a minute.") ;
+              this.ds.curSelectedRecord = this.selRec;
+              this.data.updateTCSRecord()
+              .subscribe((results) => {
+                if(results.ID == 0) 
+                  this.cds.acknowledge('Operation Status', 'Failed - Reason: ' + results.processMsg, 'OK');
+                else
+                {
+                  this.resetAllFields();
+                  this.comm.signalReload.emit();
+                  this.cds.acknowledge('Operation Status', 'Operation Successful!', 'OK');
+                }
+              });
             }
           })
           .catch(() => console.log('User dismissed the dialog'));
         }
-      //}
+        else
+          this.cds.acknowledge('Incomplete Form', 'You must ' + this.invalidMsg.join(', ') + '.', 'OK', 'lg');
+      }
+      else
+        this.cds.acknowledge('Invalid Submission', "You have not made any changes to this record.", 'OK');
     });
 
     this.comm.createNewClicked.subscribe(() => {
-      //if(this.ds.curSelectedButton == "orders") {
-        this.chgArr = [];
-        this.updateDataLoad();
-      //}
+      this.chgArr = [];
+      this.selRec = new TCS();
+      this.setDefaultItems();
+      this.updateDataLoad();
     });
-
+  
     this.comm.editRecClicked.subscribe(() => {
-      //if(this.ds.curSelectedButton == "orders") {
         this.chgArr = [];
         this.selRec = this.ds.curSelectedRecord;
-        console.log(this.selRec);
         this.updateDataLoad();
-      //}
     });
+  }
+
+  setDefaultItems(){
+    
   }
 
   updateDataLoad() {
@@ -75,4 +91,13 @@ export class TcsComponent implements OnInit {
       this.chgArr.push(e.target.id);
   }
 
+  ValidateFormData() {
+    // Check each of the list form controls to make sure they are valid
+    this.invalidMsg = [];
+
+    if(this.descControl.invalid) this.invalidMsg.push("enter a description");
+    if(this.opControl.invalid) this.invalidMsg.push("select an operation");
+     
+    return null;
+  }
 }

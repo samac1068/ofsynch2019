@@ -11,7 +11,8 @@ export class DatastoreService {
   private _passKey: string = "4A3F6BD3-61FB-467B-83D0-0EFBAF72AFC4";
   private _connectid: string  = 'MobCopConnectionString';
   private _appVersion: string = '2.0.0 (ALPHA)';
-  private _useLocalServer: boolean = false;
+  private _apiServer: string = "";
+  private _apiLocation: string = "";
 
   curSelectedButton: string = "";
   tblColumns:any = {};
@@ -34,8 +35,17 @@ export class DatastoreService {
     return this._appVersion;
   }
 
-  useLocalServer() {
-    return this._useLocalServer;
+  getWSAPI() {
+    return this._apiServer;
+  }
+
+  getAPILocation() {
+    return this._apiLocation;
+  }
+
+  setWSAPI(url: string, location: string) {
+    this._apiServer = url;
+    this._apiLocation = location;
   }
 
    /// Global Services

@@ -1,3 +1,4 @@
+import { Fundcites } from './../../../models/fundcites';
 import { ConfirmDialogService } from './../../../dialog/confirm-dialog/confirm-dialog.service';
 import { CommService } from './../../../services/comm.service';
 import { Component, OnInit, Input } from '@angular/core';
@@ -18,6 +19,7 @@ export class FundcitesComponent implements OnInit {
   //Data providers
   selRec: any = {};
   chgArr: string[] = [];
+  invalidMsg: string[] = [];
   fundtypes: Fundtype[] = [];
 
   //Form Validators
@@ -46,36 +48,51 @@ export class FundcitesComponent implements OnInit {
 
   ngOnInit() {
     this.comm.submitRecClicked.subscribe(() => {
-      //if(this.ds.curSelectedButton == "damps") {
-        //console.log("submit has been clicked", this.chgArr.length);
-        if(this.chgArr.length > 0) {
+      if(this.chgArr.length > 0) {
+        this.ValidateFormData();
+        if(this.invalidMsg.length == 0){
           this.cds.confirm('DAMPS - Submission', 'Confirm you want to submit the ' + this.chgArr.length + ' change(s)?', 'Yes', 'No')
           .then((confirmed) => { 
             if (confirmed) {
-              /* this.data.getTestDisplayOfObject(this.operations)  // We are going to do a test saving
-              .subscribe(results => console.log(results)); */
-              console.log("yeah gonna save in a minute.") ;
+              this.ds.curSelectedRecord = this.selRec;
+              this.data.updateFundCiteData()
+              .subscribe((results) => {
+                if(results.ID == 0) 
+                  this.cds.acknowledge('Operation Status', 'Failed - Reason: ' + results.processMsg, 'OK');
+                else
+                {
+                  this.resetAllFields();
+                  this.comm.signalReload.emit();
+                  this.cds.acknowledge('Operation Status', 'Operation Successful!', 'OK');
+                }
+              });
             }
           })
           .catch(() => console.log('User dismissed the dialog'));
         }
-      //}
+        else
+          this.cds.acknowledge('Incomplete Form', 'You must ' + this.invalidMsg.join(', ') + '.', 'OK', 'lg');
+      }
+      else
+        this.cds.acknowledge('Invalid Submission', "You have not made any changes to this record.", 'OK');
     });
 
     this.comm.createNewClicked.subscribe(() => {
-      //if(this.ds.curSelectedButton == "damps") {
-        this.chgArr = [];
-        this.updateDataLoad();
-      //}
+      this.chgArr = [];
+      this.selRec = new Fundcites();
+      this.setDefaultItems();
+      this.updateDataLoad();
     });
-
+  
     this.comm.editRecClicked.subscribe(() => {
-      //if(this.ds.curSelectedButton == "damps") {
         this.chgArr = [];
         this.selRec = this.ds.curSelectedRecord;
         this.updateDataLoad();
-      //}
     });
+  }
+
+  setDefaultItems(){
+    //this.selRec.ID = 0;  //Indication that this is a new record.
   }
 
   // Used to get the latest batch of stored DDL information
@@ -95,5 +112,33 @@ export class FundcitesComponent implements OnInit {
   textChanges(e){
     if(this.chgArr.indexOf(e.target.id) == -1)
       this.chgArr.push(e.target.id);
+  }
+
+  ValidateFormData() {
+    // Check each of the list form controls to make sure they are valid
+    this.invalidMsg = [];
+
+    if(this.fundcodeControl.invalid) this.invalidMsg.push("enter a fund code");
+    if(this.fundeffdateControl.invalid) this.invalidMsg.push("enter a effective date");
+    if(this.cicControl.invalid) this.invalidMsg.push("enter a CIC");
+    if(this.mdcControl.invalid) this.invalidMsg.push("enter a MDC");
+    if(this.fy1Control.invalid) this.invalidMsg.push("enter a FY1");
+    if(this.fy2Control.invalid) this.invalidMsg.push("enter a FY2");
+    if(this.fy3Control.invalid) this.invalidMsg.push("enter a FY3");
+    if(this.fyControl.invalid) this.invalidMsg.push("enter a FY");
+    if(this.bsnControl.invalid) this.invalidMsg.push("enter a BSN");
+    if(this.limitControl.invalid) this.invalidMsg.push("enter a LIMIT");
+    if(this.oaControl.invalid) this.invalidMsg.push("enter a OA");
+    if(this.asnControl.invalid) this.invalidMsg.push("enter a ASN");
+    if(this.eorControl.invalid) this.invalidMsg.push("enter a EOR");
+    if(this.mdepControl.invalid) this.invalidMsg.push("enter a MDEP");
+    if(this.fccControl.invalid) this.invalidMsg.push("enter a FCC");
+    if(this.amsControl.invalid) this.invalidMsg.push("enter a AMS");
+    if(this.statusidControl.invalid) this.invalidMsg.push("enter a Status ID");
+    if(this.apcControl.invalid) this.invalidMsg.push("enter a APC");
+    if(this.fsnControl.invalid) this.invalidMsg.push("enter a FSN");
+    if(this.fundtypeControl.invalid) this.invalidMsg.push("select a fund type");
+         
+    return null;
   }
 }
