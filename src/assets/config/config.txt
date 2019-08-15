@@ -1,8 +1,8 @@
 {
     "api":
     [
-        {"location": "local", "url": "http://localhost:62441/api/OFS", "active": false},
-        {"location": "demo", "url": "https://demo.mkgcs.com/MOBAPI/api/OFS", "active": true},
+        {"location": "local", "url": "http://localhost:62441/api/OFS", "active": true},
+        {"location": "demo", "url": "https://demo.mkgcs.com/MOBAPI/api/OFS", "active": false},
         {"location": "azure", "url": "https://mobcop.mkgcs.com/MOBAPI/api/OFS", "active": false},
         {"location": "prod", "url": "https://mobcop.aoc.army.pentagon.smil.mil/MOBAPI/OFS", "active": false}
     ]

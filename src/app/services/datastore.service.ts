@@ -10,7 +10,7 @@ export class DatastoreService {
   //Variables
   private _passKey: string = "4A3F6BD3-61FB-467B-83D0-0EFBAF72AFC4";
   private _connectid: string  = 'MobCopConnectionString';
-  private _appVersion: string = '2.0.0 (ALPHA)';
+  private _appVersion: string = '2.0.0 (BETA)';
   private _apiServer: string = "";
   private _apiLocation: string = "";
 
@@ -20,7 +20,7 @@ export class DatastoreService {
   opsData: any = {};
   btnData: any[] = [
                     ["damps","ID"], ["orders","ID"], ["pay","ID"],["tcs","ID"], ["conusa","ID"], 
-                    ["missionlocation","ID"], ["fundcites","ID"], ["operations","ID"], ["tpfdd","ID"], ["cycles","ID"]
+                    ["locations","ID"], ["fundcites","ID"], ["operations","ID"], ["tpfdd","ID"], ["cycles","ID"]
                   ];
   btnStatus: boolean[] = [false, false, false, false, false, false, false, false, false, false];
   columnHeaders = {};

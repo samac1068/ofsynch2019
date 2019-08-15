@@ -95,6 +95,7 @@ export class DampsComponent implements OnInit {
     this.selRec.ma12304_b = 0;
     this.selRec.ma12302_border = 0;
     this.selRec.UIC_ToNipr = 0;
+    this.selRec.MOBCAP = -1;
   }
 
   // Used to get the latest batch of stored DDL information
@@ -132,6 +133,10 @@ export class DampsComponent implements OnInit {
     if(this.tcsControl.invalid) this.invalidMsg.push("select a TCS");
     if(this.conusaControl.invalid) this.invalidMsg.push("select a CONUSA");
      
+    // Make sure value isn't null
+    if(this.selRec.MOBCAP == null || this.selRec.MOBCAP == undefined || this.selRec.MOBCAP.length == 0)
+      this.selRec.MOBCAP = -1;
+
     return null;
   }
 }

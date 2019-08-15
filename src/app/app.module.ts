@@ -1,6 +1,8 @@
 import { DatastoreService } from './services/datastore.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 // App Components
 import { AppComponent } from './app.component';
@@ -18,6 +20,8 @@ import { OperationsComponent } from './components/updaters/operations/operations
 import { TpfddComponent } from './components/updaters/tpfdd/tpfdd.component';
 import { BtnGroupComponent } from './components/updaters/btn-group/btn-group.component';
 import { ConfirmDialogComponent } from './dialog/confirm-dialog/confirm-dialog.component';
+import { CyclesComponent } from './components/updaters/cycles/cycles.component';
+import { OperationDialogComponent } from './dialog/operation-dialog/operation-dialog.component';
 
 // Services
 import { CommService } from './services/comm.service';
@@ -41,14 +45,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { DampsComponent } from './components/updaters/damps/damps.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { FormsModule } from '@angular/forms';
+import { MatNativeDateModule } from '@angular/material/core';
 
 // 3rd Party Items
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { MatNativeDateModule } from '@angular/material/core';
-import { CyclesComponent } from './components/updaters/cycles/cycles.component';
-
+import { AngularDualListBoxModule } from 'angular-dual-listbox';
 
 @NgModule({
   declarations: [
@@ -69,7 +71,8 @@ import { CyclesComponent } from './components/updaters/cycles/cycles.component';
     FundcitesComponent,
     OperationsComponent,
     TpfddComponent,
-    CyclesComponent
+    CyclesComponent,
+    OperationDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -91,14 +94,17 @@ import { CyclesComponent } from './components/updaters/cycles/cycles.component';
     MatNativeDateModule,
     FormsModule,
     NgbModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    AngularDualListBoxModule
   ],
   providers: [
     DatastoreService,
     CommService,
-    DataService
+    DataService,
+    Location,
+    {provide: LocationStrategy, useClass: PathLocationStrategy}
   ],
-  entryComponents: [ ConfirmDialogComponent ],
+  entryComponents: [ ConfirmDialogComponent, OperationDialogComponent ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

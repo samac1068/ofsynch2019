@@ -16,6 +16,6 @@ export class UpdatePanelComponent implements OnInit {
   constructor(private ds: DatastoreService, private comm: CommService) { }
 
   ngOnInit() {
-    console.log("curSelectedButton: " + this.curSelectedButton);
+    //console.log("curSelectedButton: " + this.curSelectedButton);
   }
 }

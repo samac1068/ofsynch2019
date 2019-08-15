@@ -1,0 +1,9 @@
+<div class="title">
+    Operation Management Dialog - <span class="operationtitle">{{ selOp }}</span>
+</div>
+
+<div class="listbox">
+  <dual-list [source]="availList" [(destination)]="currList" [format]="dlFormat" [height]="dlHeight"></dual-list>
+</div>
+
+<button class="doneBtn btnCustom" (click)="killDialog()">Done</button>

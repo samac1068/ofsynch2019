@@ -1,5 +1,6 @@
 import { DatastoreService } from './../../services/datastore.service';
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-banner',
@@ -10,10 +11,16 @@ export class BannerComponent implements OnInit {
 
   version: string;
 
-  constructor(private ds: DatastoreService) { }
+  constructor(private ds: DatastoreService, private location: Location) { }
 
   ngOnInit() {
     this.version = this.ds.getVersion();
   }
 
+  returnToMDIS(){
+    console.log("go back to previous page");
+    if(this.ds.getAPILocation() == "PROD"){
+      this.location.back();
+    }
+  }
 }

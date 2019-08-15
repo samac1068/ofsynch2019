@@ -3,6 +3,8 @@ import { CommService } from './../../services/comm.service';
 import { DatastoreService } from './../../services/datastore.service';
 import { Component, OnInit, ViewChild, ElementRef, HostListener, Renderer2, Input, ViewChildren } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { MatDialog, MatDialogRef } from '@angular/material';
+import { OperationDialogComponent } from 'src/app/dialog/operation-dialog/operation-dialog.component';
 
 @Component({
   selector: 'app-datawindow',
@@ -23,8 +25,10 @@ export class DatawindowComponent implements OnInit {
   subOpList: string [];
   curOperation: string;
   allDataLoaded: boolean = false;
-  
- constructor(private ds: DatastoreService, private comm: CommService, private data:DataService, private spinner: NgxSpinnerService) { }
+  operationDialogRef: MatDialogRef<OperationDialogComponent>
+
+ constructor(private ds: DatastoreService, private comm: CommService, private data:DataService, private spinner: NgxSpinnerService,
+  private dialog: MatDialog) { }
 
   ngOnInit() {
     //Confirm that we have the confirmed location for the API
@@ -47,7 +51,6 @@ export class DatawindowComponent implements OnInit {
 
     //Subscriptions
     this.comm.navbarClicked.subscribe(() => {
-      this.allDataLoaded = false;
       this.curOperation = this.ds.curSelectedButton;
       this.showEditor = false;
       this.isNewRecord = false;
@@ -63,24 +66,26 @@ export class DatawindowComponent implements OnInit {
     //Reload of Datagrid signaled
     this.comm.signalReload.subscribe(() => {
       this.showEditor = false;
-      this.reloadSelectedOperation();
+      this.getSelectedOperationData();
     });
   }
 
-  //Function Handler
-  loadSelectedButton() {
-    this.spinner.show();  // Display the Loading animation
+  async getSelectedOperationData(){
+    this.showLoaderAni(); //<-----------------------
     this.data.getOperationData().subscribe((results) => {
-      // Load the returning data to be displayed
-      this.dgData = results
-      this.ds.opsData[this.ds.curSelectedButton] = this.dgData; //results;
-      
-      // Load the list of column headers for the selected operation
-      this.colHeadData = this.ds.columnHeaders[this.ds.curSelectedButton];
+      this.dgData = results; // Load the returning data to be displayed
+      this.ds.opsData[this.ds.curSelectedButton] = this.dgData;
+      this.colHeadData = this.ds.columnHeaders[this.ds.curSelectedButton]; // Load the list of column headers for the selected operation
     });
     
     this.availWidth = this.rightcol.nativeElement.offsetWidth;
     this.setTableResize();
+
+    this.hideLoaderAni();  //TODO <----  Temporarily placed until we figure out another issue
+  }
+
+  loadSelectedButton() {
+    this.getSelectedOperationData();
 
     //Load the necessary suboperation information for the selected operation
     switch(this.ds.curSelectedButton){
@@ -106,7 +111,7 @@ export class DatawindowComponent implements OnInit {
         this.subOpList = ["fundtypes"];
         break;
       case "operations":
-        this.subOpList = [];
+        this.subOpList = ["locations", "missionAssign"];
         break;
       case "tpfdd":
         this.subOpList = ["operations"];
@@ -130,29 +135,17 @@ export class DatawindowComponent implements OnInit {
     }
   }
 
-  reloadSelectedOperation(){
-    this.spinner.show();  // Display the Loading animation
-    this.data.getOperationData().subscribe((results) => {
-      // Load the returning data to be displayed
-      this.dgData = results;
-      this.ds.opsData[this.ds.curSelectedButton] = results;
-      
-      // Load the list of column headers for the selected operation
-      this.colHeadData = this.ds.columnHeaders[this.ds.curSelectedButton];
-    });
-    
-    this.availWidth = this.rightcol.nativeElement.offsetWidth;
-    this.setTableResize();
-  }
-
-  handleLoaderAni(){
+  hideLoaderAni(){
+    console.log("hideLoaderAni");
     this.spinner.hide();
     this.allDataLoaded = true;
   }
 
   showLoaderAni() {
-    this.spinner.show();
+    console.log("showLoaderAni");
     this.allDataLoaded = false;
+    this.spinner.show();
+    console.log(this.allDataLoaded);
   }
 
   sepClickHandler() {
@@ -212,8 +205,16 @@ export class DatawindowComponent implements OnInit {
 
   editRecordHandler(selectedRow: any) {
     this.ds.curSelectedRecord = selectedRow;
-    this.isNewRecord = false;
-    this.showEditor = true;
-    this.comm.editRecClicked.emit();
+      this.isNewRecord = false;
+
+    if(this.ds.curSelectedButton != "operations"){
+      this.showEditor = true;
+      this.comm.editRecClicked.emit();
+    }
+    else
+    {
+      this.showEditor = false;
+      this.operationDialogRef = this.dialog.open(OperationDialogComponent, { height: '445px', width: '600px' });
+    }
   }
 }

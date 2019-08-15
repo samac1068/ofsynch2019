@@ -33,18 +33,18 @@
       <!-- Row Information -->
       <tbody>
         <tr *ngFor="let row of dgData; let i = index; let last = last;" class="mat-cell">
-          <td style="text-align:center"><img src="../../../assets/images/cog.png" title="Click to edit record" (click)="editRecordHandler(row)" class="clickitem" /></td>
+          <td style="text-align:center"><img src="./assets/images/cog.png" title="Click to edit record" (click)="editRecordHandler(row)" class="clickitem" /></td>
           <td #dglist *ngFor="let col of colHeadData;" [ngStyle]="{'text-align': (col.checkbox) ? 'center' : 'left'}">
               {{ (col.checkbox) ?  "" : row[col.columnDef] }}
-            <img [src]="((row[col.columnDef] == true && col.checkbox) ? '../../../assets/images/cbox_checked.png':'../../../assets/images/cbox_open.png')" width='15' height='15' 
+            <img [src]="((row[col.columnDef] == true && col.checkbox) ? './assets/images/cbox_checked.png':'./assets/images/cbox_open.png')" width='15' height='15' 
                 [ngStyle]="{'display': (col.checkbox) ? '' : 'none'}"/>
-            <ng-container *ngIf="last">{{ handleLoaderAni() }}</ng-container>
+            <!-- <ng-container *ngIf="last">{{ hideLoaderAni() }}</ng-container> -->
           </td>  
         </tr>
       </tbody>
     </table>
 
-    <div id="spinner" [hidden]="allDataLoaded" class="dgloader rightcol" [ngClass]="showEditor ? 'rightcol' : 'rightcol_wide'">
+    <div id="divSpinner" [hidden]="allDataLoaded" class="dgloader rightcol" [ngClass]="showEditor ? 'rightcol' : 'rightcol_wide'">
       <ngx-spinner bdOpacity = 0.9 bdColor = "#333333" size = "medium" color = "#fff" type = "timer" [fullScreen] = "false">
         <p style="color: white" >Stand By Loading Data...</p>
       </ngx-spinner>

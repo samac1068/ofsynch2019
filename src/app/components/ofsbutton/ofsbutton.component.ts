@@ -27,7 +27,7 @@ export class OfsbuttonComponent implements OnInit {
   constructor(private ds: DatastoreService, private comm: CommService) { }
 
   ngOnInit() {
-    this.imgPath = `../../../assets/images/${this.imgname}.png`;
+    this.imgPath = `./assets/images/${this.imgname}.png`;
 
     this.comm.navbarClicked.subscribe(() => {
       this.confirmBtnStatus();

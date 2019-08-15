@@ -67,17 +67,17 @@ export class DataService {
       }
     }
 
-    console.log("API Server URL is: ", this.identifyWSServer());
+    //console.log("API Server URL is: ", this.identifyWSServer());
   }
 
   // Retrieve Data from local file
   setWSServer(): Observable<any>  {
-    return this.http.get<any>('./assets/config.json')
+    return this.http.get('assets/config/config.txt')
     .pipe(catchError(this.errorHandler));
   }
 
   getColumnData(): Observable<any> {
-    return this.http.get<any>('./assets/dg-columns.json')
+    return this.http.get('assets/config/dg-columns.txt')
     .pipe(catchError(this.errorHandler));
   }
 
