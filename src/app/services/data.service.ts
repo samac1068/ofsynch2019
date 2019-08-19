@@ -1,3 +1,4 @@
+import { MissionAssign } from './../models/missionassign';
 import { Fundcites } from './../models/fundcites';
 import { DatastoreService } from './datastore.service';
 import { Injectable } from '@angular/core';
@@ -183,6 +184,12 @@ export class DataService {
   updateCycleRecord(): Observable<any> {
     var fullDomain: string = this.identifyWSServer() + `/UpdateCycleData`;
     return (this.http.post<Cycle>(fullDomain + "?id=" + this.ds.getPassKey(), this.ds.curSelectedRecord, httpHeaders )
+    .pipe(catchError(this.errorHandler)));
+  }
+
+  modifyOpsLocationData(locationData: MissionAssign): Observable<any> {
+    var fullDomain: string = this.identifyWSServer() + `/ModifyOpsLocationData`;
+    return (this.http.post<MissionAssign>(fullDomain + "?id=" + this.ds.getPassKey(), locationData, httpHeaders )
     .pipe(catchError(this.errorHandler)));
   }
 }

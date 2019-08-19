@@ -1,5 +1,5 @@
 export class MissionAssign {
     id: number;
-    opid: number;
-    locationid: number;
+    op_id: number;
+    location_id: number;
 }

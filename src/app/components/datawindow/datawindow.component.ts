@@ -66,26 +66,26 @@ export class DatawindowComponent implements OnInit {
     //Reload of Datagrid signaled
     this.comm.signalReload.subscribe(() => {
       this.showEditor = false;
-      this.getSelectedOperationData();
+      this.getSelectedOperationData(false);
     });
   }
 
-  async getSelectedOperationData(){
-    this.showLoaderAni(); //<-----------------------
-    this.data.getOperationData().subscribe((results) => {
+  async getSelectedOperationData(isMulti: Boolean){
+    this.showLoaderAni();
+    await this.data.getOperationData()
+    .subscribe((results) => {
       this.dgData = results; // Load the returning data to be displayed
       this.ds.opsData[this.ds.curSelectedButton] = this.dgData;
       this.colHeadData = this.ds.columnHeaders[this.ds.curSelectedButton]; // Load the list of column headers for the selected operation
+      this.hideLoaderAni();
     });
     
     this.availWidth = this.rightcol.nativeElement.offsetWidth;
     this.setTableResize();
-
-    this.hideLoaderAni();  //TODO <----  Temporarily placed until we figure out another issue
   }
 
   loadSelectedButton() {
-    this.getSelectedOperationData();
+    this.getSelectedOperationData(true);
 
     //Load the necessary suboperation information for the selected operation
     switch(this.ds.curSelectedButton){
@@ -96,22 +96,22 @@ export class DatawindowComponent implements OnInit {
         this.subOpList = ["operations","cycles","damps"];
         break;
       case "pay":
-        this.subOpList = [];
+        this.subOpList = ["record", "transfer"];
         break;
       case "tcs":
-        this.subOpList = [];
+        this.subOpList = ["geoloc"];
         break;
       case "conusa":
         this.subOpList = [];
         break;
-      case "missionlocation":
+      case "missionlocations":
         this.subOpList = ["country","states"];
         break;
       case "fundcites":
         this.subOpList = ["fundtypes"];
         break;
       case "operations":
-        this.subOpList = ["locations", "missionAssign"];
+        this.subOpList = ["missionlocations", "missionAssign", "locationid"];
         break;
       case "tpfdd":
         this.subOpList = ["operations"];
@@ -126,26 +126,25 @@ export class DatawindowComponent implements OnInit {
   }
   
   getSubOpData(operation: string []){
+    var loopCount: number = 0;
     if(operation != null && operation != undefined) {
-      operation.forEach((obj) => {
-        this.data.getSubOperationData(obj).subscribe((results) => {
+        operation.forEach((obj) => {
+          this.data.getSubOperationData(obj).subscribe((results) => {
           this.ds.opsData[obj] = results;
+          loopCount++;
         });
       });
     }
   }
 
   hideLoaderAni(){
-    console.log("hideLoaderAni");
     this.spinner.hide();
     this.allDataLoaded = true;
   }
 
   showLoaderAni() {
-    console.log("showLoaderAni");
     this.allDataLoaded = false;
     this.spinner.show();
-    console.log(this.allDataLoaded);
   }
 
   sepClickHandler() {
@@ -214,7 +213,7 @@ export class DatawindowComponent implements OnInit {
     else
     {
       this.showEditor = false;
-      this.operationDialogRef = this.dialog.open(OperationDialogComponent, { height: '445px', width: '600px' });
+      this.operationDialogRef = this.dialog.open(OperationDialogComponent, { height: '600px', width: '620px' });
     }
   }
 }

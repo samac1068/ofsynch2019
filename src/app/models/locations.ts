@@ -1,4 +1,4 @@
-export class Location {
+export class Locations {
     lngMissionLocationID: number;
     strMissionLocation: string;
     MissionConus: boolean;

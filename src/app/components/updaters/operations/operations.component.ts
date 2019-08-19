@@ -40,12 +40,12 @@ export class OperationsComponent implements OnInit {
               this.data.updateOperationData()
               .subscribe((results) => {
                 if(results.ID == 0) 
-                  this.cds.acknowledge('Operation Status', 'Failed - Reason: ' + results.processMsg, 'OK');
+                  this.cds.acknowledge(this.ds.acknowTitle, 'Failed - Reason: ' + results.processMsg, 'OK');
                 else
                 {
                   this.resetAllFields();
                   this.comm.signalReload.emit();
-                  this.cds.acknowledge('Operation Status', 'Operation Successful!', 'OK');
+                  this.cds.acknowledge(this.ds.acknowTitle, 'Operation Successful!', 'OK');
                 }
               });
             }

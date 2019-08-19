@@ -3,7 +3,7 @@
       [ 
         {"header": "ID", "columnDef": "ID", "width": 40, "checkbox": false, "hidden": false},
         {"header": "Hidden", "columnDef": "hidden", "width": 60, "checkbox": true, "hidden": false},
-        {"header": "Description", "columnDef": "Description", "width": 300, "checkbox": false, "hidden": false},
+        {"header": "Description", "columnDef": "Description", "width": 200, "checkbox": false, "hidden": false},
         {"header": "Pay OP", "columnDef": "PAY_Operation", "width": 100, "checkbox": false, "hidden": false},
         {"header": "TCS OP", "columnDef": "TCS_Operation", "width": 100, "checkbox": false, "hidden": false},
         {"header": "Short Name", "columnDef": "opShortName", "width": 120, "checkbox": false, "hidden": false},
@@ -16,7 +16,7 @@
         {"header": "12304B", "columnDef": "ma12304_b", "width": 60, "checkbox": true, "hidden": false},
         {"header": "MOBCAP", "columnDef": "MOBCAP", "width": 80, "checkbox": false, "hidden": false},
         {"header": "Cycle", "columnDef": "Cycle", "width": 60, "checkbox": false, "hidden": false},
-        {"header": "Long Name", "columnDef": "opLongName", "width": 60, "checkbox": false, "hidden": false},
+        {"header": "Long Name", "columnDef": "opLongName", "width": 120, "checkbox": false, "hidden": false},
         {"header": "UIC to NIPR", "columnDef": "UIC_ToNipr", "width": 60, "checkbox": true, "hidden": false}
       ],
       "orders": 
@@ -73,7 +73,7 @@
         {"header": "RECORD STATUS", "columnDef": "Record_Status_Description", "width": 60, "checkbox": false, "hidden": false},
         {"header": "TRANSFER STATUS", "columnDef": "Transfer_Status_Description", "width": 60, "checkbox": false, "hidden": false}
       ],
-      "locations": 
+      "missionlocations": 
       [ 
         {"header": "ID", "columnDef": "lngMissionLocationID", "width": 40, "checkbox": false, "hidden": false},
         {"header": "LOCATION", "columnDef": "strMissionLocation", "width": 140, "checkbox": false, "hidden": false},

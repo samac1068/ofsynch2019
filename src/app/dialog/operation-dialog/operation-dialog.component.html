@@ -1,9 +1,26 @@
 <div class="title">
-    Operation Management Dialog - <span class="operationtitle">{{ selOp }}</span>
+    Operation/Location Management Dialog
 </div>
 
-<div class="listbox">
-  <dual-list [source]="availList" [(destination)]="currList" [format]="dlFormat" [height]="dlHeight"></dual-list>
-</div>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Operation: {{ selOp.operation }}</mat-card-title>
+    <mat-card-subtitle>{{ selOp.operation_long }} (<span class="idtext">ID:{{ selOp.op_id }}</span>)</mat-card-subtitle>
+  </mat-card-header>
 
-<button class="doneBtn btnCustom" (click)="killDialog()">Done</button>
+  <mat-card-content>
+    <div id="navi">
+      <div id="leftlabel">Current Assigned {{ assignedCount }}</div>
+      <div id="rightlabel">Available {{ availCount }}</div>
+    </div>
+    <div id="spacer">&nbsp;</div>
+    <div class="listbox">
+      <dual-list [source]="locations" [(destination)]="currList" [format]="dlFormat" [height]="dlHeight" key="lngMissionLocationID"
+      display="strMissionLocation" sort="true" (destinationChange)="processRequestedChange($event)"></dual-list>
+    </div>
+  </mat-card-content>
+
+  <mat-card-footer>
+      <button class="doneBtn btnCustom" (click)="killDialog()" title="Click to close dialog.">Done</button>
+  </mat-card-footer>
+</mat-card>

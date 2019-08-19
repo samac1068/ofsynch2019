@@ -1,4 +1,4 @@
-import { Location } from './../../../models/location';
+import { Locations } from '../../../models/locations';
 import { ConfirmDialogService } from './../../../dialog/confirm-dialog/confirm-dialog.service';
 import { CommService } from './../../../services/comm.service';
 import { Component, OnInit, Input } from '@angular/core';
@@ -50,12 +50,12 @@ export class MissionlocationComponent implements OnInit {
               this.data.updateLocationData()
               .subscribe((results) => {
                 if(results.ID == 0) 
-                  this.cds.acknowledge('Operation Status', 'Failed - Reason: ' + results.processMsg, 'OK');
+                  this.cds.acknowledge(this.ds.acknowTitle, 'Failed - Reason: ' + results.processMsg, 'OK');
                 else
                 {
                   this.resetAllFields();
                   this.comm.signalReload.emit();
-                  this.cds.acknowledge('Operation Status', 'Operation Successful!', 'OK');
+                  this.cds.acknowledge(this.ds.acknowTitle, 'Operation Successful!', 'OK');
                 }
               });
             }
@@ -71,7 +71,7 @@ export class MissionlocationComponent implements OnInit {
 
     this.comm.createNewClicked.subscribe(() => {
       this.chgArr = [];
-      this.selRec = new Location();
+      this.selRec = new Locations();
       this.setDefaultItems();
       this.updateDataLoad();
     });
