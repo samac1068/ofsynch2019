@@ -5,4 +5,5 @@ export class Operation {
     operation_long: string;
     CRC: boolean;
     toNIPR: boolean;
+    assignedCnt: number;
 }

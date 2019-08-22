@@ -21,7 +21,8 @@ export class TpfddComponent implements OnInit {
   chgArr: string[] = [];
   invalidMsg: string[] = [];
   operations: Operation[] = [];
-  tpfddtypes: string[] = ["Type1", "Type2", "Type3", "Type4"];
+  tpfddtypes: string[] = ["EXEC", "PLAN"];
+  convertedDt: Date;
 
   //Form Validators
   nmshortControl = new FormControl('', [Validators.required]);
@@ -29,7 +30,7 @@ export class TpfddComponent implements OnInit {
   opControl = new FormControl('', [Validators.required]);
   typeControl = new FormControl('', [Validators.required]);
   cdateControl = new FormControl('', [Validators.required]);
-   
+  
   constructor(private comm:CommService, private ds: DatastoreService, private cds: ConfirmDialogService, private data: DataService) { }
 
   ngOnInit() {
@@ -40,6 +41,7 @@ export class TpfddComponent implements OnInit {
           this.cds.confirm('TPFDD - Submission', 'Confirm you want to submit the ' + this.chgArr.length + ' change(s)?', 'Yes', 'No')
           .then((confirmed) => { 
             if (confirmed) {
+              this.selRec.CDATE = this.convertedDt.toISOString();
               this.ds.curSelectedRecord = this.selRec;
               this.data.updateTPFDDRecord()
               .subscribe((results) => {
@@ -73,6 +75,7 @@ export class TpfddComponent implements OnInit {
     this.comm.editRecClicked.subscribe(() => {
         this.chgArr = [];
         this.selRec = this.ds.curSelectedRecord;
+        this.convertedDt = new Date(this.selRec.CDATE);
         this.updateDataLoad();
     });
   }
@@ -110,7 +113,5 @@ export class TpfddComponent implements OnInit {
     if(this.opControl.invalid) this.invalidMsg.push("select a cycle");
     if(this.typeControl.invalid) this.invalidMsg.push("enter a type");
     if(this.cdateControl.invalid) this.invalidMsg.push("enter a CDATE");
-         
-    return null;
   }
 }

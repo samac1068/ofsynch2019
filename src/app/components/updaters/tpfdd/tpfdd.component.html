@@ -55,7 +55,7 @@
     <div class="col-6">
       <mat-form-field appearance="outline" style="width:100%">
         <mat-label>CDATE:</mat-label>
-        <input matInput [matDatepicker]="picker" placeholder="Choose a CDATE" required [(value)]="selRec.CDATE" (focusout)="textChanges($event)">
+        <input matInput [matDatepicker]="picker" placeholder="Choose a CDATE" required [(value)]="convertedDt" (focusout)="textChanges($event)">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>  

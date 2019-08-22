@@ -25,7 +25,7 @@
         {"header": "ID", "columnDef": "id", "width": 40, "checkbox": false, "hidden": false},
         {"header": "OPERATION", "columnDef": "operation", "width": 230, "checkbox": false, "hidden": false},
         {"header": "CYCLE", "columnDef": "cycle", "width": 55, "checkbox": false, "hidden": false},
-        {"header": "PLANNING", "columnDef": "plan_id", "width": 60, "checkbox": false, "hidden": false},
+        {"header": "IN PLANNING", "columnDef": "plan_id", "width": 55, "checkbox": true, "hidden": false},
         {"header": "ORDERS", "columnDef": "ord_id", "width": 60, "checkbox": false, "hidden": false},
         {"header": "ASSIGNED DAMPS", "columnDef": "Description", "width": 150, "checkbox": false, "hidden": false}
       ],
@@ -51,7 +51,7 @@
         {"header": "SHORTNAME", "columnDef": "opShortName", "width": 140, "checkbox": false, "hidden": false},
         {"header": "LONGNAME", "columnDef": "opLongName", "width": 230, "checkbox": false, "hidden": false},
         {"header": "AUTH ID", "columnDef": "opAuthId", "width": 40, "checkbox": false, "hidden": false},
-        {"header": "HIDDEN", "columnDef": "opHidden", "width": 40, "checkbox": false, "hidden": false},
+        {"header": "HIDDEN", "columnDef": "opHidden", "width": 40, "checkbox": true, "hidden": false},
         {"header": "RECORD STATUS", "columnDef": "Record_Status_Description", "width": 60, "checkbox": false, "hidden": false},
         {"header": "TRANSFER STATUS", "columnDef": "Transfer_Status_Description", "width": 60, "checkbox": false, "hidden": false}
       ],
@@ -59,10 +59,11 @@
       [ 
         {"header": "ID", "columnDef": "op_id", "width": 40, "checkbox": false, "hidden": false},
         {"header": "OPERATION", "columnDef": "operation", "width": 140, "checkbox": false, "hidden": false},
-        {"header": "VISIBLE", "columnDef": "unitrqmt_visible", "width": 40, "checkbox": false, "hidden": false},
+        {"header": "VISIBLE", "columnDef": "unitrqmt_visible", "width": 40, "checkbox": true, "hidden": false},
         {"header": "LONG NAME", "columnDef": "operation_long", "width": 230, "checkbox": false, "hidden": false},
-        {"header": "TO CRC", "columnDef": "CRC", "width": 40, "checkbox": false, "hidden": false},
-        {"header": "TO NIPR", "columnDef": "toNIPR", "width": 40, "checkbox": false, "hidden": false}
+        {"header": "TO CRC", "columnDef": "CRC", "width": 40, "checkbox": true, "hidden": false},
+        {"header": "TO NIPR", "columnDef": "toNIPR", "width": 40, "checkbox": true, "hidden": false},
+        {"header": "LOC ASGND", "columnDef": "assignedCnt", "width": 40, "checkbox": false, "hidden": false}
       ],
       "cycles": 
       [ 
@@ -76,6 +77,7 @@
       "missionlocations": 
       [ 
         {"header": "ID", "columnDef": "lngMissionLocationID", "width": 40, "checkbox": false, "hidden": false},
+        {"header": "HIDDEN", "columnDef": "Hidden", "width": 40, "checkbox": true, "hidden": false},
         {"header": "LOCATION", "columnDef": "strMissionLocation", "width": 140, "checkbox": false, "hidden": false},
         {"header": "CONUS", "columnDef": "MissionConus", "width": 40, "checkbox": true, "hidden": false},
         {"header": "COUNTRY", "columnDef": "Country", "width": 140, "checkbox": false, "hidden": false},
@@ -99,7 +101,7 @@
         {"header": "FUND CODE", "columnDef": "FundCode", "width": 300, "checkbox": false, "hidden": false},
         {"header": "EFFECTIVE DATE", "columnDef": "FundEffDate", "width": 80, "checkbox": false, "hidden": false},
         {"header": "FUND TYPE", "columnDef": "FundType", "width": 40, "checkbox": false, "hidden": false},
-        {"header": "CIC", "columnDef": "CIC", "width": 200, "checkbox": false, "hidden": false},
+        {"header": "CIC", "columnDef": "CIC", "width": 150, "checkbox": false, "hidden": false},
         {"header": "MDC", "columnDef": "MDC", "width": 40, "checkbox": false, "hidden": false},
         {"header": "CONUS BASED", "columnDef": "IsConusBase", "width": 40, "checkbox": true, "hidden": false},
         {"header": "FY1", "columnDef": "FY1", "width": 40, "checkbox": false, "hidden": false},

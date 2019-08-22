@@ -52,7 +52,7 @@ export class OfsbuttonComponent implements OnInit {
 
   confirmBtnStatus() {
     // If this button is not currently selected, then change BG color and toggle
-    this.toggle = (this.ds.curSelectedButton == this.label.toLowerCase());
+    this.toggle = (this.ds.curSelectedButton == this.label.toLowerCase().replace(" ", ""));
   }
 
   buttonShift(): Object{
