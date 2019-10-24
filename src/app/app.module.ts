@@ -26,8 +26,9 @@ import { OperationDialogComponent } from './dialog/operation-dialog/operation-di
 // Services
 import { CommService } from './services/comm.service';
 import { DataService } from './services/data.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AgGridModule } from 'ag-grid-angular';
+import { AuthInterceptorService } from './services/auth-interceptor.service';
 
 //Angular Material 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -51,6 +52,8 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { AngularDualListBoxModule } from 'angular-dual-listbox';
+//import { NoopInterceptor } from '@angular/common/http/src/interceptor';
+
 
 @NgModule({
   declarations: [
@@ -102,7 +105,8 @@ import { AngularDualListBoxModule } from 'angular-dual-listbox';
     CommService,
     DataService,
     Location,
-    {provide: LocationStrategy, useClass: PathLocationStrategy}
+    {provide: LocationStrategy, useClass: PathLocationStrategy},
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}
   ],
   entryComponents: [ ConfirmDialogComponent, OperationDialogComponent ],
   bootstrap: [AppComponent]

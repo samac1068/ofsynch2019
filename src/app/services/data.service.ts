@@ -14,6 +14,7 @@ import { TCS } from './../models/tcs';
 import { Pay } from './../models/pay';
 import { Orders } from '../models/orders';
 import { Operation } from '../models/operations';
+import { HttpParamsOptions } from '@angular/common/http/src/params';
 
 const httpHeaders = {
   headers: new HttpHeaders ({
@@ -80,6 +81,19 @@ export class DataService {
   getColumnData(): Observable<any> {
     return this.http.get('assets/config/dg-columns.txt')
     .pipe(catchError(this.errorHandler));
+  }
+
+  // Establish Secure Connection and Store Retrieved Token
+  getSessionToken(): Observable<any> {
+    var fullDomain: string = this.identifyWSServer().split("/api")[0] + `/token`;
+    const header = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
+    const params = new  HttpParams().set('grant_type', 'password')
+                                    .set('username', this.ds.getPassKey());
+                                    
+    localStorage.setItem("token", this.ds.getPassKey());  // Forcing a key that can be used for authorization with the API
+
+    return (this.http.post<any>(fullDomain, null, { params: params , headers: header })
+      .pipe(catchError(this.errorHandler)));
   }
 
   // Retrieve Data from Server
@@ -170,7 +184,7 @@ export class DataService {
   }
 
   updateOperationData(): Observable<any> {
-    var fullDomain: string = this.identifyWSServer() + `/UpdateOperationData`;
+    var fullDomain: string = this.identifyWSServer() + `/UpdateOpsLookupData`;
     return (this.http.post<Operation>(fullDomain + "?id=" + this.ds.getPassKey(), this.ds.curSelectedRecord, httpHeaders )
     .pipe(catchError(this.errorHandler))); 
   }
@@ -188,7 +202,7 @@ export class DataService {
   }
 
   modifyOpsLocationData(locationData: MissionAssign): Observable<any> {
-    var fullDomain: string = this.identifyWSServer() + `/ModifyOpsLocationData`;
+    var fullDomain: string = this.identifyWSServer() + `/UpdateOpsLocationData`;
     return (this.http.post<MissionAssign>(fullDomain + "?id=" + this.ds.getPassKey(), locationData, httpHeaders )
     .pipe(catchError(this.errorHandler)));
   }
