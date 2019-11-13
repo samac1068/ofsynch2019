@@ -28,34 +28,37 @@ export class CyclesComponent implements OnInit {
 
   ngOnInit() {
     this.comm.submitRecClicked.subscribe(() => {
-      if(this.chgArr.length > 0) {
-        this.ValidateFormData();
-        if(this.invalidMsg.length == 0){
-          this.cds.confirm('CYCLE - Submission', 'Confirm you want to submit the ' + this.chgArr.length + ' change(s)?', 'Yes', 'No')
-          .then((confirmed) => { 
-            if (confirmed) {
-              this.ds.curSelectedRecord = this.selRec;
-              this.data.updateCycleRecord()
-              .subscribe((results) => {
-                if(results.ID == 0) 
-                  this.cds.acknowledge(this.ds.acknowTitle, 'Failed - Reason: ' + results.processMsg, 'OK');
-                else
-                {
-                  this.resetAllFields();
-                  this.comm.signalReload.emit();
-                  this.cds.acknowledge(this.ds.acknowTitle, 'Operation Successful!', 'OK');
-                }
-              });
-            }
-          })
-          .catch(() => console.log('User dismissed the dialog'));
+      if(this.ds.curSelectedButton == "cycles") {
+        if(this.chgArr.length > 0) {
+          this.ValidateFormData();
+          if(this.invalidMsg.length == 0){
+            this.cds.confirm('CYCLE - Submission', 'Confirm you want to submit the ' + this.chgArr.length + ' change(s)?', 'Yes', 'No')
+            .then((confirmed) => { 
+              if (confirmed) {
+                this.ds.curSelectedRecord = this.selRec;
+                this.data.updateCycleRecord()
+                .subscribe((results) => {
+                  if(results.ID == 0) 
+                    this.cds.acknowledge(this.ds.acknowTitle, 'Failed - Reason: ' + results.processMsg, 'OK');
+                  else
+                  {
+                    this.resetAllFields();
+                    this.comm.signalReload.emit();
+                    this.cds.acknowledge(this.ds.acknowTitle, 'Operation Successful!', 'OK');
+                  }
+                });
+              }
+            })
+            .catch(() => console.log('User dismissed the dialog'));
+          }
+          else
+            this.cds.acknowledge('CYCLE: Incomplete Form', 'You must ' + this.invalidMsg.join(', ') + '.', 'OK', 'lg');
         }
         else
-          this.cds.acknowledge('Incomplete Form', 'You must ' + this.invalidMsg.join(', ') + '.', 'OK', 'lg');
+          this.cds.acknowledge('CYCLE: Invalid Submission', "You have not made any changes to this record.", 'OK');
       }
-      else
-        this.cds.acknowledge('Invalid Submission', "You have not made any changes to this record.", 'OK');
     });
+
 
     this.comm.createNewClicked.subscribe(() => {
       this.chgArr = [];
@@ -67,12 +70,14 @@ export class CyclesComponent implements OnInit {
     this.comm.editRecClicked.subscribe(() => {
         this.chgArr = [];
         this.selRec = this.ds.curSelectedRecord;
+
+        if(this.selRec.opHidden == null) this.selRec.opHidden = 0;
         this.updateDataLoad();
     });
   }
 
   setDefaultItems(){
-    //this.selRec.ID = 0;  //Indication that this is a new record.
+    this.selRec.opHidden = 0;
   }
 
   // Used to get the latest batch of stored DDL information
@@ -81,7 +86,7 @@ export class CyclesComponent implements OnInit {
   }
 
   resetAllFields(){
-    this.selRec = null;
+    this.selRec = new Cycle();
   }
 
   storeAllChanges(e: any) {

@@ -1,7 +1,7 @@
 <div class="container page">
   <div class="row">
         <div class="col-lg"><span class="setleft" style="font-weight: bold">ID: <span class="idtxt">{{ selRec.opId }}</span></span></div>
-        <div class="col-lg"><mat-checkbox id="hidden" class="setright" style="font-weight: bold" [(checked)]="selRec.opHidden" 
+        <div class="col-lg"><mat-checkbox id="opHidden" class="setright" style="font-weight: bold" [(ngModel)]="selRec.opHidden" 
           (change)="storeAllChanges($event)">Hidden</mat-checkbox></div>
   </div>
 
@@ -10,7 +10,7 @@
     <div class="col-lg">
       <mat-form-field appearance="outline" style="width:100%">
         <mat-label>Short Name:</mat-label>
-        <input matInput id="shortname" [formControl]="shNameControl" required [(value)]="selRec.opShortName" (focusout)="textChanges($event)">
+        <input matInput id="shortname" [formControl]="shNameControl" required [(ngModel)]="selRec.opShortName" (focusout)="textChanges($event)">
       </mat-form-field>  
     </div>
   </div>
@@ -20,7 +20,7 @@
     <div class="col-lg">
       <mat-form-field appearance="outline" style="width:100%">
         <mat-label>Long Name:</mat-label>
-        <input matInput id="longname" [formControl]="lgNameControl" required [(value)]="selRec.opLongName" (focusout)="textChanges($event)">
+        <input matInput id="longname" [formControl]="lgNameControl" required [(ngModel)]="selRec.opLongName" (focusout)="textChanges($event)">
       </mat-form-field>  
     </div>
   </div>
@@ -30,7 +30,7 @@
     <div class="col-lg">
       <mat-form-field appearance="outline" style="width:100%">
         <mat-label>Authority ID:</mat-label>
-        <input matInput id="authorityid" [formControl]="authidControl" required [(value)]="selRec.opAuthId" (focusout)="textChanges($event)">
+        <input matInput id="authorityid" [formControl]="authidControl" required [(ngModel)]="selRec.opAuthId" (focusout)="textChanges($event)">
       </mat-form-field>  
     </div>
   </div>

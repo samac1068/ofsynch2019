@@ -1,7 +1,7 @@
 <div class="container page">
   <div class="row">
         <div class="col-lg"><span class="setleft" style="font-weight: bold">PID: <span class="idtxt">{{ selRec.CYC_ID }}</span></span></div>
-        <div class="col-lg"><mat-checkbox id="active" class="setright" style="font-weight: bold" [(checked)]="selRec.hidden" 
+        <div class="col-lg"><mat-checkbox id="opHidden" class="setright" style="font-weight: bold" [(ngModel)]="selRec.opHidden" 
           (change)="storeAllChanges($event)">Hidden</mat-checkbox></div>
   </div>
 
@@ -10,7 +10,7 @@
     <div class="col-lg">
       <mat-form-field appearance="outline" style="width:100%">
         <mat-label>Cycle:</mat-label>
-        <input matInput id="cycle" [formControl]="cycleControl" required [(value)]="selRec.cycle" (focusout)="textChanges($event)">
+        <input matInput id="cycle" [formControl]="cycleControl" required [(ngModel)]="selRec.cycle" (focusout)="textChanges($event)">
       </mat-form-field>  
     </div>
   </div>
@@ -20,7 +20,7 @@
     <div class="col-lg">
       <mat-form-field appearance="outline" style="width:100%">
         <mat-label>FY:</mat-label>
-        <input matInput id="fy" [formControl]="fyControl" required [(value)]="selRec.FY" (focusout)="textChanges($event)">
+        <input matInput id="fy" [formControl]="fyControl" required [(ngModel)]="selRec.FY" (focusout)="textChanges($event)">
       </mat-form-field>  
     </div>
   </div>

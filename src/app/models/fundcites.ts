@@ -3,9 +3,10 @@ export class Fundcites {
     FundCode: string;
     FundEffDate: string;
     FundType: number;
+    FundTypeName: string;
     CIC: string;
     MDC: number;
-    IsConusBase: number;
+    IsConusBased: number;
     FY1: number;
     FY2: number;
     FY3: number;

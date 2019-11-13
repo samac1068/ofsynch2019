@@ -1,9 +1,9 @@
 <div class="container page">
   <div class="row">
         <div class="col-4"><span class="setleft" style="font-weight: bold">PID: <span class="idtxt">{{ selRec.PID }}</span></span></div>
-        <div class="col-4"><mat-checkbox id="active" style="font-weight: bold" [(checked)]="selRec.ACTIVE" 
+        <div class="col-4"><mat-checkbox id="active" style="font-weight: bold" [(ngModel)]="selRec.ACTIVE" 
           (change)="storeAllChanges($event)">Active</mat-checkbox></div>
-        <div class="col-4"><mat-checkbox id="deploy" style="font-weight: bold" [(checked)]="selRec.DEPLOY" 
+        <div class="col-4"><mat-checkbox id="deploy" style="font-weight: bold" [(ngModel)]="selRec.DEPLOY" 
           (change)="storeAllChanges($event)">Deploy</mat-checkbox></div>
   </div>
 
@@ -12,7 +12,7 @@
     <div class="col-lg">
       <mat-form-field appearance="outline" style="width:100%">
         <mat-label>Description Short:</mat-label>
-        <input matInput id="nmshort" [formControl]="nmshortControl" required [(value)]="selRec.DESCRIPTION_SHORT" (focusout)="textChanges($event)">
+        <input matInput id="nmshort" [formControl]="nmshortControl" required [(ngModel)]="selRec.DESCRIPTION_SHORT" (focusout)="textChanges($event)">
       </mat-form-field>  
     </div>
   </div>
@@ -22,7 +22,7 @@
     <div class="col-lg">
       <mat-form-field appearance="outline" style="width:100%">
         <mat-label>Description Long:</mat-label>
-        <input matInput id="nmlong" [formControl]="nmlongControl" required [(value)]="selRec.DESCRIPTION_LONG" (focusout)="textChanges($event)">
+        <input matInput id="nmlong" [formControl]="nmlongControl" required [(ngModel)]="selRec.DESCRIPTION_LONG" (focusout)="textChanges($event)">
       </mat-form-field>  
     </div>
   </div>
@@ -48,14 +48,14 @@
     <div class="col-6">
       <mat-form-field appearance="outline" style="width:100%">
         <mat-label>Type:</mat-label>
-        <input matInput id="oplong" [formControl]="typeControl" required [(value)]="selRec.TYPE" (focusout)="textChanges($event)">
+        <input matInput id="oplong" [formControl]="typeControl" required [(ngModel)]="selRec.TYPE" (focusout)="textChanges($event)">
       </mat-form-field>  
     </div>
 
     <div class="col-6">
       <mat-form-field appearance="outline" style="width:100%">
         <mat-label>CDATE:</mat-label>
-        <input matInput [matDatepicker]="picker" placeholder="Choose a CDATE" required [(value)]="convertedDt" (focusout)="textChanges($event)">
+        <input matInput id="cdate" [matDatepicker]="picker" placeholder="Choose a CDATE" [(ngModel)]="convertedDt" (dateChange)="textChanges($event)">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>  

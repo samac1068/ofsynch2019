@@ -7,7 +7,7 @@ export class Locations {
     Installation: string;
     DISPLAY: string;
     STATEAB: string;
-    Hidden: boolean;
+    opHidden: boolean;
     GeoLocation: string;
     Geographic_Coord: string;
     ZipCode: string;

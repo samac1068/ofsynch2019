@@ -27,22 +27,6 @@
     </div>
   </div>
 
-  <!-- List Based DaD -->
-  <!-- <div class="row">
-    <div class="col-lg">
-        <mat-form-field style="width:100%">
-          <mat-label>Fund Type:</mat-label>
-          <mat-select id="fundtype" [formControl]="fundtypeControl" required [(ngModel)]="selRec.FundType" (selectionChange)="storeAllChanges($event)">
-            <mat-option>--</mat-option>
-            <mat-option *ngFor="let ft of fundtypes" [(value)]="ft.ID">
-              {{ ft.FUNDTYPE }}
-            </mat-option>
-          </mat-select>
-          <mat-error *ngIf="fundtypeControl.hasError('required')">Choose a Fund Type</mat-error>
-        </mat-form-field>
-    </div>
-  </div> -->
-
   <!-- Button Group -->
   <app-btn-group [isNewRecord]="isNewRecord"></app-btn-group>
 </div>

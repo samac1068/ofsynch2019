@@ -48,33 +48,35 @@ export class FundcitesComponent implements OnInit {
 
   ngOnInit() {
     this.comm.submitRecClicked.subscribe(() => {
-      if(this.chgArr.length > 0) {
-        this.ValidateFormData();
-        if(this.invalidMsg.length == 0){
-          this.cds.confirm('DAMPS - Submission', 'Confirm you want to submit the ' + this.chgArr.length + ' change(s)?', 'Yes', 'No')
-          .then((confirmed) => { 
-            if (confirmed) {
-              this.ds.curSelectedRecord = this.selRec;
-              this.data.updateFundCiteData()
-              .subscribe((results) => {
-                if(results.ID == 0) 
-                  this.cds.acknowledge(this.ds.acknowTitle, 'Failed - Reason: ' + results.processMsg, 'OK');
-                else
-                {
-                  this.resetAllFields();
-                  this.comm.signalReload.emit();
-                  this.cds.acknowledge(this.ds.acknowTitle, 'Operation Successful!', 'OK');
-                }
-              });
-            }
-          })
-          .catch(() => console.log('User dismissed the dialog'));
+      if(this.ds.curSelectedButton == "fundcites") {
+        if(this.chgArr.length > 0) {
+          this.ValidateFormData();
+          if(this.invalidMsg.length == 0){
+            this.cds.confirm('FUNDCITES - Submission', 'Confirm you want to submit the ' + this.chgArr.length + ' change(s)?', 'Yes', 'No')
+            .then((confirmed) => { 
+              if (confirmed) {
+                this.ds.curSelectedRecord = this.selRec;
+                this.data.updateFundCiteData()
+                .subscribe((results) => {
+                  if(results.ID == 0) 
+                    this.cds.acknowledge(this.ds.acknowTitle, 'Failed - Reason: ' + results.processMsg, 'OK');
+                  else
+                  {
+                    this.resetAllFields();
+                    this.comm.signalReload.emit();
+                    this.cds.acknowledge(this.ds.acknowTitle, 'Operation Successful!', 'OK');
+                  }
+                });
+              }
+            })
+            .catch(() => console.log('User dismissed the dialog'));
+          }
+          else
+            this.cds.acknowledge('FUNDCITES: Incomplete Form', 'You must ' + this.invalidMsg.join(', ') + '.', 'OK', 'lg');
         }
         else
-          this.cds.acknowledge('Incomplete Form', 'You must ' + this.invalidMsg.join(', ') + '.', 'OK', 'lg');
+          this.cds.acknowledge('FUNDCITES: Invalid Submission', "You have not made any changes to this record.", 'OK');
       }
-      else
-        this.cds.acknowledge('Invalid Submission', "You have not made any changes to this record.", 'OK');
     });
 
     this.comm.createNewClicked.subscribe(() => {
@@ -101,7 +103,7 @@ export class FundcitesComponent implements OnInit {
   }
 
   resetAllFields(){
-    this.selRec = null;
+    this.selRec = new Fundcites();
   }
 
   storeAllChanges(e: any) {
@@ -120,7 +122,9 @@ export class FundcitesComponent implements OnInit {
 
     if(this.fundcodeControl.invalid) this.invalidMsg.push("enter a fund code");
     if(this.fundeffdateControl.invalid) this.invalidMsg.push("enter a effective date");
-    if(this.cicControl.invalid) this.invalidMsg.push("enter a CIC");
+    if(this.fundtypeControl.invalid) this.invalidMsg.push("select a fund type");
+
+    /* if(this.cicControl.invalid) this.invalidMsg.push("enter a CIC");
     if(this.mdcControl.invalid) this.invalidMsg.push("enter a MDC");
     if(this.fy1Control.invalid) this.invalidMsg.push("enter a FY1");
     if(this.fy2Control.invalid) this.invalidMsg.push("enter a FY2");
@@ -136,9 +140,8 @@ export class FundcitesComponent implements OnInit {
     if(this.amsControl.invalid) this.invalidMsg.push("enter a AMS");
     if(this.statusidControl.invalid) this.invalidMsg.push("enter a Status ID");
     if(this.apcControl.invalid) this.invalidMsg.push("enter a APC");
-    if(this.fsnControl.invalid) this.invalidMsg.push("enter a FSN");
-    if(this.fundtypeControl.invalid) this.invalidMsg.push("select a fund type");
-         
+    if(this.fsnControl.invalid) this.invalidMsg.push("enter a FSN"); */
+             
     return null;
   }
 }

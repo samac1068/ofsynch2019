@@ -2,7 +2,7 @@ export class Damps {
     action: string;
     ID: number;
     Description: string;
-    hidden: boolean;
+    opHidden: boolean;
     PAY_Operation_ID: number;
     PAY_Operation: string;
     TCS_Operation_ID: number;

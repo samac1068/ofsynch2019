@@ -74,8 +74,9 @@ th.mat-sort-header-sorted {
 }
 
 .filter {
-    width: 450px;
+    width: 300px !important;
     height: 23px;
+    margin-top: -10px;
 }
 
 .clickitem {

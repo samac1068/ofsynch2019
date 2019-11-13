@@ -19,40 +19,42 @@ export class PayComponent implements OnInit {
   chgArr: string[] = [];
   invalidMsg: string[] = [];
   
-  opControl = new FormControl('', [Validators.required]);
-  descControl = new FormControl('', [Validators.required]);
+  opControl = new FormControl('', [Validators.required, Validators.minLength(1)]);
+  descControl = new FormControl('', [Validators.required, Validators.minLength(1)]);
   
   constructor(private comm:CommService, private ds: DatastoreService, private cds: ConfirmDialogService, private data: DataService) { }
 
   ngOnInit() {
     this.comm.submitRecClicked.subscribe(() => {
-      if(this.chgArr.length > 0) {
-        this.ValidateFormData();
-        if(this.invalidMsg.length == 0){
-          this.cds.confirm('PAY - Submission', 'Confirm you want to submit the ' + this.chgArr.length + ' change(s)?', 'Yes', 'No')
-          .then((confirmed) => { 
-            if (confirmed) {
-              this.ds.curSelectedRecord = this.selRec;
-              this.data.updatePayRecord()
-              .subscribe((results) => {
-                if(results.ID == 0) 
-                  this.cds.acknowledge(this.ds.acknowTitle, 'Failed - Reason: ' + results.processMsg, 'OK');
-                else
-                {
-                  this.resetAllFields();
-                  this.comm.signalReload.emit();
-                  this.cds.acknowledge(this.ds.acknowTitle, 'Operation Successful!', 'OK');
-                }
-              });
-            }
-          })
-          .catch(() => console.log('User dismissed the dialog'));
+      if(this.ds.curSelectedButton == "pay") {
+        if(this.chgArr.length > 0) {
+          this.ValidateFormData();
+          if(this.invalidMsg.length == 0){
+            this.cds.confirm('PAY - Submission', 'Confirm you want to submit the ' + this.chgArr.length + ' change(s)?', 'Yes', 'No')
+            .then((confirmed) => { 
+              if (confirmed) {
+                this.ds.curSelectedRecord = this.selRec;
+                this.data.updatePayRecord()
+                .subscribe((results) => {
+                  if(results.ID == 0) 
+                    this.cds.acknowledge(this.ds.acknowTitle, 'Failed - Reason: ' + results.processMsg, 'OK');
+                  else
+                  { 
+                    this.resetAllFields();
+                    this.comm.signalReload.emit();
+                    this.cds.acknowledge(this.ds.acknowTitle, 'Operation Successful!', 'OK');
+                  }
+                });
+              }
+            })
+            .catch(() => console.log('User dismissed the dialog'));
+          }
+          else
+            this.cds.acknowledge('PAY: Incomplete Form', 'You must ' + this.invalidMsg.join(', ') + '.', 'OK', 'lg');
         }
         else
-          this.cds.acknowledge('Incomplete Form', 'You must ' + this.invalidMsg.join(', ') + '.', 'OK', 'lg');
+          this.cds.acknowledge('PAY: Invalid Submission', "You have not made any changes to this record.", 'OK');
       }
-      else
-        this.cds.acknowledge('Invalid Submission', "You have not made any changes to this record.", 'OK');
     });
 
     this.comm.createNewClicked.subscribe(() => {
@@ -78,7 +80,7 @@ export class PayComponent implements OnInit {
   }
 
   resetAllFields(){
-    this.selRec = null;
+    this.selRec = new Pay();
   }
 
   storeAllChanges(e: any) {
@@ -97,6 +99,10 @@ export class PayComponent implements OnInit {
 
     if(this.descControl.invalid) this.invalidMsg.push("enter a description");
     if(this.opControl.invalid) this.invalidMsg.push("select an operation");
+
+    // Need to validate that the two fields have some sort of text in them, with a length above 1
+    //if(this.selRec.PAY_Operation.length < 1) this.invalidMsg.push("select an operation");
+    //if(this.selRec.PAY_Operation_Description.length < 3) this.invalidMsg.push("enter a description");
      
     return null;
   }

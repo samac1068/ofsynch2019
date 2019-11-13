@@ -1,6 +1,6 @@
-import { Locations } from '../../../models/locations';
+import { Locations } from 'src/app/models/locations';
 import { ConfirmDialogService } from './../../../dialog/confirm-dialog/confirm-dialog.service';
-import { CommService } from './../../../services/comm.service';
+import { CommService } from 'src/app/services/comm.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { DatastoreService } from 'src/app/services/datastore.service';
@@ -40,33 +40,36 @@ export class MissionlocationComponent implements OnInit {
 
   ngOnInit() {
     this.comm.submitRecClicked.subscribe(() => {
-      if(this.chgArr.length > 0) {
-        this.ValidateFormData();
-        if(this.invalidMsg.length == 0){
-          this.cds.confirm('DAMPS - Submission', 'Confirm you want to submit the ' + this.chgArr.length + ' change(s)?', 'Yes', 'No')
-          .then((confirmed) => { 
-            if (confirmed) {
-              this.ds.curSelectedRecord = this.selRec;
-              this.data.updateLocationData()
-              .subscribe((results) => {
-                if(results.ID == 0) 
-                  this.cds.acknowledge(this.ds.acknowTitle, 'Failed - Reason: ' + results.processMsg, 'OK');
-                else
-                {
-                  this.resetAllFields();
-                  this.comm.signalReload.emit();
-                  this.cds.acknowledge(this.ds.acknowTitle, 'Operation Successful!', 'OK');
-                }
-              });
-            }
-          })
-          .catch(() => console.log('User dismissed the dialog'));
+      console.log(this.ds.curSelectedButton);
+      if(this.ds.curSelectedButton == "missionlocations") {
+        if(this.chgArr.length > 0) {
+          this.ValidateFormData();
+          if(this.invalidMsg.length == 0){
+            this.cds.confirm('LOCATION - Submission', 'Confirm you want to submit the ' + this.chgArr.length + ' change(s)?', 'Yes', 'No')
+            .then((confirmed) => { 
+              if (confirmed) {
+                this.ds.curSelectedRecord = this.selRec;
+                this.data.updateLocationData()
+                .subscribe((results) => {
+                  if(results.ID == 0) 
+                    this.cds.acknowledge(this.ds.acknowTitle, 'Failed - Reason: ' + results.processMsg, 'OK');
+                  else
+                  {
+                    this.resetAllFields();
+                    this.comm.signalReload.emit();
+                    this.cds.acknowledge(this.ds.acknowTitle, 'Operation Successful!', 'OK');
+                  }
+                });
+              }
+            })
+            .catch(() => console.log('User dismissed the dialog'));
+          }
+          else
+            this.cds.acknowledge('LOCATION: Incomplete Form', 'You must ' + this.invalidMsg.join(', ') + '.', 'OK', 'lg');
         }
         else
-          this.cds.acknowledge('Incomplete Form', 'You must ' + this.invalidMsg.join(', ') + '.', 'OK', 'lg');
+          this.cds.acknowledge('LOCATION: Invalid Submission', "You have not made any changes to this record.", 'OK');
       }
-      else
-        this.cds.acknowledge('Invalid Submission', "You have not made any changes to this record.", 'OK');
     });
 
     this.comm.createNewClicked.subscribe(() => {
@@ -84,7 +87,10 @@ export class MissionlocationComponent implements OnInit {
   }
 
   setDefaultItems(){
-    
+  }
+
+  enableDisableStateField() {
+    return this.selRec.CountryCode == "US";
   }
 
   // Used to get the latest batch of stored DDL information
@@ -94,7 +100,7 @@ export class MissionlocationComponent implements OnInit {
   }
 
   resetAllFields(){
-    this.selRec = null;
+    this.selRec = new Locations();
   }
 
   storeAllChanges(e: any) {
@@ -114,7 +120,10 @@ export class MissionlocationComponent implements OnInit {
     if(this.locationControl.invalid) this.invalidMsg.push("enter a location");
     if(this.displayControl.invalid) this.invalidMsg.push("enter a display");
     if(this.countryControl.invalid) this.invalidMsg.push("select a country");
-    if(this.stateControl.invalid) this.invalidMsg.push("select a state");
+    
+    if(this.selRec.CountrCode == "US")
+      if(this.stateControl.invalid) this.invalidMsg.push("select a state");
+
     if(this.zipcodeControl.invalid) this.invalidMsg.push("enter a zip code");
     if(this.installationControl.invalid) this.invalidMsg.push("enter an installation");
     if(this.geolocControl.invalid) this.invalidMsg.push("enter a geographical location");

@@ -2,7 +2,7 @@
     "damps": 
       [ 
         {"header": "ID", "columnDef": "ID", "width": 40, "checkbox": false, "hidden": false},
-        {"header": "Hidden", "columnDef": "hidden", "width": 60, "checkbox": true, "hidden": false},
+        {"header": "Hidden", "columnDef": "opHidden", "width": 60, "checkbox": true, "hidden": false},
         {"header": "Description", "columnDef": "Description", "width": 200, "checkbox": false, "hidden": false},
         {"header": "Pay OP", "columnDef": "PAY_Operation", "width": 100, "checkbox": false, "hidden": false},
         {"header": "TCS OP", "columnDef": "TCS_Operation", "width": 100, "checkbox": false, "hidden": false},
@@ -67,17 +67,17 @@
       ],
       "cycles": 
       [ 
-        {"header": "PID", "columnDef": "CYC_ID", "width": 40, "checkbox": false, "hidden": false},
+        {"header": "CYCLE ID", "columnDef": "CYC_ID", "width": 30, "checkbox": false, "hidden": false},
         {"header": "CYCLE", "columnDef": "cycle", "width": 140, "checkbox": false, "hidden": false},
         {"header": "FY", "columnDef": "FY", "width": 40, "checkbox": false, "hidden": false},
-        {"header": "HIDDEN", "columnDef": "hidden", "width": 40, "checkbox": false, "hidden": false},
+        {"header": "HIDDEN", "columnDef": "opHidden", "width": 40, "checkbox": true, "hidden": false},
         {"header": "RECORD STATUS", "columnDef": "Record_Status_Description", "width": 60, "checkbox": false, "hidden": false},
         {"header": "TRANSFER STATUS", "columnDef": "Transfer_Status_Description", "width": 60, "checkbox": false, "hidden": false}
       ],
       "missionlocations": 
       [ 
         {"header": "ID", "columnDef": "lngMissionLocationID", "width": 40, "checkbox": false, "hidden": false},
-        {"header": "HIDDEN", "columnDef": "Hidden", "width": 40, "checkbox": true, "hidden": false},
+        {"header": "HIDDEN", "columnDef": "opHidden", "width": 40, "checkbox": true, "hidden": false},
         {"header": "LOCATION", "columnDef": "strMissionLocation", "width": 140, "checkbox": false, "hidden": false},
         {"header": "CONUS", "columnDef": "MissionConus", "width": 40, "checkbox": true, "hidden": false},
         {"header": "COUNTRY", "columnDef": "Country", "width": 140, "checkbox": false, "hidden": false},
@@ -98,12 +98,12 @@
       "fundcites": 
       [ 
         {"header": "FUND ID", "columnDef": "FundId", "width": 40, "checkbox": false, "hidden": false},
-        {"header": "FUND CODE", "columnDef": "FundCode", "width": 300, "checkbox": false, "hidden": false},
-        {"header": "EFFECTIVE DATE", "columnDef": "FundEffDate", "width": 80, "checkbox": false, "hidden": false},
-        {"header": "FUND TYPE", "columnDef": "FundType", "width": 40, "checkbox": false, "hidden": false},
+        {"header": "FUND CODE", "columnDef": "FundCode", "width": 370, "checkbox": false, "hidden": false},
+        {"header": "EFFECTIVE DATE", "columnDef": "FundEffDate", "width": 70, "checkbox": false, "hidden": false},
+        {"header": "FUND TYPE", "columnDef": "FundTypeName", "width": 120, "checkbox": false, "hidden": false},
         {"header": "CIC", "columnDef": "CIC", "width": 150, "checkbox": false, "hidden": false},
         {"header": "MDC", "columnDef": "MDC", "width": 40, "checkbox": false, "hidden": false},
-        {"header": "CONUS BASED", "columnDef": "IsConusBase", "width": 40, "checkbox": true, "hidden": false},
+        {"header": "CONUS BASED", "columnDef": "IsConusBased", "width": 40, "checkbox": true, "hidden": false},
         {"header": "FY1", "columnDef": "FY1", "width": 40, "checkbox": false, "hidden": false},
         {"header": "FY2", "columnDef": "FY2", "width": 40, "checkbox": false, "hidden": false},
         {"header": "FY3", "columnDef": "FY3", "width": 40, "checkbox": false, "hidden": false},
@@ -130,6 +130,6 @@
         {"header": "TYPE", "columnDef": "TYPE", "width": 50, "checkbox": false, "hidden": false},
         {"header": "ACTIVE", "columnDef": "ACTIVE", "width": 50, "checkbox": true, "hidden": false},
         {"header": "DEPLOY", "columnDef": "DEPLOY", "width": 50, "checkbox": true, "hidden": false},
-        {"header": "OPERATION ID", "columnDef": "operation_id", "width": 60, "checkbox": false, "hidden": false}
+        {"header": "OPERATION", "columnDef": "operation", "width": 60, "checkbox": false, "hidden": false}
       ]
   }

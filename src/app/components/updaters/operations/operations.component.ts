@@ -30,33 +30,36 @@ export class OperationsComponent implements OnInit {
 
   ngOnInit() {
     this.comm.submitRecClicked.subscribe(() => {
-      if(this.chgArr.length > 0) {
-        this.ValidateFormData();
-        if(this.invalidMsg.length == 0){
-          this.cds.confirm('OPERATION - Submission', 'Confirm you want to submit the ' + this.chgArr.length + ' change(s)?', 'Yes', 'No')
-          .then((confirmed) => { 
-            if (confirmed) {
-              this.ds.curSelectedRecord = this.selRec;
-              this.data.updateOperationData()
-              .subscribe((results) => {
-                if(results.ID == 0) 
-                  this.cds.acknowledge(this.ds.acknowTitle, 'Failed - Reason: ' + results.processMsg, 'OK');
-                else
-                {
-                  this.resetAllFields();
-                  this.comm.signalReload.emit();
-                  this.cds.acknowledge(this.ds.acknowTitle, 'Operation Successful!', 'OK');
-                }
-              });
-            }
-          })
-          .catch(() => console.log('User dismissed the dialog'));
+      if(this.ds.curSelectedButton == "operations") {
+        if(this.chgArr.length > 0) {
+          this.ValidateFormData();
+          if(this.invalidMsg.length == 0){
+            this.cds.confirm('OPERATIONS - Submission', 'Confirm you want to submit the ' + this.chgArr.length + ' change(s)?', 'Yes', 'No')
+            .then((confirmed) => { 
+              if (confirmed) {
+                this.ds.curSelectedRecord = this.selRec;
+                console.log(this.ds.curSelectedRecord);
+                this.data.updateOperationData()
+                .subscribe((results) => {
+                  if(results.ID == 0) 
+                    this.cds.acknowledge(this.ds.acknowTitle, 'Failed - Reason: ' + results.processMsg, 'OK');
+                  else
+                  {
+                    this.resetAllFields();
+                    this.comm.signalReload.emit();
+                    this.cds.acknowledge(this.ds.acknowTitle, 'Operation Successful!', 'OK');
+                  }
+                });
+              }
+            })
+            .catch(() => console.log('User dismissed the dialog'));
+          }
+          else
+            this.cds.acknowledge('OPERATIONS: Incomplete Form', 'You must ' + this.invalidMsg.join(', ') + '.', 'OK', 'lg');
         }
         else
-          this.cds.acknowledge('Incomplete Form', 'You must ' + this.invalidMsg.join(', ') + '.', 'OK', 'lg');
+          this.cds.acknowledge('OPERATIONS: Invalid Submission', "You have not made any changes to this record.", 'OK');
       }
-      else
-        this.cds.acknowledge('Invalid Submission', "You have not made any changes to this record.", 'OK');
     });
 
     this.comm.createNewClicked.subscribe(() => {
@@ -83,7 +86,7 @@ export class OperationsComponent implements OnInit {
   }
 
   resetAllFields(){
-    this.selRec = null;
+    this.selRec = new Operation();
   }
 
   storeAllChanges(e: any) {
@@ -103,7 +106,5 @@ export class OperationsComponent implements OnInit {
     if(this.opshortControl.invalid) this.invalidMsg.push("enter a short description");
     if(this.oplongControl.invalid) this.invalidMsg.push("enter a long description");
     if(this.dadControl.invalid) this.invalidMsg.push("select a DAD");
-     
-    return null;
   }
 }

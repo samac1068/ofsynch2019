@@ -1,7 +1,7 @@
 <div class="container page">
   <div class="row">
         <div class="col-lg"><span class="setleft" style="font-weight: bold">ID: <span class="idtxt">{{ selRec.lngMissionLocationID }}</span></span></div>
-        <div class="col-lg"><mat-checkbox id="hidden" class="setright" style="font-weight: bold" [(ngModel)]="selRec.Hidden" 
+        <div class="col-lg"><mat-checkbox id="opHidden" class="setright" style="font-weight: bold" [(ngModel)]="selRec.opHidden" 
           (change)="storeAllChanges($event)">Hidden</mat-checkbox></div>
   </div>
 
@@ -16,7 +16,7 @@
     <div class="col-lg">
       <mat-form-field appearance="outline" style="width:100%">
         <mat-label>Location:</mat-label>
-        <input matInput id="location" [formControl]="locationControl" required [(value)]="selRec.strMissionLocation" (focusout)="textChanges($event)">
+        <input matInput id="location" [formControl]="locationControl" required [(ngModel)]="selRec.strMissionLocation" (focusout)="textChanges($event)">
       </mat-form-field>  
     </div>
   </div>
@@ -26,7 +26,7 @@
     <div class="col-lg">
       <mat-form-field appearance="outline" style="width:100%">
         <mat-label>Display:</mat-label>
-        <input matInput id="display" [formControl]="displayControl" required [(value)]="selRec.DISPLAY" (focusout)="textChanges($event)">
+        <input matInput id="display" [formControl]="displayControl" required [(ngModel)]="selRec.DISPLAY" (focusout)="textChanges($event)">
       </mat-form-field>  
     </div>
   </div>
@@ -52,7 +52,8 @@
     <div class="col-lg">
         <mat-form-field style="width:100%">
             <mat-label>State</mat-label>
-            <mat-select id="state" [formControl]="stateControl" required [(ngModel)]="selRec.STATEAB" (selectionChange)="storeAllChanges($event)">
+            <mat-select id="state" [formControl]="stateControl" required [(ngModel)]="selRec.STATEAB" 
+              (selectionChange)="storeAllChanges($event)" [disabled]="selRec.CountryCode != 'US'">
               <mat-option>--</mat-option>
               <mat-option *ngFor="let s of states" [(value)]="s.state_cd">
                 {{ s.state_name }}
@@ -68,7 +69,7 @@
     <div class="col-lg">
       <mat-form-field appearance="outline" style="width:100%">
         <mat-label>Zip Code:</mat-label>
-        <input matInput id="zipcode" [formControl]="zipcodeControl" required [(value)]="selRec.ZipCode" (focusout)="textChanges($event)">
+        <input matInput id="zipcode" [formControl]="zipcodeControl" required [(ngModel)]="selRec.ZipCode" (focusout)="textChanges($event)">
       </mat-form-field>  
     </div>
   </div>
@@ -78,7 +79,7 @@
     <div class="col-lg">
       <mat-form-field appearance="outline" style="width:100%">
         <mat-label>Installation:</mat-label>
-        <input matInput id="installation" [formControl]="installationControl" required [(value)]="selRec.Installation" (focusout)="textChanges($event)">
+        <input matInput id="installation" [formControl]="installationControl" required [(ngModel)]="selRec.Installation" (focusout)="textChanges($event)">
       </mat-form-field>  
     </div>
   </div>
@@ -88,7 +89,7 @@
     <div class="col-lg">
       <mat-form-field appearance="outline" style="width:100%">
         <mat-label>Geo Location:</mat-label>
-        <input matInput id="geolocation" [formControl]="geolocControl" required [(value)]="selRec.GeoLocation" (focusout)="textChanges($event)">
+        <input matInput id="geolocation" [formControl]="geolocControl" required [(ngModel)]="selRec.GeoLocation" (focusout)="textChanges($event)">
       </mat-form-field>  
     </div>
   </div>
@@ -98,7 +99,7 @@
     <div class="col-lg">
       <mat-form-field appearance="outline" style="width:100%">
         <mat-label>Coordinates:</mat-label>
-        <input matInput id="geocoord" [formControl]="geocoordControl" required [(value)]="selRec.Geographic_Coord" (focusout)="textChanges($event)">
+        <input matInput id="geocoord" [formControl]="geocoordControl" required [(ngModel)]="selRec.Geographic_Coord" (focusout)="textChanges($event)">
       </mat-form-field>  
     </div>
   </div>
@@ -108,7 +109,7 @@
     <div class="col-lg">
       <mat-form-field appearance="outline" style="width:100%">
         <mat-label>Latitude:</mat-label>
-        <input matInput id="latitude" [formControl]="latitudeControl" required [(value)]="selRec.Latitude" (focusout)="textChanges($event)">
+        <input matInput id="latitude" [formControl]="latitudeControl" required [(ngModel)]="selRec.Latitude" (focusout)="textChanges($event)">
       </mat-form-field>  
     </div>
   </div>
@@ -118,7 +119,7 @@
     <div class="col-lg">
       <mat-form-field appearance="outline" style="width:100%">
         <mat-label>Longitude:</mat-label>
-        <input matInput id="longitude" [formControl]="longitudeControl" required [(value)]="selRec.Longitude" (focusout)="textChanges($event)">
+        <input matInput id="longitude" [formControl]="longitudeControl" required [(ngModel)]="selRec.Longitude" (focusout)="textChanges($event)">
       </mat-form-field>  
     </div>
   </div>

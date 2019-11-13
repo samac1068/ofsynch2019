@@ -8,7 +8,7 @@
     <div class="col-lg">
       <mat-form-field appearance="outline" style="width:100%">
         <mat-label>Operation:</mat-label>
-        <input matInput id="operation" [formControl]="opControl" required [(value)]="selRec.TCS_Operation" (focusout)="textChanges($event)">
+        <input matInput id="operation" [formControl]="opControl" required [(ngModel)]="selRec.TCS_Operation" (focusout)="textChanges($event)">
       </mat-form-field>  
     </div>
   </div>
@@ -18,7 +18,7 @@
     <div class="col-lg">
       <mat-form-field appearance="outline" style="width:100%">
         <mat-label>Description:</mat-label>
-        <input matInput id="description" [formControl]="descControl" required [(value)]="selRec.TCS_Operation_Description" (focusout)="textChanges($event)">
+        <input matInput id="description" [formControl]="descControl" required [(ngModel)]="selRec.TCS_Operation_Description" (focusout)="textChanges($event)">
       </mat-form-field>  
     </div>
   </div>

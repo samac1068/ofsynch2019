@@ -6,6 +6,7 @@ import { DatastoreService } from 'src/app/services/datastore.service';
 import { DataService } from 'src/app/services/data.service';
 import { Operation } from 'src/app/models/operations';
 import { Tpfdd } from 'src/app/models/tpfdd';
+import { MatDatepickerInput } from '@angular/material';
 
 @Component({
   selector: 'app-tpfdd',
@@ -35,34 +36,36 @@ export class TpfddComponent implements OnInit {
 
   ngOnInit() {
     this.comm.submitRecClicked.subscribe(() => {
-      if(this.chgArr.length > 0) {
-        this.ValidateFormData();
-        if(this.invalidMsg.length == 0){
-          this.cds.confirm('TPFDD - Submission', 'Confirm you want to submit the ' + this.chgArr.length + ' change(s)?', 'Yes', 'No')
-          .then((confirmed) => { 
-            if (confirmed) {
-              this.selRec.CDATE = this.convertedDt.toISOString();
-              this.ds.curSelectedRecord = this.selRec;
-              this.data.updateTPFDDRecord()
-              .subscribe((results) => {
-                if(results.ID == 0) 
-                  this.cds.acknowledge(this.ds.acknowTitle, 'Failed - Reason: ' + results.processMsg, 'OK');
-                else
-                {
-                  this.resetAllFields();
-                  this.comm.signalReload.emit();
-                  this.cds.acknowledge(this.ds.acknowTitle, 'Operation Successful!', 'OK');
-                }
-              });
-            }
-          })
-          .catch(() => console.log('User dismissed the dialog'));
+      if(this.ds.curSelectedButton == "tpfdd") {
+        if(this.chgArr.length > 0) {
+          this.ValidateFormData();
+          if(this.invalidMsg.length == 0){
+            this.cds.confirm('TPFDD - Submission', 'Confirm you want to submit the ' + this.chgArr.length + ' change(s)?', 'Yes', 'No')
+            .then((confirmed) => { 
+              if (confirmed) {
+                this.selRec.CDATE = this.convertedDt.toISOString().split("T")[0];
+                this.ds.curSelectedRecord = this.selRec;
+                this.data.updateTPFDDRecord()
+                .subscribe((results) => {
+                  if(results.PID.length == 0) 
+                    this.cds.acknowledge(this.ds.acknowTitle, 'Failed - Reason: ' + results.processMsg, 'OK');
+                  else
+                  {
+                    this.resetAllFields();
+                    this.comm.signalReload.emit();
+                    this.cds.acknowledge(this.ds.acknowTitle, 'Operation Successful!', 'OK');
+                  }
+                });
+              }
+            })
+            .catch(() => console.log('User dismissed the dialog'));
+          }
+          else
+            this.cds.acknowledge('TPFDD: Incomplete Form', 'You must ' + this.invalidMsg.join(', ') + '.', 'OK', 'lg');
         }
         else
-          this.cds.acknowledge('Incomplete Form', 'You must ' + this.invalidMsg.join(', ') + '.', 'OK', 'lg');
+          this.cds.acknowledge('TPFDD: Invalid Submission', "You have not made any changes to this record.", 'OK');
       }
-      else
-        this.cds.acknowledge('Invalid Submission', "You have not made any changes to this record.", 'OK');
     });
 
     this.comm.createNewClicked.subscribe(() => {
@@ -75,7 +78,7 @@ export class TpfddComponent implements OnInit {
     this.comm.editRecClicked.subscribe(() => {
         this.chgArr = [];
         this.selRec = this.ds.curSelectedRecord;
-        this.convertedDt = new Date(this.selRec.CDATE);
+        this.convertedDt = (this.selRec.CDATE != null) ? new Date(this.selRec.CDATE) : null;
         this.updateDataLoad();
     });
   }
@@ -91,7 +94,7 @@ export class TpfddComponent implements OnInit {
   }
 
   resetAllFields(){
-    this.selRec = null;
+    this.selRec = new Tpfdd();
   }
 
   storeAllChanges(e: any) {
@@ -100,7 +103,9 @@ export class TpfddComponent implements OnInit {
   }
 
   textChanges(e){
-    if(this.chgArr.indexOf(e.target.id) == -1)
+    if(e.target instanceof MatDatepickerInput){
+      this.chgArr.push('cdate');
+    } else if(this.chgArr.indexOf(e.target.id) == -1)
       this.chgArr.push(e.target.id);
   }
 
@@ -112,6 +117,6 @@ export class TpfddComponent implements OnInit {
     if(this.nmlongControl.invalid) this.invalidMsg.push("enter a long name");
     if(this.opControl.invalid) this.invalidMsg.push("select a cycle");
     if(this.typeControl.invalid) this.invalidMsg.push("enter a type");
-    if(this.cdateControl.invalid) this.invalidMsg.push("enter a CDATE");
+    //if(this.cdateControl.invalid) this.invalidMsg.push("enter a CDATE");
   }
 }

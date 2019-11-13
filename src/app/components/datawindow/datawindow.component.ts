@@ -1,7 +1,7 @@
 import { DataService } from './../../services/data.service';
 import { CommService } from './../../services/comm.service';
 import { DatastoreService } from './../../services/datastore.service';
-import { Component, OnInit, ViewChild, ElementRef, HostListener, Renderer2, Input, ViewChildren } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, HostListener, Renderer2, Input, ViewChildren, ChangeDetectorRef } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { OperationDialogComponent } from 'src/app/dialog/operation-dialog/operation-dialog.component';
@@ -26,9 +26,10 @@ export class DatawindowComponent implements OnInit {
   curOperation: string;
   allDataLoaded: boolean = false;
   operationDialogRef: MatDialogRef<OperationDialogComponent>
+  filterValue: string = "";
 
  constructor(private ds: DatastoreService, private comm: CommService, private data:DataService, private spinner: NgxSpinnerService,
-  private dialog: MatDialog) { }
+  private dialog: MatDialog, private cdRef:ChangeDetectorRef) { }
 
   ngOnInit() {
     //Confirm that we have the confirmed location for the API
@@ -80,6 +81,7 @@ export class DatawindowComponent implements OnInit {
       this.hideLoaderAni();
     });
     
+    this.cdRef.detectChanges();
     this.availWidth = this.rightcol.nativeElement.offsetWidth;
     this.setTableResize();
   }
@@ -155,7 +157,6 @@ export class DatawindowComponent implements OnInit {
     let totWidth = 0;
     this.ds.columnHeaders[this.ds.curSelectedButton].forEach(( column ) => {
       totWidth += column.width;
-
     });
 
     const scale = (this.availWidth - 5) / totWidth;
@@ -172,7 +173,7 @@ export class DatawindowComponent implements OnInit {
     });
   }
 
-  applyFilter(filterValue: string) {
+  applyFilter() {  // filterValue: string
     var table, tr, td, i, txtValue, found;
 
     table = document.getElementById("opDataTbl");
@@ -184,7 +185,7 @@ export class DatawindowComponent implements OnInit {
       for (var j = 0; j < td.length; j++) {
         if(td[j]){
           txtValue = td[j].textContent || td[j].innerText;
-          if (txtValue.toUpperCase().indexOf(filterValue.toUpperCase()) > -1) {
+          if (txtValue.toUpperCase().indexOf(this.filterValue.toUpperCase()) > -1) {
             found = true;
             break;
           }
@@ -196,6 +197,11 @@ export class DatawindowComponent implements OnInit {
     }
   }
   
+  clearFilter() {
+    this.filterValue = "";
+    this.applyFilter();
+  }
+
   createNewRecordHandler() {
     this.isNewRecord = true;
     this.showEditor = true;
@@ -204,7 +210,7 @@ export class DatawindowComponent implements OnInit {
 
   editRecordHandler(selectedRow: any) {
     this.ds.curSelectedRecord = selectedRow;
-      this.isNewRecord = false;
+    this.isNewRecord = false;
 
     if(this.ds.curSelectedButton != "operations"){
       this.showEditor = true;

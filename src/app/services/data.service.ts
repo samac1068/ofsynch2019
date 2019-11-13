@@ -14,7 +14,6 @@ import { TCS } from './../models/tcs';
 import { Pay } from './../models/pay';
 import { Orders } from '../models/orders';
 import { Operation } from '../models/operations';
-import { HttpParamsOptions } from '@angular/common/http/src/params';
 
 const httpHeaders = {
   headers: new HttpHeaders ({

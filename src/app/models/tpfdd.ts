@@ -7,4 +7,5 @@ export class Tpfdd {
     active: boolean;
     deploy: boolean;
     operationId: number;
+    oepration: string;
 }

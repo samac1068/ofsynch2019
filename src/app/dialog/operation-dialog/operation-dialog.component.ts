@@ -1,3 +1,4 @@
+import { CommService } from 'src/app/services/comm.service';
 import { MissionAssign } from './../../models/missionassign';
 import { DataService } from './../../services/data.service';
 import { Component, OnInit } from '@angular/core';
@@ -30,7 +31,7 @@ export class OperationDialogComponent implements OnInit {
   assignedStorage: Locations[] = [];
 
   constructor(private ds: DatastoreService, private data: DataService, public dialogRef: MatDialogRef<OperationDialogComponent>, 
-    private cds: ConfirmDialogService) { }
+    private cds: ConfirmDialogService, private comm: CommService) { }
 
   ngOnInit() {
     this.selOp = this.ds.curSelectedRecord;
@@ -38,15 +39,24 @@ export class OperationDialogComponent implements OnInit {
   }
 
   updateDataLoad() {
-    this.missionAssign = this.ds.opsData["missionAssign"];
     this.locations = this.ds.opsData["missionlocations"];
+    
+    // Update the mission assigned list to reflect the recent change
+    this.data.getSubOperationData('missionAssign')
+    .subscribe((results) => {
+      this.ds.opsData["missionAssign"] = results;
+      this.missionAssign = results;
 
-    // build the lists
-    this.buildListsForOperation()
+      // build the lists
+      this.buildListsForOperation();
+    });
   }
 
   buildListsForOperation() {
     // Get all of the location ID for this specific operation
+    this.currList = [];
+    this.assignedStorage = [];
+
     var currentList = this.missionAssign.filter(ma => { return ma.op_id === this.selOp.op_id; });
 
     // Based on that list, loop through and build the CurrList 
@@ -67,20 +77,21 @@ export class OperationDialogComponent implements OnInit {
     let atob: any = this.assignedStorage.filter(item => this.currList.indexOf(item) < 0);  // Removed from Current
     let btoa: any = this.currList.filter(item => this.assignedStorage.indexOf(item) < 0);  // Added to Current
 
+    console.log(atob, btoa);
+
     var chgValue: MissionAssign = new MissionAssign();
-    if(atob == null && btoa != null) //Added
-      chgValue = { id: 0, op_id: this.selOp.op_id, location_id: btoa.lngMissionLocationID };
-    else if(atob != null && btoa == null)  //Removed
-      chgValue = { id: -1, op_id: this.selOp.op_id, location_id: atob.lngMissionLocationID };
+    if(atob.length == 0 && btoa.length > 0) {//Added
+      chgValue = { id: 0, op_id: this.selOp.op_id, location_id: btoa[0].lngMissionLocationID };
+    } else if(atob.length > 0 && btoa.length == 0) {  //Removed
+      chgValue = { id: -1, op_id: this.selOp.op_id, location_id: atob[0].lngMissionLocationID };
+    }
 
     this.data.modifyOpsLocationData(chgValue)
     .subscribe((results) => {
       if(results.ID == 0)
         this.cds.acknowledge(this.ds.acknowTitle, 'Failed - Reason: ' + results.processMsg, 'OK');
       else {
-        //Need to unchange what was changed
         this.updateDataLoad();
-        this.cds.acknowledge(this.ds.acknowTitle, 'Operation Successful!', 'OK');
       }
     });
   }
@@ -105,6 +116,7 @@ export class OperationDialogComponent implements OnInit {
   }
 
   killDialog() {
+    this.comm.signalReload.emit();
     this.dialogRef.close();
     console.log("All changes have been saved");
   }

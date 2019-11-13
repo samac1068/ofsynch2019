@@ -1,8 +1,10 @@
 <div class="container page">
     <div class="row">
           <div class="col-lg"><span class="setleft" style="font-weight: bold">ID: <span class="idtxt">{{ selRec.FundId }}</span></span></div>
-          <div class="col-lg"><mat-checkbox id="conusbased" class="setright" style="font-weight: bold" [(checked)]="selRec.IsConusBased" 
-            (change)="storeAllChanges($event)">CONUS Based</mat-checkbox></div>
+          <div class="col-lg">
+            <mat-checkbox id="IsConusBased" class="setright" style="font-weight: bold" [(ngModel)]="selRec.IsConusBased" 
+            (change)="storeAllChanges($event)">CONUS Based</mat-checkbox>
+          </div>
     </div>
 
   <!-- Fund Code -->
@@ -10,7 +12,7 @@
     <div class="col-lg">
       <mat-form-field appearance="outline" style="width:100%">
         <mat-label>Fund Code:</mat-label>
-        <input matInput id="fundcode" [formControl]="fundcodeControl" required [(value)]="selRec.FundCode" (focusout)="textChanges($event)">
+        <input matInput id="fundcode" [formControl]="fundcodeControl" required [(ngModel)]="selRec.FundCode" (focusout)="textChanges($event)">
       </mat-form-field>  
     </div>
   </div>
@@ -20,7 +22,7 @@
     <div class="col-lg">
       <mat-form-field appearance="outline" style="width:100%">
         <mat-label>Fund Effective Date:</mat-label>
-        <input matInput id="effectivedate" [formControl]="fundeffdateControl" required [(value)]="selRec.FundEffDate" (focusout)="textChanges($event)">
+        <input matInput id="effectivedate" [formControl]="fundeffdateControl" required [(ngModel)]="selRec.FundEffDate" (focusout)="textChanges($event)">
       </mat-form-field>  
     </div>
   </div>
@@ -30,7 +32,7 @@
     <div class="col-lg">
       <mat-form-field appearance="outline" style="width:100%">
         <mat-label>CIC:</mat-label>
-        <input matInput id="cic" [formControl]="cicControl" required [(value)]="selRec.CIC" (focusout)="textChanges($event)">
+        <input matInput id="cic" [formControl]="cicControl" [(ngModel)]="selRec.CIC" (focusout)="textChanges($event)">
       </mat-form-field>  
     </div>
   </div>
@@ -40,7 +42,7 @@
     <div class="col-lg">
       <mat-form-field appearance="outline" style="width:100%">
         <mat-label>MDC:</mat-label>
-        <input matInput id="mdc" [formControl]="mdcControl" required [(value)]="selRec.MDC" (focusout)="textChanges($event)">
+        <input matInput id="mdc" [formControl]="mdcControl" [(ngModel)]="selRec.MDC" (focusout)="textChanges($event)">
       </mat-form-field>  
     </div>
   </div>
@@ -50,25 +52,25 @@
     <div class="col-3">
       <mat-form-field appearance="outline" style="width:100%">
         <mat-label>FY1:</mat-label>
-        <input matInput id="fy1" [formControl]="fy1Control" required [(value)]="selRec.FY1" (focusout)="textChanges($event)">
+        <input matInput id="fy1" [formControl]="fy1Control" [(ngModel)]="selRec.FY1" (focusout)="textChanges($event)">
       </mat-form-field>  
     </div>
     <div class="col-3">
       <mat-form-field appearance="outline" style="width:100%">
         <mat-label>FY2:</mat-label>
-        <input matInput id="fy2" [formControl]="fy2Control" required [(value)]="selRec.FY2" (focusout)="textChanges($event)">
+        <input matInput id="fy2" [formControl]="fy2Control" [(ngModel)]="selRec.FY2" (focusout)="textChanges($event)">
       </mat-form-field>  
     </div>
     <div class="col-3">
       <mat-form-field appearance="outline" style="width:100%">
         <mat-label>FY3:</mat-label>
-        <input matInput id="fy3" [formControl]="fy3Control" required [(value)]="selRec.FY3" (focusout)="textChanges($event)">
+        <input matInput id="fy3" [formControl]="fy3Control" [(ngModel)]="selRec.FY3" (focusout)="textChanges($event)">
       </mat-form-field>  
     </div>
     <div class="col-3">
       <mat-form-field appearance="outline" style="width:100%">
         <mat-label>FY:</mat-label>
-        <input matInput id="fy" [formControl]="fyControl" required [(value)]="selRec.FY" (focusout)="textChanges($event)">
+        <input matInput id="fy" [formControl]="fyControl" [(ngModel)]="selRec.FY" (focusout)="textChanges($event)">
       </mat-form-field>  
     </div>
   </div>
@@ -78,25 +80,25 @@
     <div class="col-3">
       <mat-form-field appearance="outline" style="width:100%">
         <mat-label>BSN:</mat-label>
-        <input matInput id="bsn" [formControl]="bsnControl" required [(value)]="selRec.BSN" (focusout)="textChanges($event)">
+        <input matInput id="bsn" [formControl]="bsnControl" [(ngModel)]="selRec.BSN" (focusout)="textChanges($event)">
       </mat-form-field>  
     </div>
     <div class="col-3">
       <mat-form-field appearance="outline" style="width:100%">
         <mat-label>LIMIT:</mat-label>
-        <input matInput id="limit" [formControl]="limitControl" required [(value)]="selRec.LIMIT" (focusout)="textChanges($event)">
+        <input matInput id="limit" [formControl]="limitControl" [(ngModel)]="selRec.LIMIT" (focusout)="textChanges($event)">
       </mat-form-field>  
     </div>
     <div class="col-3">
       <mat-form-field appearance="outline" style="width:100%">
         <mat-label>OA:</mat-label>
-        <input matInput id="oa" [formControl]="oaControl" required [(value)]="selRec.OA" (focusout)="textChanges($event)">
+        <input matInput id="oa" [formControl]="oaControl" [(ngModel)]="selRec.OA" (focusout)="textChanges($event)">
       </mat-form-field>  
     </div>
     <div class="col-3">
       <mat-form-field appearance="outline" style="width:100%">
         <mat-label>ASN:</mat-label>
-        <input matInput id="asn" [formControl]="asnControl" required [(value)]="selRec.ASN" (focusout)="textChanges($event)">
+        <input matInput id="asn" [formControl]="asnControl" [(ngModel)]="selRec.ASN" (focusout)="textChanges($event)">
       </mat-form-field>  
     </div>
   </div>
@@ -106,25 +108,25 @@
     <div class="col-3">
       <mat-form-field appearance="outline" style="width:100%">
         <mat-label>EOR:</mat-label>
-        <input matInput id="eor" [formControl]="eorControl" required [(value)]="selRec.EOR" (focusout)="textChanges($event)">
+        <input matInput id="eor" [formControl]="eorControl" [(ngModel)]="selRec.EOR" (focusout)="textChanges($event)">
       </mat-form-field>  
     </div>
     <div class="col-3">
       <mat-form-field appearance="outline" style="width:100%">
         <mat-label>MDEP:</mat-label>
-        <input matInput id="mdep" [formControl]="mdepControl" required [(value)]="selRec.MDEP" (focusout)="textChanges($event)">
+        <input matInput id="mdep" [formControl]="mdepControl" [(ngModel)]="selRec.MDEP" (focusout)="textChanges($event)">
       </mat-form-field>  
     </div>
     <div class="col-3">
       <mat-form-field appearance="outline" style="width:100%">
         <mat-label>FCC:</mat-label>
-        <input matInput id="fcc" [formControl]="fccControl" required [(value)]="selRec.FCC" (focusout)="textChanges($event)">
+        <input matInput id="fcc" [formControl]="fccControl" [(ngModel)]="selRec.FCC" (focusout)="textChanges($event)">
       </mat-form-field>  
     </div>
     <div class="col-3">
       <mat-form-field appearance="outline" style="width:100%">
         <mat-label>AMS:</mat-label>
-        <input matInput id="ams" [formControl]="amsControl" required [(value)]="selRec.AMS" (focusout)="textChanges($event)">
+        <input matInput id="ams" [formControl]="amsControl" [(ngModel)]="selRec.AMS" (focusout)="textChanges($event)">
       </mat-form-field>  
     </div>
   </div>
@@ -134,19 +136,19 @@
     <div class="col-4">
       <mat-form-field appearance="outline" style="width:100%">
         <mat-label>STATUS ID:</mat-label>
-        <input matInput id="statusid" [formControl]="statusidControl" required [(value)]="selRec.STATUS_ID" (focusout)="textChanges($event)">
+        <input matInput id="statusid" [formControl]="statusidControl" [(ngModel)]="selRec.STATUS_ID" (focusout)="textChanges($event)">
       </mat-form-field>  
     </div>
     <div class="col-4">
       <mat-form-field appearance="outline" style="width:100%">
         <mat-label>APC:</mat-label>
-        <input matInput id="apc" [formControl]="apcControl" required [(value)]="selRec.APC" (focusout)="textChanges($event)">
+        <input matInput id="apc" [formControl]="apcControl" [(ngModel)]="selRec.APC" (focusout)="textChanges($event)">
       </mat-form-field>  
     </div>
     <div class="col-4">
       <mat-form-field appearance="outline" style="width:100%">
         <mat-label>FSN:</mat-label>
-        <input matInput id="fsn" [formControl]="fsnControl" required [(value)]="selRec.FSN" (focusout)="textChanges($event)">
+        <input matInput id="fsn" [formControl]="fsnControl" [(ngModel)]="selRec.FSN" (focusout)="textChanges($event)">
       </mat-form-field>  
     </div>
   </div>

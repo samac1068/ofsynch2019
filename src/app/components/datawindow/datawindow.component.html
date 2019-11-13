@@ -8,13 +8,16 @@
   <div class="sep" [ngClass]="showEditor?'leftcol':'leftcol_hide'"></div>
   
   <!-- Right Side Data Grid -->
-  <div #rightcol class="rightcol" [ngClass]="showEditor ? 'rightcol' : 'rightcol_wide'">
+  <div #rightcol class="rightcol" [ngClass]="showEditor?'rightcol':'rightcol_wide'">
     <div style="margin-bottom: 10px">
-      <button class="btn btnCustom" style="margin-top: -20px;margin-right:30px;color:white;font-size:12px; border: 1px solid darkslategray;" 
+      <button class="btn btnCustom" style="margin-top:-20px;margin-right:30px;color:white;font-size:12px; border: 1px solid darkslategray;" 
             *ngIf="!showEditor" (click)="createNewRecordHandler()">Create New Record</button>
+      
+      <button id="reset" class="btn btnCustom" (click)="clearFilter()" [disabled]="filterValue.length == 0"
+        style="margin-top: -20px;margin-left: 10px; color:white;font-size:12px;border: 1px solid darkslategray;">Reset Filter</button>
       <mat-form-field appearance="standard" style="width: 60%; height: 25px; font-size:11px;">
         <mat-label>Filter</mat-label>
-        <input matInput  class="filter" (keyup)="applyFilter($event.target.value)"> 
+        <input matInput  class="filter" (keyup)="applyFilter()" [(ngModel)]="filterValue"> 
       </mat-form-field>  
     </div>
 

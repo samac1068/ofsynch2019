@@ -9,6 +9,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { DatastoreService } from 'src/app/services/datastore.service';
 import { DataService } from 'src/app/services/data.service';
 import { Cycle } from 'src/app/models/cycle';
+import { MatCheckbox } from '@angular/material';
 
 @Component({
   selector: 'app-damps',
@@ -42,34 +43,40 @@ export class DampsComponent implements OnInit {
 
   ngOnInit() {
     this.comm.submitRecClicked.subscribe(() => {
-      if(this.chgArr.length > 0) {
-        this.ValidateFormData();
-        if(this.invalidMsg.length == 0){
-          this.cds.confirm('DAMPS - Submission', 'Confirm you want to submit the ' + this.chgArr.length + ' change(s)?', 'Yes', 'No')
-          .then((confirmed) => { 
-            if (confirmed) {
-              this.ds.curSelectedRecord = this.selRec;
-              this.data.modifyFPOperationRecord()
-              .subscribe((results) => {
-                if(results.ID == 0) 
-                  this.cds.acknowledge(this.ds.acknowTitle, 'Failed - Reason: ' + results.processMsg, 'OK');
-                else
-                {
-                  this.resetAllFields();
-                  this.comm.signalReload.emit();
-                  this.cds.acknowledge(this.ds.acknowTitle, 'Operation Successful!', 'OK');
-                }
-              });
-            }
-          })
-          .catch(() => console.log('User dismissed the dialog'));
+      if(this.ds.curSelectedButton == "damps") {
+        if(this.chgArr.length > 0) {
+          this.ValidateFormData();
+          this.ds.curSelectedRecord = this.selRec;
+          
+          if(this.invalidMsg.length == 0){
+            this.cds.confirm('DAMPS - Submission', 'Confirm you want to submit the ' + this.chgArr.length + ' change(s)?', 'Yes', 'No')
+            .then((confirmed) => {
+              
+              if (confirmed) {
+                this.data.modifyFPOperationRecord()
+                .subscribe((results) => {
+              
+                  if(results.ID == 0) 
+                    this.cds.acknowledge(this.ds.acknowTitle, 'Failed - Reason: ' + results.processMsg, 'OK');
+                  else
+                  {
+                    this.resetAllFields();
+                    this.comm.signalReload.emit();
+                    this.cds.acknowledge(this.ds.acknowTitle, 'Operation Successful!', 'OK');
+                  }
+                });
+              }
+            })
+            .catch(() => console.log('User dismissed the dialog'));
+          }
+          else
+            this.cds.acknowledge('DAMPS: Incomplete Form', 'You must ' + this.invalidMsg.join(', ') + '.', 'OK', 'lg');
         }
         else
-          this.cds.acknowledge('Incomplete Form', 'You must ' + this.invalidMsg.join(', ') + '.', 'OK', 'lg');
+          this.cds.acknowledge('DAMPS: Invalid Submission', "You have not made any changes to this record.", 'OK');
       }
-      else
-        this.cds.acknowledge('Invalid Submission', "You have not made any changes to this record.", 'OK');
     });
+    
 
     this.comm.createNewClicked.subscribe(() => {
         this.chgArr = [];
@@ -87,7 +94,7 @@ export class DampsComponent implements OnInit {
 
   setDefaultItems(){
     this.selRec.ID = 0;  //Indication that this is a new record.
-    this.selRec.hidden = 0;
+    this.selRec.opHidden = 0;
     this.selRec.ma12301_d = 0;
     this.selRec.ma12302 = 0;
     this.selRec.ma12304 = 0;
@@ -115,6 +122,11 @@ export class DampsComponent implements OnInit {
   storeAllChanges(e: any) {
     if(this.chgArr.indexOf(e.source.id) == -1)
       this.chgArr.push(e.source.id);
+    else {
+      if(e.source instanceof MatCheckbox) { //So remove the selected checkbox from the change event - but only if a checkbox
+        this.chgArr.splice(this.chgArr.indexOf(e.source.id),1);
+      }
+    }
   }
 
   textChanges(e){
@@ -136,7 +148,5 @@ export class DampsComponent implements OnInit {
     // Make sure value isn't null
     if(this.selRec.MOBCAP == null || this.selRec.MOBCAP == undefined || this.selRec.MOBCAP.length == 0)
       this.selRec.MOBCAP = -1;
-
-    return null;
   }
 }
