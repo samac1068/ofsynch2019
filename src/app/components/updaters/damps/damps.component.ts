@@ -27,7 +27,6 @@ export class DampsComponent implements OnInit {
   pay: Pay[] = [];
   tcs: TCS[] = [];
   conusa: Conusa[] = [];
-
   chgArr: string[] = [];
   invalidMsg: string[] = [];
 
@@ -44,18 +43,16 @@ export class DampsComponent implements OnInit {
   ngOnInit() {
     this.comm.submitRecClicked.subscribe(() => {
       if(this.ds.curSelectedButton == "damps") {
+        console.log(this.chgArr.length);
         if(this.chgArr.length > 0) {
           this.ValidateFormData();
           this.ds.curSelectedRecord = this.selRec;
-          
           if(this.invalidMsg.length == 0){
             this.cds.confirm('DAMPS - Submission', 'Confirm you want to submit the ' + this.chgArr.length + ' change(s)?', 'Yes', 'No')
             .then((confirmed) => {
-              
               if (confirmed) {
                 this.data.modifyFPOperationRecord()
                 .subscribe((results) => {
-              
                   if(results.ID == 0) 
                     this.cds.acknowledge(this.ds.acknowTitle, 'Failed - Reason: ' + results.processMsg, 'OK');
                   else
@@ -77,7 +74,6 @@ export class DampsComponent implements OnInit {
       }
     });
     
-
     this.comm.createNewClicked.subscribe(() => {
         this.chgArr = [];
         this.selRec = new Damps();
