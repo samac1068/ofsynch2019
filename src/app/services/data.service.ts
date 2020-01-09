@@ -32,9 +32,7 @@ export class DataService {
   
   constructor(private http: HttpClient, private ds: DatastoreService) { }
 
-  ngOnInit(): void {
-    
-  }
+  ngOnInit(): void { }
 
   // Error Handling
   private errorHandler(error: any){
@@ -68,7 +66,7 @@ export class DataService {
       }
     }
 
-    //console.log("API Server URL is: ", this.identifyWSServer());
+    console.log("API Server URL is: ", this.identifyWSServer());
   }
 
   // Retrieve Data from local file

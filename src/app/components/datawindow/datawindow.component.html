@@ -15,10 +15,11 @@
       
       <button id="reset" class="btn btnCustom" (click)="clearFilter()" [disabled]="filterValue.length == 0"
         style="margin-top: -20px;margin-left: 10px; color:white;font-size:12px;border: 1px solid darkslategray;">Reset Filter</button>
-      <mat-form-field appearance="standard" style="width: 60%; height: 25px; font-size:11px;">
+
+      <mat-form-field appearance="standard" style="width: 350px; height: 25px; font-size:11px; top:-8px">
         <mat-label>Filter</mat-label>
         <input matInput  class="filter" (keyup)="applyFilter()" [(ngModel)]="filterValue"> 
-      </mat-form-field>  
+      </mat-form-field>
     </div>
 
     <!-- Generate the dynamic table -->

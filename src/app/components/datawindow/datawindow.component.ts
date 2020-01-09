@@ -25,7 +25,7 @@ export class DatawindowComponent implements OnInit {
   subOpList: string [];
   curOperation: string;
   allDataLoaded: boolean = false;
-  operationDialogRef: MatDialogRef<OperationDialogComponent>
+  operationDialogRef: MatDialogRef<OperationDialogComponent>;
   filterValue: string = "";
 
  constructor(private ds: DatastoreService, private comm: CommService, private data:DataService, private spinner: NgxSpinnerService,
@@ -88,6 +88,7 @@ export class DatawindowComponent implements OnInit {
 
   loadSelectedButton() {
     this.getSelectedOperationData(true);
+    console.log("datawindow - curselectbutton is ", this.ds.curSelectedButton);
 
     //Load the necessary suboperation information for the selected operation
     switch(this.ds.curSelectedButton){
