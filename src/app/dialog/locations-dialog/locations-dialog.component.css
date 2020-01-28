@@ -1,0 +1,51 @@
+.locationDialogClass {
+    min-height: 170px;
+    width: 950px;
+    height: auto;
+    overflow-y: hidden;
+}
+
+.scontainer {
+    overflow: hidden;
+}
+
+.searchlbl {
+    font-weight: bold;
+}
+
+.searchinput {
+    width: 450px;
+    margin-left: 10px;
+    font-size: 12px;
+}
+
+.infotext {
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.buttonpack {
+    width: 98%;
+}
+
+.specialBtn {
+    font-size:11px;
+    margin-left:20px;
+    color: white;
+    height:27px;
+    padding:1px 12px;
+}
+
+#divExist, #divPossible {
+    border: 1px gray solid;
+    width: 48%;
+}
+
+.cellText {
+    font-size: 11px;
+}
+
+th, td {
+    border-bottom: 1px solid #ddd;
+}

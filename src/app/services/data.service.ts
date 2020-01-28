@@ -115,6 +115,13 @@ export class DataService {
       .pipe(catchError(this.errorHandler)));
   }
 
+  searchGeoLocation(locName: string): Observable<any> {
+    var fullDomain: string = this.identifyWSServer() + `/SearchGeoLocation`;
+    const  params = new  HttpParams().set('id', this.ds.getPassKey()).set('locName', locName);
+    return (this.http.get<any>(fullDomain, { params })
+      .pipe(catchError(this.errorHandler)));
+  }
+
   getPayLOA(opID: string): Observable<any> {
     var fullDomain: string = this.identifyWSServer() + `/GetPayLinesOfAccounting`;
     const  params = new  HttpParams().set('id', this.ds.getPassKey()).set('opID', opID);
@@ -172,6 +179,12 @@ export class DataService {
     var fullDomain: string = this.identifyWSServer() + `/UpdateLocationData`;
     return (this.http.post<Location>(fullDomain + "?id=" + this.ds.getPassKey(), this.ds.curSelectedRecord, httpHeaders )
     .pipe(catchError(this.errorHandler))); 
+  }
+
+  saveMissionLocation(): Observable<any> {
+    var fullDomain: string = this.identifyWSServer() + `/SaveMissionLocation`;
+    return (this.http.post<Location>(fullDomain + "?id=" + this.ds.getPassKey(), this.ds.curSelectedRecord, httpHeaders )
+        .pipe(catchError(this.errorHandler)));
   }
 
   updateFundCiteData(): Observable<any> {

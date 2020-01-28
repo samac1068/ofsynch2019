@@ -36,7 +36,7 @@
 
       <!-- Row Information -->
       <tbody>
-        <tr *ngFor="let row of dgData; let i = index; let last = last;" class="mat-cell">
+        <tr *ngFor="let row of dgData; let i = index; let last = last; trackBy:trackByIndex" class="mat-cell">
           <td style="text-align:center"><img src="./assets/images/cog.png" title="Click to edit record" (click)="editRecordHandler(row)" class="clickitem" /></td>
           <td #dglist *ngFor="let col of colHeadData;" [ngStyle]="{'text-align': (col.checkbox) ? 'center' : 'left'}">
               {{ (col.checkbox) ?  "" : row[col.columnDef] }}

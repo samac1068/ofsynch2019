@@ -12,6 +12,11 @@
             "element",
             "app",
             "kebab-case"
+        ],
+        "quotemark": [
+            true,
+            "single",
+            "double"
         ]
     }
 }

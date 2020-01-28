@@ -22,6 +22,7 @@ import { BtnGroupComponent } from './components/updaters/btn-group/btn-group.com
 import { ConfirmDialogComponent } from './dialog/confirm-dialog/confirm-dialog.component';
 import { CyclesComponent } from './components/updaters/cycles/cycles.component';
 import { OperationDialogComponent } from './dialog/operation-dialog/operation-dialog.component';
+import { LocationsDialogComponent } from './dialog/locations-dialog/locations-dialog.component';
 
 // Services
 import { CommService } from './services/comm.service';
@@ -47,11 +48,13 @@ import { DampsComponent } from './components/updaters/damps/damps.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 // 3rd Party Items
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { AngularDualListBoxModule } from 'angular-dual-listbox';
+
 //import { NoopInterceptor } from '@angular/common/http/src/interceptor';
 
 
@@ -75,7 +78,8 @@ import { AngularDualListBoxModule } from 'angular-dual-listbox';
     OperationsComponent,
     TpfddComponent,
     CyclesComponent,
-    OperationDialogComponent
+    OperationDialogComponent,
+    LocationsDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -95,6 +99,7 @@ import { AngularDualListBoxModule } from 'angular-dual-listbox';
     MatCardModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatExpansionModule,
     FormsModule,
     NgbModule,
     NgxSpinnerModule,
@@ -108,7 +113,7 @@ import { AngularDualListBoxModule } from 'angular-dual-listbox';
     {provide: LocationStrategy, useClass: PathLocationStrategy},
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}
   ],
-  entryComponents: [ ConfirmDialogComponent, OperationDialogComponent ],
+  entryComponents: [ ConfirmDialogComponent, OperationDialogComponent, LocationsDialogComponent ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
