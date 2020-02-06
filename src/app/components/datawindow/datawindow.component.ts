@@ -1,247 +1,212 @@
-import { DataService } from './../../services/data.service';
-import { CommService } from './../../services/comm.service';
-import { DatastoreService } from './../../services/datastore.service';
-import { Component, OnInit, ViewChild, ElementRef, HostListener, Renderer2, Input, ViewChildren, ChangeDetectorRef } from '@angular/core';
-import { NgxSpinnerService } from 'ngx-spinner';
-import { MatDialog, MatDialogRef } from '@angular/material';
-import { OperationDialogComponent } from 'src/app/dialog/operation-dialog/operation-dialog.component';
-import { LocationsDialogComponent } from 'src/app/dialog/locations-dialog/locations-dialog.component';
+import {DataService} from '../../services/data.service';
+import {CommService} from '../../services/comm.service';
+import {DatastoreService} from '../../services/datastore.service';
+import {Component, OnInit, ViewChild, ElementRef, HostListener, Renderer2, Input, ViewChildren, ChangeDetectorRef} from '@angular/core';
+import {NgxSpinnerService} from 'ngx-spinner';
+import {MatDialog, MatDialogRef} from '@angular/material';
+import {OperationDialogComponent} from 'src/app/dialog/operation-dialog/operation-dialog.component';
+import {LocationsDialogComponent} from 'src/app/dialog/locations-dialog/locations-dialog.component';
+import { AGCheckBoxRendererComponent } from 'src/app/components/renderers/AGCheckBoxRendererComponent';
 
 @Component({
-  selector: 'app-datawindow',
-  templateUrl: './datawindow.component.html',
-  styleUrls: ['./datawindow.component.css']
+    selector: 'app-datawindow',
+    templateUrl: './datawindow.component.html',
+    styleUrls: ['./datawindow.component.css']
 })
 
 export class DatawindowComponent implements OnInit {
-  @ViewChild('rightcol', {static: false}) rightcol: ElementRef;
+    @ViewChild('rightcol', {static: false}) rightcol: ElementRef;
 
-  dgData: any = []; // Currently loaded information
-  dgDataRaw: any = []; // Contains the displayed list of information and is used to reset back to norm before a filter is applied
-  colData: any = []; // current column list
-  colWidthData: string[] = [];
-  colHeadData: string[] = [];
-  showEditor = false;  // Display the edit panel or hide it.  Default is hidden
-  availWidth: number;
-  isNewRecord = false;
-  subOpList: string [];
-  curOperation: string;
-  allDataLoaded = false;
-  operationDialogRef: MatDialogRef<OperationDialogComponent>;
-  locationDialogRef: MatDialogRef<LocationsDialogComponent>;
-  filterValue = '';
+    dgData: any = []; // Currently loaded information
+    dgDataRaw: any = []; // Contains the displayed list of information and is used to reset back to norm before a filter is applied
+    localPamams: any;
+    //colData: any = []; // current column list
+    //colWidthData: string[] = [];
+    colHeadData: string[] = [];
+    colDefaults;
+    showEditor = false;  // Display the edit panel or hide it.  Default is hidden
+    availWidth: number;
+    isNewRecord = false;
+    subOpList: string [];
+    curOperation: string;
+    allDataLoaded = false;
+    operationDialogRef: MatDialogRef<OperationDialogComponent>;
+    locationDialogRef: MatDialogRef<LocationsDialogComponent>;
 
- constructor(private ds: DatastoreService, private comm: CommService, private data: DataService, private spinner: NgxSpinnerService,
-             private dialog: MatDialog, private cdRef: ChangeDetectorRef) { }
+    constructor(private ds: DatastoreService, private comm: CommService, private data: DataService, private spinner: NgxSpinnerService,
+                private dialog: MatDialog, private cdRef: ChangeDetectorRef) {
+    }
 
-  ngOnInit() {
-    // Confirm that we have the confirmed location for the API
-    this.data.getColumnData().subscribe((results) => { // Initiator
-        // tslint:disable-next-line:prefer-for-of
-      for (let i = 0; i < this.ds.btnData.length; i++) {
-          // tslint:disable-next-line:triple-equals
-        if (results[this.ds.btnData[i][0]] != undefined && results[this.ds.btnData[i][0]] != null) {
-            // tslint:disable-next-line:prefer-for-of
-          for (let k = 0; k < results[this.ds.btnData[i][0]].length; k++) {
-            if (!results[this.ds.btnData[i][0]][k].hidden) {
-              this.ds.columnHeaders[this.ds.btnData[i][0]] = results[this.ds.btnData[i][0]];
-            }
-          }
-        } else {
-            // tslint:disable-next-line:triple-equals
-           if (this.ds.curSelectedButton != '' && this.ds.curSelectedButton != undefined) {
-             alert('Unable to retrieve the column headers for the selected operation.  Please confirm dg-columns.json');
-           }
-        }
-      }
-    });
+    ngOnInit() {
+        // Confirm that we have the confirmed location for the API
 
-    // Subscriptions
-    this.comm.navbarClicked.subscribe(() => {
-      this.curOperation = this.ds.curSelectedButton;
-      this.showEditor = false;
-      this.isNewRecord = false;
-      this.loadSelectedButton();
-    });
+        // Load the column headers
+        this.ds.columnHeaders = this.data.getColumnData();
+        this.colDefaults = { resizable: true, sortable: false, editable: false };
 
-    // Canceled clicked
-    this.comm.cancelRecClicked.subscribe(() => {
-      this.isNewRecord = false;
-      this.showEditor = false;
-    });
+        // Subscriptions
+        this.comm.navbarClicked.subscribe(() => {
+            this.curOperation = this.ds.curSelectedButton;
+            this.showEditor = false;
+            this.isNewRecord = false;
+            this.loadSelectedButton();
+        });
 
-    // Reload of Datagrid signaled
-    this.comm.signalReload.subscribe(() => {
-      this.showEditor = false;
-      this.getSelectedOperationData(false);
-    });
-  }
+        // Canceled clicked
+        this.comm.cancelRecClicked.subscribe(() => {
+            this.isNewRecord = false;
+            this.showEditor = false;
+        });
+
+        // Reload of Datagrid signaled
+        this.comm.signalReload.subscribe(() => {
+            this.showEditor = false;
+            this.getSelectedOperationData(false);
+        });
+
+        //Cog was clicked
+        this.comm.cogClicked.subscribe((results) => {
+            this.editRecordHandler(results);
+        });
+    }
 
     // tslint:disable-next-line:ban-types
-  async getSelectedOperationData(isMulti: Boolean) {
-    this.showLoaderAni();
-    await this.data.getOperationData()
-    .subscribe((results) => {
-      this.dgData = results; // Load the returning data to be displayed
-      this.dgDataRaw = results;
-      this.ds.opsData[this.ds.curSelectedButton] = this.dgData;
-      this.colHeadData = this.ds.columnHeaders[this.ds.curSelectedButton]; // Load the list of column headers for the selected operation
-      this.hideLoaderAni();
-    });
+    async getSelectedOperationData(isMulti: Boolean) {
+        this.showLoaderAni();
+        await this.data.getOperationData()
+            .subscribe((results) => {
+                this.dgData = results; // Load the returning data to be displayed
+                this.dgDataRaw = results;
+                this.ds.opsData[this.ds.curSelectedButton] = this.dgData;
+                this.colHeadData = this.ds.columnHeaders[this.ds.curSelectedButton]; // Load the list of column headers for the selected operation
 
-    this.cdRef.detectChanges();
-    this.availWidth = this.rightcol.nativeElement.offsetWidth;
-    this.setTableResize();
-  }
+                this.hideLoaderAni();
+            });
 
-  loadSelectedButton() {
-    this.getSelectedOperationData(true);
-    //console.log('datawindow - curselectbutton is ', this.ds.curSelectedButton);
-
-    // Load the necessary suboperation information for the selected operation
-    switch (this.ds.curSelectedButton) {
-      case 'damps':
-        this.subOpList = ['pay', 'tcs', 'conusa', 'operations', 'cycles'];
-        break;
-      case 'orders':
-        this.subOpList = ['operations', 'cycles', 'damps'];
-        break;
-      case 'pay':
-        this.subOpList = ['record', 'transfer'];
-        break;
-      case 'tcs':
-        this.subOpList = ['geoloc'];
-        break;
-      case 'conusa':
-        this.subOpList = [];
-        break;
-      case 'missionlocations':
-        this.subOpList = ['country', 'states'];
-        break;
-      case 'fundcites':
-        this.subOpList = ['fundtypes'];
-        break;
-      case 'operations':
-        this.subOpList = ['missionlocations', 'missionAssign', 'locationid'];
-        break;
-      case 'tpfdd':
-        this.subOpList = ['operations'];
-        break;
-      case 'cycles':
-        this.subOpList = [];
-        break;
+        this.cdRef.detectChanges();
+        this.availWidth = this.rightcol.nativeElement.offsetWidth;
+        this.setTableResize();
     }
 
-    // Grab the support data for the selected operation button
-    this.getSubOpData(this.subOpList);
-  }
-
-  getSubOpData(operation: string []) {
-    let loopCount = 0;
-      // tslint:disable-next-line:triple-equals
-    if (operation != null) {
-        operation.forEach((obj) => {
-          this.data.getSubOperationData(obj).subscribe((results) => {
-          this.ds.opsData[obj] = results;
-          loopCount++;
-        });
-      });
+    onGridReady(params) {
+        console.log("Setting the params");
+         this.localPamams = params;
     }
-  }
 
-  hideLoaderAni() {
-    this.spinner.hide();
-    this.allDataLoaded = true;
-  }
+    loadSelectedButton() {
+        this.getSelectedOperationData(true);
 
-  showLoaderAni() {
-    this.allDataLoaded = false;
-    this.spinner.show();
-  }
-
-  sepClickHandler() {
-    this.showEditor = !this.showEditor;
-  }
-
-  setTableResize() {
-    let totWidth = 0;
-    this.ds.columnHeaders[this.ds.curSelectedButton].forEach(( column ) => {
-      totWidth += column.width;
-    });
-
-    const scale = (this.availWidth - 5) / totWidth;
-    this.ds.columnHeaders[this.ds.curSelectedButton].forEach(( column ) => {
-      column.width *= scale;
-      this.setColumnWidth(column);
-    });
-  }
-
-  setColumnWidth(column: any) {
-    const columnEls = Array.from( document.getElementsByClassName( 'mat-column-' + column.columnDef ));
-    columnEls.forEach(( el: HTMLDivElement ) => {
-      el.style.width = column.width + 'px';
-    });
-  }
-
-  public trackByIndex(index: number, value: any)
-  {
-    return index;
-  }
-
-  applyFilter() {  // filterValue: string
-    //this.dgData = this.dgDataRaw.filter(item => item.indexOf(this.filterValue));
-
-    let table, tr, td, i, txtValue, found;
-
-    table = document.getElementById('opDataTbl');
-    tr = table.getElementsByTagName('tr');
-
-    for (i = 1; i < tr.length; i++) {
-      found = false;
-      td = tr[i].getElementsByTagName('td');
-      for (let j = 0; j < td.length; j++) {
-        if (td[j]) {
-          txtValue = td[j].textContent || td[j].innerText;
-          if (txtValue.toUpperCase().indexOf(this.filterValue.toUpperCase()) > -1) {
-            found = true;
-            break;
-          }
+        // Load the necessary suboperation information for the selected operation
+        switch (this.ds.curSelectedButton) {
+            case 'damps':
+                this.subOpList = ['pay', 'tcs', 'conusa', 'operations', 'cycles'];
+                break;
+            case 'orders':
+                this.subOpList = ['operations', 'cycles', 'damps'];
+                break;
+            case 'pay':
+                this.subOpList = ['record', 'transfer'];
+                break;
+            case 'tcs':
+                this.subOpList = ['geoloc'];
+                break;
+            case 'conusa':
+                this.subOpList = [];
+                break;
+            case 'missionlocations':
+                this.subOpList = ['country', 'states'];
+                break;
+            case 'fundcites':
+                this.subOpList = ['fundtypes'];
+                break;
+            case 'operations':
+                this.subOpList = ['missionlocations', 'missionAssign', 'locationid'];
+                break;
+            case 'tpfdd':
+                this.subOpList = ['operations'];
+                break;
+            case 'cycles':
+                this.subOpList = [];
+                break;
         }
-      }
 
-      // Set the display based on the results.
-      tr[i].style.display = (!found) ? 'none' : '';
+        // Grab the support data for the selected operation button
+        this.getSubOpData(this.subOpList);
     }
-  }
 
-  clearFilter() {
-    this.filterValue = '';
-    this.applyFilter();
-    this.dgData = this.dgDataRaw;
-  }
-
-  createNewRecordHandler() {
-    if (this.ds.curSelectedButton == 'missionlocations') { // Show new location entry window
-      this.showEditor = false;
-      this.locationDialogRef = this.dialog.open(LocationsDialogComponent, { panelClass: 'locationDialogClass' });
-    }else{   // Show standard new item entry window
-      this.isNewRecord = true;
-      this.showEditor = true;
-      this.comm.createNewClicked.emit();
+    getSubOpData(operation: string []) {
+        let loopCount = 0;
+        // tslint:disable-next-line:triple-equals
+        if (operation != null) {
+            operation.forEach((obj) => {
+                this.data.getSubOperationData(obj).subscribe((results) => {
+                    this.ds.opsData[obj] = results;
+                    loopCount++;
+                });
+            });
+        }
     }
-  }
 
-  editRecordHandler(selectedRow: any) {
-    this.ds.curSelectedRecord = selectedRow;
-    this.isNewRecord = false;
-
-      // tslint:disable-next-line:triple-equals
-    if(this.ds.curSelectedButton == 'operations') {     // Show Unique Operations Window
-        this.showEditor = false;
-        this.operationDialogRef = this.dialog.open(OperationDialogComponent, { height: '600px', width: '620px' });
-    }else{    // Show standard window
-        this.showEditor = true;
-        this.comm.editRecClicked.emit();
+    hideLoaderAni() {
+        this.spinner.hide();
+        this.allDataLoaded = true;
     }
-  }
+
+    showLoaderAni() {
+        this.allDataLoaded = false;
+        this.spinner.show();
+    }
+
+    sepClickHandler() {
+        this.showEditor = !this.showEditor;
+    }
+
+    setTableResize() {
+        let totWidth = 0;
+        this.ds.columnHeaders[this.ds.curSelectedButton].forEach((column) => {
+            totWidth += column.width;
+        });
+
+        const scale = (this.availWidth - 5) / totWidth;
+        this.ds.columnHeaders[this.ds.curSelectedButton].forEach((column) => {
+            column.width *= scale;
+            this.setColumnWidth(column);
+        });
+    }
+
+    setColumnWidth(column: any) {
+        const columnEls = Array.from(document.getElementsByClassName('mat-column-' + column.columnDef));
+        columnEls.forEach((el: HTMLDivElement) => {
+            el.style.width = column.width + 'px';
+        });
+    }
+
+    public trackByIndex(index: number, value: any) {
+        return index;
+    }
+
+    createNewRecordHandler() {
+        if (this.ds.curSelectedButton == 'missionlocations') { // Show new location entry window
+            this.showEditor = false;
+            this.locationDialogRef = this.dialog.open(LocationsDialogComponent, {panelClass: 'locationDialogClass'});
+        } else {   // Show standard new item entry window
+            this.isNewRecord = true;
+            this.showEditor = true;
+            this.comm.createNewClicked.emit();
+        }
+    }
+
+    editRecordHandler(selectedRow: any) {
+        this.ds.curSelectedRecord = selectedRow;
+        this.isNewRecord = false;
+
+        // tslint:disable-next-line:triple-equals
+        if (this.ds.curSelectedButton == 'operations') {     // Show Unique Operations Window
+            this.showEditor = false;
+            this.operationDialogRef = this.dialog.open(OperationDialogComponent, {height: '600px', width: '620px'});
+        } else {    // Show standard window
+            this.showEditor = true;
+            this.comm.editRecClicked.emit();
+        }
+    }
 }

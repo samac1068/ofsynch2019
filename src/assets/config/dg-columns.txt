@@ -1,135 +1,135 @@
 {
     "damps": 
       [ 
-        {"header": "ID", "columnDef": "ID", "width": 40, "checkbox": false, "hidden": false},
-        {"header": "Hidden", "columnDef": "opHidden", "width": 60, "checkbox": true, "hidden": false},
-        {"header": "Description", "columnDef": "Description", "width": 200, "checkbox": false, "hidden": false},
-        {"header": "Pay OP", "columnDef": "PAY_Operation", "width": 100, "checkbox": false, "hidden": false},
-        {"header": "TCS OP", "columnDef": "TCS_Operation", "width": 100, "checkbox": false, "hidden": false},
-        {"header": "Short Name", "columnDef": "opShortName", "width": 120, "checkbox": false, "hidden": false},
-        {"header": "Record Status", "columnDef": "Record_Status_Description", "width": 60, "checkbox": false, "hidden": false},
-        {"header": "Transfer Status", "columnDef": "Transfer_Status_Description", "width": 60, "checkbox": false, "hidden": false},
-        {"header": "12301D", "columnDef": "ma12301_d", "width": 60, "checkbox": true, "hidden": false},
-        {"header": "12302", "columnDef": "ma12302", "width": 60, "checkbox": true, "hidden": false},
-        {"header": "12304", "columnDef": "ma12304", "width": 60, "checkbox": true, "hidden": false},
-        {"header": "12304A", "columnDef": "ma12304_a", "width": 60, "checkbox": true, "hidden": false},
-        {"header": "12304B", "columnDef": "ma12304_b", "width": 60, "checkbox": true, "hidden": false},
-        {"header": "MOBCAP", "columnDef": "MOBCAP", "width": 80, "checkbox": false, "hidden": false},
-        {"header": "Cycle", "columnDef": "Cycle", "width": 60, "checkbox": false, "hidden": false},
-        {"header": "Long Name", "columnDef": "opLongName", "width": 120, "checkbox": false, "hidden": false},
-        {"header": "UIC to NIPR", "columnDef": "UIC_ToNipr", "width": 60, "checkbox": true, "hidden": false}
+        {"headerName": "ID", "field": "ID", "width": 40, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "Hidden", "field": "opHidden", "width": 60, "cellRendererFramework": "agCheckBoxRenderer", "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "Description", "field": "Description", "width": 200, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "Pay OP", "field": "PAY_Operation", "width": 100, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "TCS OP", "field": "TCS_Operation", "width": 100, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "Short Name", "field": "opShortName", "width": 120, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "Record Status", "field": "Record_Status_Description", "width": 60, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "Transfer Status", "field": "Transfer_Status_Description", "width": 60, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "12301D", "field": "ma12301_d", "width": 60, "cellRendererFramework": "agCheckBoxRenderer", "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "12302", "field": "ma12302", "width": 60, "cellRendererFramework": "agCheckBoxRenderer", "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "12304", "field": "ma12304", "width": 60, "cellRendererFramework": "agCheckBoxRenderer", "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "12304A", "field": "ma12304_a", "width": 60, "cellRendererFramework": "agCheckBoxRenderer", "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "12304B", "field": "ma12304_b", "width": 60, "cellRendererFramework": "agCheckBoxRenderer", "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "MOBCAP", "field": "MOBCAP", "width": 80, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "Cycle", "field": "Cycle", "width": 60, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "Long Name", "field": "opLongName", "width": 120, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "UIC to NIPR", "field": "UIC_ToNipr", "width": 60, "cellRendererFramework": "agCheckBoxRenderer", "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false}
       ],
-      "orders": 
-      [ 
-        {"header": "Visible", "columnDef": "visible", "width": 55, "checkbox": true, "hidden": false},
-        {"header": "ID", "columnDef": "id", "width": 40, "checkbox": false, "hidden": false},
-        {"header": "OPERATION", "columnDef": "operation", "width": 230, "checkbox": false, "hidden": false},
-        {"header": "CYCLE", "columnDef": "cycle", "width": 55, "checkbox": false, "hidden": false},
-        {"header": "IN PLANNING", "columnDef": "plan_id", "width": 55, "checkbox": true, "hidden": false},
-        {"header": "ORDERS", "columnDef": "ord_id", "width": 60, "checkbox": false, "hidden": false},
-        {"header": "ASSIGNED DAMPS", "columnDef": "Description", "width": 150, "checkbox": false, "hidden": false}
+      "orders":
+      [
+        {"headerName": "Visible", "field": "visible", "width": 55, "cellRendererFramework": "agCheckBoxRenderer", "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "ID", "field": "id", "width": 40, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "OPERATION", "field": "operation", "width": 230, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "CYCLE", "field": "cycle", "width": 55, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "IN PLANNING", "field": "plan_id", "width": 55, "cellRendererFramework": "agCheckBoxRenderer", "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "ORDERS", "field": "ord_id", "width": 60, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "ASSIGNED DAMPS", "field": "Description", "width": 150, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false}
       ],
-      "pay": 
-      [ 
-        {"header": "ID", "columnDef": "PAY_Operation_ID", "width": 40, "checkbox": false, "hidden": false},
-        {"header": "OPERATION", "columnDef": "PAY_Operation", "width": 140, "checkbox": false, "hidden": false},
-        {"header": "DESCRIPTION", "columnDef": "PAY_Operation_Description", "width": 230, "checkbox": false, "hidden": false},
-        {"header": "RECORD STATUS", "columnDef": "Record_Status_Description", "width": 60, "checkbox": false, "hidden": false},
-        {"header": "TRANSFER STATUS", "columnDef": "Transfer_Status_Description", "width": 60, "checkbox": false, "hidden": false}
+      "pay":
+      [
+        {"headerName": "ID", "field": "PAY_Operation_ID", "width": 40, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "OPERATION", "field": "PAY_Operation", "width": 140, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "DESCRIPTION", "field": "PAY_Operation_Description", "width": 230, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "RECORD STATUS", "field": "Record_Status_Description", "width": 60, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "TRANSFER STATUS", "field": "Transfer_Status_Description", "width": 60, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false}
       ],
-      "tcs": 
-      [ 
-        {"header": "ID", "columnDef": "TCS_Operation_ID", "width": 40, "checkbox": false, "hidden": false},
-        {"header": "OPERATION", "columnDef": "TCS_Operation", "width": 140, "checkbox": false, "hidden": false},
-        {"header": "DESCRIPTION", "columnDef": "TCS_Operation_Description", "width": 230, "checkbox": false, "hidden": false},
-        {"header": "RECORD STATUS", "columnDef": "Record_Status_Description", "width": 60, "checkbox": false, "hidden": false},
-        {"header": "TRANSFER STATUS", "columnDef": "Transfer_Status_Description", "width": 60, "checkbox": false, "hidden": false}
+      "tcs":
+      [
+        {"headerName": "ID", "field": "TCS_Operation_ID", "width": 40, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "OPERATION", "field": "TCS_Operation", "width": 140, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "DESCRIPTION", "field": "TCS_Operation_Description", "width": 230, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "RECORD STATUS", "field": "Record_Status_Description", "width": 60, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "TRANSFER STATUS", "field": "Transfer_Status_Description", "width": 60, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false}
       ],
-      "conusa": 
-      [ 
-        {"header": "ID", "columnDef": "opId", "width": 40, "checkbox": false, "hidden": false},
-        {"header": "SHORTNAME", "columnDef": "opShortName", "width": 140, "checkbox": false, "hidden": false},
-        {"header": "LONGNAME", "columnDef": "opLongName", "width": 230, "checkbox": false, "hidden": false},
-        {"header": "AUTH ID", "columnDef": "opAuthId", "width": 40, "checkbox": false, "hidden": false},
-        {"header": "HIDDEN", "columnDef": "opHidden", "width": 40, "checkbox": true, "hidden": false},
-        {"header": "RECORD STATUS", "columnDef": "Record_Status_Description", "width": 60, "checkbox": false, "hidden": false},
-        {"header": "TRANSFER STATUS", "columnDef": "Transfer_Status_Description", "width": 60, "checkbox": false, "hidden": false}
+      "conusa":
+      [
+        {"headerName": "ID", "field": "opId", "width": 40, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "SHORTNAME", "field": "opShortName", "width": 140, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "LONGNAME", "field": "opLongName", "width": 230, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "AUTH ID", "field": "opAuthId", "width": 40, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "HIDDEN", "field": "opHidden", "width": 40, "cellRendererFramework": "agCheckBoxRenderer", "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "RECORD STATUS", "field": "Record_Status_Description", "width": 60, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "TRANSFER STATUS", "field": "Transfer_Status_Description", "width": 60, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false}
       ],
-      "operations": 
-      [ 
-        {"header": "ID", "columnDef": "op_id", "width": 40, "checkbox": false, "hidden": false},
-        {"header": "OPERATION", "columnDef": "operation", "width": 140, "checkbox": false, "hidden": false},
-        {"header": "VISIBLE", "columnDef": "unitrqmt_visible", "width": 40, "checkbox": true, "hidden": false},
-        {"header": "LONG NAME", "columnDef": "operation_long", "width": 230, "checkbox": false, "hidden": false},
-        {"header": "TO CRC", "columnDef": "CRC", "width": 40, "checkbox": true, "hidden": false},
-        {"header": "TO NIPR", "columnDef": "toNIPR", "width": 40, "checkbox": true, "hidden": false},
-        {"header": "LOC ASGND", "columnDef": "assignedCnt", "width": 40, "checkbox": false, "hidden": false}
+      "operations":
+      [
+        {"headerName": "ID", "field": "op_id", "width": 40, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "OPERATION", "field": "operation", "width": 140, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "VISIBLE", "field": "unitrqmt_visible", "width": 40, "cellRendererFramework": "agCheckBoxRenderer", "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "LONG NAME", "field": "operation_long", "width": 230, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "TO CRC", "field": "CRC", "width": 40, "cellRendererFramework": "agCheckBoxRenderer", "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "TO NIPR", "field": "toNIPR", "width": 40, "cellRendererFramework": "agCheckBoxRenderer", "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "LOC ASGND", "field": "assignedCnt", "width": 40, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false}
       ],
-      "cycles": 
-      [ 
-        {"header": "CYCLE ID", "columnDef": "CYC_ID", "width": 30, "checkbox": false, "hidden": false},
-        {"header": "CYCLE", "columnDef": "cycle", "width": 140, "checkbox": false, "hidden": false},
-        {"header": "FY", "columnDef": "FY", "width": 40, "checkbox": false, "hidden": false},
-        {"header": "HIDDEN", "columnDef": "opHidden", "width": 40, "checkbox": true, "hidden": false},
-        {"header": "RECORD STATUS", "columnDef": "Record_Status_Description", "width": 60, "checkbox": false, "hidden": false},
-        {"header": "TRANSFER STATUS", "columnDef": "Transfer_Status_Description", "width": 60, "checkbox": false, "hidden": false}
+      "cycles":
+      [
+        {"headerName": "CYCLE ID", "field": "CYC_ID", "width": 30, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "CYCLE", "field": "cycle", "width": 140, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "FY", "field": "FY", "width": 40, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "HIDDEN", "field": "opHidden", "width": 40, "cellRendererFramework": "agCheckBoxRenderer", "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "RECORD STATUS", "field": "Record_Status_Description", "width": 60, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "TRANSFER STATUS", "field": "Transfer_Status_Description", "width": 60, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false}
       ],
-      "missionlocations": 
-      [ 
-        {"header": "ID", "columnDef": "lngMissionLocationID", "width": 40, "checkbox": false, "hidden": false},
-        {"header": "HIDDEN", "columnDef": "opHidden", "width": 40, "checkbox": true, "hidden": false},
-        {"header": "LOCATION", "columnDef": "strMissionLocation", "width": 140, "checkbox": false, "hidden": false},
-        {"header": "CONUS", "columnDef": "MissionConus", "width": 40, "checkbox": true, "hidden": false},
-        {"header": "COUNTRY", "columnDef": "Country", "width": 140, "checkbox": false, "hidden": false},
-        {"header": "COUNTRY CODE", "columnDef": "CountryCode", "width": 60, "checkbox": false, "hidden": false},
-        {"header": "STATE", "columnDef": "STATEAB", "width": 50, "checkbox": false, "hidden": false},
-        {"header": "ZIP CODE", "columnDef": "ZipCode", "width": 70, "checkbox": false, "hidden": false},
-        {"header": "INSTALLATION", "columnDef": "Installation", "width": 140, "checkbox": false, "hidden": false},
-        {"header": "GEO LOCATION", "columnDef": "GeoLocation", "width": 70, "checkbox": false, "hidden": false},
-        {"header": "GEO COORDS", "columnDef": "Geographic_Coord", "width": 100, "checkbox": false, "hidden": false},
-        {"header": "LATITUDE", "columnDef": "Latitude", "width": 80, "checkbox": false, "hidden": false},
-        {"header": "LONGITUDE", "columnDef": "Longitude", "width": 80, "checkbox": false, "hidden": false},
-        {"header": "UNC ONTRY CODE", "columnDef": "UN_CC", "width": 100, "checkbox": false, "hidden": false},
-        {"header": "ARLOC", "columnDef": "UN_CC", "width": 80, "checkbox": false, "hidden": false},
-        {"header": "COMBAT ZONE", "columnDef": "CZ", "width": 40, "checkbox": true, "hidden": false},
-        {"header": "RECORD STATUS", "columnDef": "Record_Status_Description", "width": 60, "checkbox": false, "hidden": false},
-        {"header": "TRANSFER STATUS", "columnDef": "Transfer_Status_Description", "width": 60, "checkbox": false, "hidden": false}
+      "missionlocations":
+      [
+        {"headerName": "ID", "field": "lngMissionLocationID", "width": 40, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "HIDDEN", "field": "opHidden", "width": 40, "cellRendererFramework": "agCheckBoxRenderer", "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "LOCATION", "field": "strMissionLocation", "width": 140, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "CONUS", "field": "MissionConus", "width": 40, "cellRendererFramework": "agCheckBoxRenderer", "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "COUNTRY", "field": "Country", "width": 140, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "COUNTRY CODE", "field": "CountryCode", "width": 60, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "STATE", "field": "STATEAB", "width": 50, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "ZIP CODE", "field": "ZipCode", "width": 70, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "INSTALLATION", "field": "Installation", "width": 140, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "GEO LOCATION", "field": "GeoLocation", "width": 70, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "GEO COORDS", "field": "Geographic_Coord", "width": 100, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "LATITUDE", "field": "Latitude", "width": 80, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "LONGITUDE", "field": "Longitude", "width": 80, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "UNC ONTRY CODE", "field": "UN_CC", "width": 100, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "ARLOC", "field": "UN_CC", "width": 80, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "COMBAT ZONE", "field": "CZ", "width": 40, "cellRendererFramework": "agCheckBoxRenderer", "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "RECORD STATUS", "field": "Record_Status_Description", "width": 60, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "TRANSFER STATUS", "field": "Transfer_Status_Description", "width": 60, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false}
       ],
-      "fundcites": 
-      [ 
-        {"header": "FUND ID", "columnDef": "FundId", "width": 40, "checkbox": false, "hidden": false},
-        {"header": "FUND CODE", "columnDef": "FundCode", "width": 370, "checkbox": false, "hidden": false},
-        {"header": "EFFECTIVE DATE", "columnDef": "FundEffDate", "width": 70, "checkbox": false, "hidden": false},
-        {"header": "FUND TYPE", "columnDef": "FundTypeName", "width": 120, "checkbox": false, "hidden": false},
-        {"header": "CIC", "columnDef": "CIC", "width": 150, "checkbox": false, "hidden": false},
-        {"header": "MDC", "columnDef": "MDC", "width": 40, "checkbox": false, "hidden": false},
-        {"header": "CONUS BASED", "columnDef": "IsConusBased", "width": 40, "checkbox": true, "hidden": false},
-        {"header": "FY1", "columnDef": "FY1", "width": 40, "checkbox": false, "hidden": false},
-        {"header": "FY2", "columnDef": "FY2", "width": 40, "checkbox": false, "hidden": false},
-        {"header": "FY3", "columnDef": "FY3", "width": 40, "checkbox": false, "hidden": false},
-        {"header": "DEPT", "columnDef": "DEPT", "width": 40, "checkbox": false, "hidden": false},
-        {"header": "FY", "columnDef": "FY", "width": 40, "checkbox": false, "hidden": false},
-        {"header": "BSN", "columnDef": "BSN", "width": 40, "checkbox": false, "hidden": false},
-        {"header": "LIMIT", "columnDef": "LIMIT", "width": 40, "checkbox": false, "hidden": false},
-        {"header": "OA", "columnDef": "OA", "width": 40, "checkbox": false, "hidden": false},
-        {"header": "ASN", "columnDef": "ASN", "width": 40, "checkbox": false, "hidden": false},
-        {"header": "AMS", "columnDef": "AMS", "width": 90, "checkbox": false, "hidden": false},
-        {"header": "EOR", "columnDef": "EOR", "width": 50, "checkbox": false, "hidden": false},
-        {"header": "MDEP", "columnDef": "MDEP", "width": 40, "checkbox": false, "hidden": false},
-        {"header": "FCC", "columnDef": "FCC", "width": 50, "checkbox": false, "hidden": false},
-        {"header": "STATUS ID", "columnDef": "STATUS_ID", "width": 50, "checkbox": false, "hidden": false},
-        {"header": "APC", "columnDef": "APC", "width": 60, "checkbox": false, "hidden": false},
-        {"header": "FSN", "columnDef": "FSN", "width": 50, "checkbox": false, "hidden": false}
+      "fundcites":
+      [
+        {"headerName": "FUND ID", "field": "FundId", "width": 40, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "FUND CODE", "field": "FundCode", "width": 370, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "EFFECTIVE DATE", "field": "FundEffDate", "width": 70, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "FUND TYPE", "field": "FundTypeName", "width": 120, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "CIC", "field": "CIC", "width": 150, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "MDC", "field": "MDC", "width": 40, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "CONUS BASED", "field": "IsConusBased", "width": 40, "cellRendererFramework": "agCheckBoxRenderer", "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "FY1", "field": "FY1", "width": 40, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "FY2", "field": "FY2", "width": 40, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "FY3", "field": "FY3", "width": 40, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "DEPT", "field": "DEPT", "width": 40, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "FY", "field": "FY", "width": 40, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "BSN", "field": "BSN", "width": 40, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "LIMIT", "field": "LIMIT", "width": 40, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "OA", "field": "OA", "width": 40, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "ASN", "field": "ASN", "width": 40, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "AMS", "field": "AMS", "width": 90, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "EOR", "field": "EOR", "width": 50, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "MDEP", "field": "MDEP", "width": 40, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "FCC", "field": "FCC", "width": 50, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "STATUS ID", "field": "STATUS_ID", "width": 50, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "APC", "field": "APC", "width": 60, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "FSN", "field": "FSN", "width": 50, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false}
       ],
-      "tpfdd": 
-      [ 
-        {"header": "PID", "columnDef": "PID", "width": 60, "checkbox": false, "hidden": false},
-        {"header": "OPERATION", "columnDef": "DESCRIPTION_SHORT", "width": 140, "checkbox": false, "hidden": false},
-        {"header": "DESCRIPTION", "columnDef": "DESCRIPTION_LONG", "width": 240, "checkbox": false, "hidden": false},
-        {"header": "CDATE", "columnDef": "CDATE", "width": 60, "checkbox": false, "hidden": false},
-        {"header": "TYPE", "columnDef": "TYPE", "width": 50, "checkbox": false, "hidden": false},
-        {"header": "ACTIVE", "columnDef": "ACTIVE", "width": 50, "checkbox": true, "hidden": false},
-        {"header": "DEPLOY", "columnDef": "DEPLOY", "width": 50, "checkbox": true, "hidden": false},
-        {"header": "OPERATION", "columnDef": "operation", "width": 60, "checkbox": false, "hidden": false}
+      "tpfdd":
+      [
+        {"headerName": "PID", "field": "PID", "width": 60, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "OPERATION", "field": "DESCRIPTION_SHORT", "width": 140, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "DESCRIPTION", "field": "DESCRIPTION_LONG", "width": 240, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "CDATE", "field": "CDATE", "width": 60, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "TYPE", "field": "TYPE", "width": 50, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "ACTIVE", "field": "ACTIVE", "width": 50, "cellRendererFramework": "agCheckBoxRenderer", "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "DEPLOY", "field": "DEPLOY", "width": 50, "cellRendererFramework": "agCheckBoxRenderer", "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false},
+        {"headerName": "OPERATION", "field": "operation", "width": 60, "hide": false, "sortable": true, "filter": true, "resizeable": true, "editable": false}
       ]
   }

@@ -52,7 +52,7 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let possEle of searchPoss;" class="mat-cell">
-                            <td><mat-checkbox (click)="console.log(row)"></mat-checkbox></td>
+                            <td class="checkCell"><mat-checkbox (click)="recordSelected(possEle)"></mat-checkbox></td>
                             <td class="cellText">{{ possEle.Installation }}</td>
                             <td class="cellText">{{ possEle.StateAB }}</td>
                             <td class="cellText">{{ possEle.Country }}</td>
@@ -66,7 +66,7 @@
 
     <hr *ngIf="searched" />
     <div style="float:right; margin-right: 10px;">
-        <button id="btnAddLocation" class="btn btnCustom specialBtn" disabled="locationSelected.length > 0" *ngIf="searched" (click)="addSelectedLocations()">Add Location</button>
+        <button id="btnAddLocation" class="btn btnCustom specialBtn" [disabled]="locationSelected.length == 0" *ngIf="searched" (click)="addSelectedLocations()">Add Location</button>
         <button id="btnClose" class="btn btnCustom specialBtn" (click)="closeSearch()">Close</button>
     </div>
 </div>

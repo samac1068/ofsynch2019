@@ -10,7 +10,7 @@ export class DatastoreService {
   //Variables
   private _passKey: string = "4A3F6BD3-61FB-467B-83D0-0EFBAF72AFC4";
   private _connectid: string  = 'MobCopConnectionString';
-  private _appVersion: string = '2.0.0 (BETA) - 20191024';
+  private _appVersion: string = '2.0.0 - 20200204';
   private _apiServer: string = "";
   private _apiLocation: string = "";
 
@@ -49,7 +49,7 @@ export class DatastoreService {
     this._apiLocation = location;
   }
 
-   /// Global Services
+   /// Global Services and functions
   public getSelectedRow(arr: any, id: number) {
     return arr.find(x => x.ID == id);
   }
@@ -59,6 +59,17 @@ export class DatastoreService {
       if (arr[i] == value)
         return i;
     }
+
+    return -1;
+  }
+
+  public get2DArrayIndex(arr: any, col: string, value: any): number {
+     for(var i = 0; i < arr.length; i++) {
+         if (arr[i][col] == value)
+             return i;
+     }
+
+     return -1;
   }
 
   public getBtnStatus(title: string) {

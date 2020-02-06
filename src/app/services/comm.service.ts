@@ -10,6 +10,7 @@ export class CommService {
   submitRecClicked = new EventEmitter();
   createNewClicked = new EventEmitter();
   editRecClicked = new EventEmitter();
+  cogClicked = new EventEmitter();
 
   signalReload = new EventEmitter();
 }

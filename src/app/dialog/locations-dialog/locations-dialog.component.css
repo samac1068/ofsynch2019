@@ -46,6 +46,19 @@
     font-size: 11px;
 }
 
+.checkCell {
+    text-align: center;
+    vertical-align: middle;
+}
+
 th, td {
     border-bottom: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+}
+
+.grpTitle {
+    font-weight: bold;
+    font-size: 16px;
+    text-decoration: underline;
 }

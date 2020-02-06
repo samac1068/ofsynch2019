@@ -26,11 +26,12 @@ export class LocationsDialogComponent implements OnInit {
 
     ngOnInit() {
         //this.updateDataLoad();
+        this.resetSearch();
     }
 
-    updateDataLoad() {
-        //this.locations = this.ds.opsData["missionlocations"];
-    }
+    /*updateDataLoad() {
+        this.locations = this.ds.opsData["missionlocations"];
+    }*/
 
     resetSearch() {
         // Reset the original search and shrink the form
@@ -39,7 +40,6 @@ export class LocationsDialogComponent implements OnInit {
         this.locationSelected = [];
         this.searchExist = [];
         this.searchPoss = [];
-
     }
 
     closeSearch() {
@@ -57,12 +57,12 @@ export class LocationsDialogComponent implements OnInit {
     }
 
     getLocationData() {
-        this.data.searchMissionLocation(this.searchTxt).subscribe((results) => {
-            this.searchExist = results;
+        this.data.searchMissionLocation(this.searchTxt).subscribe((resultset1) => {
+            this.searchExist = resultset1;
 
             //Now retrieve all possibles
-            this.data.searchGeoLocation(this.searchTxt).subscribe((results) => {
-                this.searchPoss = results;
+            this.data.searchGeoLocation(this.searchTxt).subscribe((resultset2) => {
+                this.searchPoss = resultset2;
                 this.searched = true;
             });
         });
@@ -70,11 +70,31 @@ export class LocationsDialogComponent implements OnInit {
 
     recordSelected(row) {
         // Search and make sure we don't have it then add otherwise remove
-        //locationSelected
+        row.Selected = !row.Selected;
+        let i: number = (this.locationSelected.length > 0) ? this.ds.get2DArrayIndex(this.locationSelected, 'GeoLoc_Cd', row.GeoLoc_Cd) : 0;
 
+        // Decide if it should be added or removed from the locationSelected array
+        if(row.Selected) {
+            if (i === 0)
+                this.locationSelected.push(row);
+        } else
+            this.locationSelected.splice(i, 1);
     }
 
     addSelectedLocations() {
-
+        // Will loop through a store each of the selected location now
+        if(this.locationSelected.length > 0) {
+            this.locationSelected.forEach((obj) => {
+                this.data.saveMissionLocation(obj)
+                    .subscribe((result) => {
+                        console.log(result);
+                        this.cds.acknowledge('Location Added', 'Successfully Added Rec ID ' + result.processMsg.split("-")[1]);
+                        this.resetSearch();
+                        this.comm.signalReload.emit();
+                    });
+            });
+        } else {
+            this.cds.acknowledge('Invalid Selection', 'No location have been selected.');
+        }
     }
 }
