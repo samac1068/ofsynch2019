@@ -1,6 +1,6 @@
 import {CommService} from 'src/app/services/comm.service';
-import {MissionAssign} from './../../models/missionassign';
-import {DataService} from './../../services/data.service';
+import {MissionAssign} from 'src/app/models/missionassign';
+import {DataService} from 'src/app/services/data.service';
 import {Component, OnInit} from '@angular/core';
 import {DatastoreService} from 'src/app/services/datastore.service';
 import {DualListComponent} from 'angular-dual-listbox';
@@ -28,21 +28,20 @@ export class OperationDialogComponent implements OnInit {
     };
 
     currList: Locations[] = [];
-
     selOp: Operation = null;
     missionAssign: MissionAssign[] = [];
     locations: any = [];
-
     availCount: number = 0;
     assignedCount: number = 0;
-
     assignedStorage: Locations[] = [];
+    killCalled: boolean = false;
 
     constructor(private ds: DatastoreService, private data: DataService, public dialogRef: MatDialogRef<OperationDialogComponent>,
                 private cds: ConfirmDialogService, private comm: CommService) {
     }
 
     ngOnInit() {
+        this.killCalled = false;
         this.selOp = this.ds.curSelectedRecord;
         this.updateDataLoad();
     }
@@ -56,8 +55,11 @@ export class OperationDialogComponent implements OnInit {
                 this.ds.opsData['missionAssign'] = results;
                 this.missionAssign = results;
 
-                // build the lists
-                this.buildListsForOperation();
+                // Depending on the timing, either display the list or kill the dialog
+                if(!this.killCalled)
+                    this.buildListsForOperation();
+                else
+                    this.killDialog();
             });
     }
 
@@ -91,7 +93,7 @@ export class OperationDialogComponent implements OnInit {
         let atob: any = this.assignedStorage.filter(item => this.currList.indexOf(item) < 0);  // Removed from Current
         let btoa: any = this.currList.filter(item => this.assignedStorage.indexOf(item) < 0);  // Added to Current
 
-        console.log(atob, btoa);
+        //console.log(atob, btoa);
 
         let chgValue: MissionAssign = new MissionAssign();
         if (atob.length == 0 && btoa.length > 0) {//Added
@@ -105,12 +107,18 @@ export class OperationDialogComponent implements OnInit {
                 //Display something on a system that doesn't have debugging tools.
                 this.cds.acknowledge(this.ds.acknowTitle, results.processMsg);
 
-                if (results.ID > 0) {
-                    this.updateDataLoad();
-                } else {
+                if (results.ID == 0) {
                     this.cds.acknowledge(this.ds.acknowTitle, 'Failed - Reason: ' + results.processMsg, 'OK');
+                } else {
+                    this.updateDataLoad();
                 }
             });
+    }
+
+    updateAndClose() {
+        // Update the full data because they may have added a piece of information
+        this.killCalled = true;
+        this.updateDataLoad();
     }
 
     setSortOnChg() {

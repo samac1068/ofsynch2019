@@ -19,5 +19,10 @@
       "dom"
     ],
     "resolveJsonModule": true
-  }
+  },
+  "exclude": [
+    "node_modules",
+    "**/*.spec.ts",
+    "/src/assets/config/config.txt"
+  ]
 }

@@ -23,7 +23,7 @@
           <mat-label>Operation</mat-label>
           <mat-select id="operation" [formControl]="opControl" required [(ngModel)]="selRec.Op_ID" (selectionChange)="storeAllChanges($event)">
             <mat-option>--</mat-option>
-            <mat-option *ngFor="let op of operations" [(value)]="op.op_id">
+            <mat-option *ngFor="let op of operations" [value]="op.op_id">
               {{ op.operation_long }}
             </mat-option>
           </mat-select>
@@ -39,7 +39,7 @@
           <mat-label>Cycle</mat-label>
           <mat-select id="cycle" [formControl]="cycleControl" required [(ngModel)]="selRec.Cyc_ID" (selectionChange)="storeAllChanges($event)">
             <mat-option>--</mat-option>
-            <mat-option *ngFor="let c of cycles" [(value)]="c.CYC_ID">
+            <mat-option *ngFor="let c of cycles" [value]="c.CYC_ID">
               {{ c.cycle }}
             </mat-option>
           </mat-select>
@@ -55,7 +55,7 @@
           <mat-label>Pay</mat-label>
           <mat-select id="pay" [formControl]="payControl" required [(ngModel)]="selRec.PAY_Operation_ID" (selectionChange)="storeAllChanges($event)">
             <mat-option>--</mat-option>
-            <mat-option *ngFor="let p of pay" [(value)]="p.PAY_Operation_ID">
+            <mat-option *ngFor="let p of pay" [value]="p.PAY_Operation_ID">
               {{ p.PAY_Operation_Description | uppercase }}
             </mat-option>
           </mat-select>
@@ -71,7 +71,7 @@
           <mat-label>TCS</mat-label>
           <mat-select id="tcs" [formControl]="tcsControl" required [(ngModel)]="selRec.TCS_Operation_ID" (selectionChange)="storeAllChanges($event)">
             <mat-option>--</mat-option>
-            <mat-option *ngFor="let t of tcs" [(value)]="t.TCS_Operation_ID">
+            <mat-option *ngFor="let t of tcs" [value]="t.TCS_Operation_ID">
               {{ t.TCS_Operation_Description | uppercase }}
             </mat-option>
           </mat-select>
@@ -87,7 +87,7 @@
           <mat-label>CONUSA</mat-label>
           <mat-select id="conusa" [formControl]="conusaControl" required [(ngModel)]="selRec.Conusa_OpID" (selectionChange)="storeAllChanges($event)">
             <mat-option>--</mat-option>
-            <mat-option *ngFor="let co of conusa" [(value)]="co.opId">
+            <mat-option *ngFor="let co of conusa" [value]="co.opId">
               {{ co.opLongName | uppercase}}
             </mat-option>
           </mat-select>
@@ -113,7 +113,6 @@
     <mat-checkbox id="ma12304" [(ngModel)]="selRec.ma12304" (change)="storeAllChanges($event)">12304</mat-checkbox>
     <mat-checkbox id="ma12304_a" [(ngModel)]="selRec.ma12304_a" (change)="storeAllChanges($event)">12304(A)</mat-checkbox>
     <mat-checkbox id="ma12304_b" [(ngModel)]="selRec.ma12304_b" (change)="storeAllChanges($event)">12304(B)</mat-checkbox>
-    <mat-checkbox id="ma12302_border" [(ngModel)]="selRec.ma_12302_border" (change)="storeAllChanges($event)">12302 Border</mat-checkbox>
   </mat-card>
 
   <!-- Button Group -->

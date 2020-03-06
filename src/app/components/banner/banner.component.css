@@ -29,6 +29,15 @@
     font-weight: bold;
 }
 
+.testtxt
+{
+    font-size: 11px;
+    color: red;
+    margin-left: 200px;
+    margin-top: 55px;
+    position: absolute;
+}
+
 .mdisButton
 {
     float:right; 

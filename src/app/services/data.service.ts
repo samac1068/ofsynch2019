@@ -3,8 +3,8 @@ import {Fundcites} from '../models/fundcites';
 import {DatastoreService} from './datastore.service';
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import {throwError, Observable} from 'rxjs';
-import {catchError} from 'rxjs/operators';
+import { throwError, Observable } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 import {Damps} from '../models/damps';
 import {Cycle} from '../models/cycle';
@@ -15,9 +15,6 @@ import {Pay} from '../models/pay';
 import {Orders} from '../models/orders';
 import {Operation} from '../models/operations';
 import {LocationSearch} from '../models/LocationSearch';
-
-import {AGCheckBoxRendererComponent} from '../components/renderers/AGCheckBoxRendererComponent';
-import {AGEditIconRendererComponent} from '../components/renderers/AGEditIconRendererComponent';
 
 const httpHeaders = {
     headers: new HttpHeaders({
@@ -34,11 +31,9 @@ const httpOpt = {
 })
 export class DataService {
 
-    constructor(private http: HttpClient, private ds: DatastoreService) {
-    }
+    constructor(private http: HttpClient, private ds: DatastoreService) { }
 
-    ngOnInit(): void {
-    }
+    ngOnInit(): void { }
 
     // Error Handling
     private static errorHandler(error: any) {
@@ -64,7 +59,7 @@ export class DataService {
     }
 
     identifyAPIServerLocation(results: any): void {
-        for (var i = 0; i < results.length; i++) {
+        for (let i = 0; i < results.length; i++) {
             if (results[i].active) {
                 this.ds.setWSAPI(results[i].url, results[i].location);
                 break;
@@ -81,211 +76,64 @@ export class DataService {
     }
 
     getColumnData(): any {
-        return {
-            "damps":
-                [
-                    {"headerName": "Edit", "field": "ID", "cellRendererFramework": AGEditIconRendererComponent },
-                    {"headerName": "ID", "field": "ID" },
-                    {"headerName": "Hidden", "field": "opHidden", "cellRendererFramework": AGCheckBoxRendererComponent},
-                    {"headerName": "Description", "field": "Description", "filter": true},
-                    {"headerName": "Pay OP", "field": "PAY_Operation", "filter": true},
-                    {"headerName": "TCS OP", "field": "TCS_Operation", "filter": true},
-                    {"headerName": "Short Name", "field": "opShortName", "filter": true},
-                    {"headerName": "Record Status", "field": "Record_Status_Description", "filter": true},
-                    {"headerName": "Transfer Status", "field": "Transfer_Status_Description",  "filter": true},
-                    {"headerName": "12301D", "field": "ma12301_d", "cellRendererFramework": AGCheckBoxRendererComponent},
-                    {"headerName": "12302", "field": "ma12302", "cellRendererFramework": AGCheckBoxRendererComponent},
-                    {"headerName": "12304", "field": "ma12304", "cellRendererFramework": AGCheckBoxRendererComponent},
-                    {"headerName": "12304A", "field": "ma12304_a", "cellRendererFramework": AGCheckBoxRendererComponent},
-                    {"headerName": "12304B", "field": "ma12304_b", "cellRendererFramework": AGCheckBoxRendererComponent},
-                    {"headerName": "MOBCAP", "field": "MOBCAP", "filter": true},
-                    {"headerName": "Cycle", "field": "Cycle", "filter": true},
-                    {"headerName": "Long Name", "field": "opLongName", "filter": true},
-                    {"headerName": "UIC to NIPR", "field": "UIC_ToNipr", "cellRendererFramework": AGCheckBoxRendererComponent}
-                ],
-            "orders":
-                [
-                    {"headerName": "Edit", "field": "id", "cellRendererFramework": AGEditIconRendererComponent },
-                    {"headerName": "Visible", "field": "visible", "cellRendererFramework": AGCheckBoxRendererComponent },
-                    {"headerName": "ID", "field": "id", "filter": true},
-                    {"headerName": "OPERATION", "field": "operation", "filter": true},
-                    {"headerName": "CYCLE", "field": "cycle", "filter": true},
-                    {"headerName": "IN PLANNING", "field": "plan_id", "cellRendererFramework": AGCheckBoxRendererComponent },
-                    {"headerName": "ORDERS", "field": "ord_id", "filter": true },
-                    {"headerName": "ASSIGNED DAMPS", "field": "Description", "filter": true }
-                ],
-            "pay":
-                [
-                    {"headerName": "Edit", "field": "PAY_Operation_ID", "cellRendererFramework": AGEditIconRendererComponent },
-                    {"headerName": "ID", "field": "PAY_Operation_ID", "filter": true },
-                    {"headerName": "OPERATION", "field": "PAY_Operation", "filter": true },
-                    {"headerName": "DESCRIPTION", "field": "PAY_Operation_Description", "filter": true },
-                    {"headerName": "RECORD STATUS", "field": "Record_Status_Description", "filter": true },
-                    {"headerName": "TRANSFER STATUS", "field": "Transfer_Status_Description", "filter": true }
-                ],
-            "tcs":
-                [
-                    {"headerName": "Edit", "field": "TCS_Operation_ID", "cellRendererFramework": AGEditIconRendererComponent },
-                    {"headerName": "ID", "field": "TCS_Operation_ID", "filter": true },
-                    {"headerName": "OPERATION", "field": "TCS_Operation", "filter": true },
-                    {"headerName": "DESCRIPTION", "field": "TCS_Operation_Description", "filter": true },
-                    {"headerName": "RECORD STATUS", "field": "Record_Status_Description", "filter": true },
-                    {"headerName": "TRANSFER STATUS", "field": "Transfer_Status_Description", "filter": true }
-                ],
-            "conusa":
-                [
-                    {"headerName": "Edit", "field": "opId", "cellRendererFramework": AGEditIconRendererComponent },
-                    {"headerName": "ID", "field": "opId", "filter": true },
-                    {"headerName": "SHORTNAME", "field": "opShortName", "filter": true },
-                    {"headerName": "LONGNAME", "field": "opLongName", "filter": true },
-                    {"headerName": "AUTH ID", "field": "opAuthId", "filter": true },
-                    {"headerName": "HIDDEN", "field": "opHidden", "cellRendererFramework": AGCheckBoxRendererComponent },
-                    {"headerName": "RECORD STATUS", "field": "Record_Status_Description", "filter": true },
-                    {"headerName": "TRANSFER STATUS", "field": "Transfer_Status_Description", "filter": true }
-                ],
-            "operations":
-                [
-                    {"headerName": "Edit", "field": "op_id", "cellRendererFramework": AGEditIconRendererComponent },
-                    {"headerName": "ID", "field": "op_id", "filter": true },
-                    {"headerName": "OPERATION", "field": "operation", "filter": true },
-                    {"headerName": "VISIBLE", "field": "unitrqmt_visible", "cellRendererFramework": AGCheckBoxRendererComponent  },
-                    {"headerName": "LONG NAME", "field": "operation_long", "filter": true },
-                    {"headerName": "TO CRC", "field": "CRC", "cellRendererFramework": AGCheckBoxRendererComponent},
-                    {"headerName": "TO NIPR", "field": "toNIPR", "cellRendererFramework": AGCheckBoxRendererComponent },
-                    {"headerName": "LOC ASGND", "field": "assignedCnt", "filter": true }
-                ],
-            "cycles":
-                [
-                    {"headerName": "Edit", "field": "CYC_ID", "cellRendererFramework": AGEditIconRendererComponent },
-                    {"headerName": "CYCLE ID", "field": "CYC_ID", "filter": true },
-                    {"headerName": "CYCLE", "field": "cycle", "filter": true },
-                    {"headerName": "FY", "field": "FY", "filter": true },
-                    {"headerName": "HIDDEN", "field": "opHidden", "cellRendererFramework": AGCheckBoxRendererComponent},
-                    {"headerName": "RECORD STATUS", "field": "Record_Status_Description", "filter": true },
-                    {"headerName": "TRANSFER STATUS", "field": "Transfer_Status_Description", "filter": true }
-                ],
-            "missionlocations":
-                [
-                    {"headerName": "Edit", "field": "lngMissionLocationID", "cellRendererFramework": AGEditIconRendererComponent },
-                    {"headerName": "ID", "field": "lngMissionLocationID", "filter": true },
-                    {"headerName": "HIDDEN", "field": "opHidden", "cellRendererFramework": AGCheckBoxRendererComponent },
-                    {"headerName": "LOCATION", "field": "strMissionLocation", "filter": true},
-                    {"headerName": "CONUS", "field": "MissionConus", "cellRendererFramework": AGCheckBoxRendererComponent },
-                    {"headerName": "COUNTRY", "field": "Country", "filter": true },
-                    {"headerName": "COUNTRY CODE", "field": "CountryCode", "filter": true },
-                    {"headerName": "STATE", "field": "STATEAB", "filter": true },
-                    {"headerName": "ZIP CODE", "field": "ZipCode", "filter": true },
-                    {"headerName": "INSTALLATION", "field": "Installation", "filter": true },
-                    {"headerName": "GEO LOCATION", "field": "GeoLocation", "filter": true },
-                    {"headerName": "GEO COORDS", "field": "Geographic_Coord", "filter": true },
-                    {"headerName": "LATITUDE", "field": "Latitude", "filter": true },
-                    {"headerName": "LONGITUDE", "field": "Longitude", "filter": true },
-                    {"headerName": "UNC ONTRY CODE", "field": "UN_CC", "filter": true },
-                    {"headerName": "ARLOC", "field": "UN_CC", "filter": true },
-                    {"headerName": "COMBAT ZONE", "field": "CZ", "cellRendererFramework": AGCheckBoxRendererComponent },
-                    {"headerName": "RECORD STATUS", "field": "Record_Status_Description", "filter": true },
-                    {"headerName": "TRANSFER STATUS", "field": "Transfer_Status_Description", "filter": true }
-                ],
-            "fundcites":
-                [
-                    {"headerName": "Edit", "field": "FundId", "cellRendererFramework": AGEditIconRendererComponent },
-                    {"headerName": "FUND ID", "field": "FundId", "filter": true },
-                    {"headerName": "FUND CODE", "field": "FundCode", "filter": true,},
-                    {"headerName": "EFFECTIVE DATE", "field": "FundEffDate", "filter": true },
-                    {"headerName": "FUND TYPE", "field": "FundTypeName", "filter": true },
-                    {"headerName": "CIC", "field": "CIC", "filter": true },
-                    {"headerName": "MDC", "field": "MDC", "filter": true },
-                    {"headerName": "CONUS BASED", "field": "IsConusBased", "cellRendererFramework": AGCheckBoxRendererComponent },
-                    {"headerName": "FY1", "field": "FY1", "filter": true },
-                    {"headerName": "FY2", "field": "FY2", "filter": true },
-                    {"headerName": "FY3", "field": "FY3", "filter": true },
-                    {"headerName": "DEPT", "field": "DEPT", "filter": true },
-                    {"headerName": "FY", "field": "FY", "filter": true },
-                    {"headerName": "BSN", "field": "BSN", "filter": true },
-                    {"headerName": "LIMIT", "field": "LIMIT", "filter": true },
-                    {"headerName": "OA", "field": "OA", "filter": true },
-                    {"headerName": "ASN", "field": "ASN", "filter": true },
-                    {"headerName": "AMS", "field": "AMS", "filter": true },
-                    {"headerName": "EOR", "field": "EOR", "filter": true },
-                    {"headerName": "MDEP", "field": "MDEP", "filter": true },
-                    {"headerName": "FCC", "field": "FCC", "filter": true },
-                    {"headerName": "STATUS ID", "field": "STATUS_ID", "filter": true },
-                    {"headerName": "APC", "field": "APC", "filter": true },
-                    {"headerName": "FSN", "field": "FSN", "filter": true }
-                ],
-            "tpfdd":
-                [
-                    {"headerName": "Edit", "field": "PID", "cellRendererFramework": AGEditIconRendererComponent },
-                    {"headerName": "PID", "field": "PID", "filter": true },
-                    {"headerName": "OPERATION", "field": "DESCRIPTION_SHORT", "filter": true },
-                    {"headerName": "DESCRIPTION", "field": "DESCRIPTION_LONG", "filter": true },
-                    {"headerName": "CDATE", "field": "CDATE", "filter": true },
-                    {"headerName": "TYPE", "field": "TYPE", "filter": true },
-                    {"headerName": "ACTIVE", "field": "ACTIVE", "cellRendererFramework": AGCheckBoxRendererComponent },
-                    {"headerName": "DEPLOY", "field": "DEPLOY", "cellRendererFramework": AGCheckBoxRendererComponent },
-                    {"headerName": "OPERATION", "field": "operation", "filter": true }
-                ]
-        };
+        return this.ds.dgColumnData;
     }
 
     // Establish Secure Connection and Store Retrieved Token
     getSessionToken(): Observable<any> {
-        var fullDomain: string = this.identifyWSServer().split('/api')[0] + `/token`;
-        const header = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
-        const params = new HttpParams().set('grant_type', 'password')
-            .set('username', this.ds.getPassKey());
+        let fullDomain: string = this.identifyWSServer().split('/api')[0] + `/token`;
+        console.log("Get session token: " + fullDomain);
+        const params = "userName=sean.mcgill" + "&password=" + this.ds.getPassKey() + "&grant_type=password";
 
-        localStorage.setItem('token', this.ds.getPassKey());  // Forcing a key that can be used for authorization with the API
-
-        return (this.http.post<any>(fullDomain, null, {params: params, headers: header})
+        return (this.http.post<any>(fullDomain, params)
             .pipe(catchError(DataService.errorHandler)));
     }
 
     // Retrieve Data from Server
     getOperationData(): Observable<any> {
-        var fullDomain: string = this.identifyWSServer() + `/GetOperationData`;
+        let fullDomain: string = this.identifyWSServer() + `/GetOperationData`;
         const params = new HttpParams().set('id', this.ds.getPassKey()).set('op', this.ds.curSelectedButton);
         return (this.http.get<any>(fullDomain, {params})
             .pipe(catchError(DataService.errorHandler)));
     }
 
     getSubOperationData(subop: string): Observable<any> {
-        var fullDomain: string = this.identifyWSServer() + `/GetOperationData`;
+        let fullDomain: string = this.identifyWSServer() + `/GetOperationData`;
         const params = new HttpParams().set('id', this.ds.getPassKey()).set('op', subop);
         return (this.http.get<any>(fullDomain, {params})
             .pipe(catchError(DataService.errorHandler)));
     }
 
     searchMissionLocation(locName: string): Observable<any> {
-        var fullDomain: string = this.identifyWSServer() + `/SearchMissionLocation`;
+        let fullDomain: string = this.identifyWSServer() + `/SearchMissionLocation`;
         const params = new HttpParams().set('id', this.ds.getPassKey()).set('locName', locName);
         return (this.http.get<any>(fullDomain, {params})
             .pipe(catchError(DataService.errorHandler)));
     }
 
     searchGeoLocation(locName: string): Observable<any> {
-        var fullDomain: string = this.identifyWSServer() + `/SearchGeoLocation`;
+        let fullDomain: string = this.identifyWSServer() + `/SearchGeoLocation`;
         const params = new HttpParams().set('id', this.ds.getPassKey()).set('locName', locName);
         return (this.http.get<any>(fullDomain, {params})
             .pipe(catchError(DataService.errorHandler)));
     }
 
     getPayLOA(opID: string): Observable<any> {
-        var fullDomain: string = this.identifyWSServer() + `/GetPayLinesOfAccounting`;
+        let fullDomain: string = this.identifyWSServer() + `/GetPayLinesOfAccounting`;
         const params = new HttpParams().set('id', this.ds.getPassKey()).set('opID', opID);
         return (this.http.get<any>(fullDomain, {params})
             .pipe(catchError(DataService.errorHandler)));
     }
 
     getTCSLOA(opID: string): Observable<any> {
-        var fullDomain: string = this.identifyWSServer() + `/GetTCSLinesOfAccounting`;
+        let fullDomain: string = this.identifyWSServer() + `/GetTCSLinesOfAccounting`;
         const params = new HttpParams().set('id', this.ds.getPassKey()).set('opID', opID);
         return (this.http.get<any>(fullDomain, {params})
             .pipe(catchError(DataService.errorHandler)));
     }
 
     getAllLOA(type: string): Observable<any> {
-        var fullDomain: string = this.identifyWSServer() + `/GetAllLinesOfAccounting`;
+        let fullDomain: string = this.identifyWSServer() + `/GetAllLinesOfAccounting`;
         const params = new HttpParams().set('id', this.ds.getPassKey()).set('type', type);
         return (this.http.get<any>(fullDomain, {params})
             .pipe(catchError(DataService.errorHandler)));
@@ -294,73 +142,73 @@ export class DataService {
 
     /////////////////////// POSTS
     modifyFPOperationRecord(): Observable<any> {
-        var fullDomain: string = this.identifyWSServer() + `/UpdateFPOperationData`;
+        let fullDomain: string = this.identifyWSServer() + `/UpdateFPOperationData`;
         return (this.http.post<Damps>(fullDomain + '?id=' + this.ds.getPassKey(), this.ds.curSelectedRecord, httpHeaders)
             .pipe(catchError(DataService.errorHandler)));
     }
 
     modifyOrdersRecord(): Observable<any> {
-        var fullDomain: string = this.identifyWSServer() + `/UpdateOrdersData`;
+        let fullDomain: string = this.identifyWSServer() + `/UpdateOrdersData`;
         return (this.http.post<Orders>(fullDomain + '?id=' + this.ds.getPassKey(), this.ds.curSelectedRecord, httpHeaders)
             .pipe(catchError(DataService.errorHandler)));
     }
 
     updatePayRecord(): Observable<any> {
-        var fullDomain: string = this.identifyWSServer() + `/UpdatePayData`;
+        let fullDomain: string = this.identifyWSServer() + `/UpdatePayData`;
         return (this.http.post<Pay>(fullDomain + '?id=' + this.ds.getPassKey(), this.ds.curSelectedRecord, httpHeaders)
             .pipe(catchError(DataService.errorHandler)));
     }
 
     updateTCSRecord(): Observable<any> {
-        var fullDomain: string = this.identifyWSServer() + `/UpdateTCSData`;
+        let fullDomain: string = this.identifyWSServer() + `/UpdateTCSData`;
         return (this.http.post<TCS>(fullDomain + '?id=' + this.ds.getPassKey(), this.ds.curSelectedRecord, httpHeaders)
             .pipe(catchError(DataService.errorHandler)));
     }
 
     updateCONUSARecord(): Observable<any> {
-        var fullDomain: string = this.identifyWSServer() + `/UpdateCONUSAData`;
+        let fullDomain: string = this.identifyWSServer() + `/UpdateCONUSAData`;
         return (this.http.post<Conusa>(fullDomain + '?id=' + this.ds.getPassKey(), this.ds.curSelectedRecord, httpHeaders)
             .pipe(catchError(DataService.errorHandler)));
     }
 
     updateLocationData(): Observable<any> {
-        var fullDomain: string = this.identifyWSServer() + `/UpdateLocationData`;
+        let fullDomain: string = this.identifyWSServer() + `/UpdateLocationData`;
         return (this.http.post<Location>(fullDomain + '?id=' + this.ds.getPassKey(), this.ds.curSelectedRecord, httpHeaders)
             .pipe(catchError(DataService.errorHandler)));
     }
 
     saveMissionLocation(LocationInfo: LocationSearch): Observable<any> {
-        var fullDomain: string = this.identifyWSServer() + `/SaveMissionLocation`;
+        let fullDomain: string = this.identifyWSServer() + `/SaveMissionLocation`;
         return (this.http.post<Location>(fullDomain + '?id=' + this.ds.getPassKey(), LocationInfo, httpHeaders)
             .pipe(catchError(DataService.errorHandler)));
     }
 
     updateFundCiteData(): Observable<any> {
-        var fullDomain: string = this.identifyWSServer() + `/UpdateFundCiteData`;
+        let fullDomain: string = this.identifyWSServer() + `/UpdateFundCiteData`;
         return (this.http.post<Fundcites>(fullDomain + '?id=' + this.ds.getPassKey(), this.ds.curSelectedRecord, httpHeaders)
             .pipe(catchError(DataService.errorHandler)));
     }
 
     updateOperationData(): Observable<any> {
-        var fullDomain: string = this.identifyWSServer() + `/UpdateOpsLookupData`;
+        let fullDomain: string = this.identifyWSServer() + `/UpdateOpsLookupData`;
         return (this.http.post<Operation>(fullDomain + '?id=' + this.ds.getPassKey(), this.ds.curSelectedRecord, httpHeaders)
             .pipe(catchError(DataService.errorHandler)));
     }
 
     updateTPFDDRecord(): Observable<any> {
-        var fullDomain: string = this.identifyWSServer() + `/UpdateTPFDDData`;
+        let fullDomain: string = this.identifyWSServer() + `/UpdateTPFDDData`;
         return (this.http.post<Tpfdd>(fullDomain + '?id=' + this.ds.getPassKey(), this.ds.curSelectedRecord, httpHeaders)
             .pipe(catchError(DataService.errorHandler)));
     }
 
     updateCycleRecord(): Observable<any> {
-        var fullDomain: string = this.identifyWSServer() + `/UpdateCycleData`;
+        let fullDomain: string = this.identifyWSServer() + `/UpdateCycleData`;
         return (this.http.post<Cycle>(fullDomain + '?id=' + this.ds.getPassKey(), this.ds.curSelectedRecord, httpHeaders)
             .pipe(catchError(DataService.errorHandler)));
     }
 
     modifyOpsLocationData(locationData: MissionAssign): Observable<any> {
-        var fullDomain: string = this.identifyWSServer() + `/UpdateOpsLocationData`;
+        let fullDomain: string = this.identifyWSServer() + `/UpdateOpsLocationData`;
         return (this.http.post<MissionAssign>(fullDomain + '?id=' + this.ds.getPassKey(), locationData, httpHeaders)
             .pipe(catchError(DataService.errorHandler)));
     }

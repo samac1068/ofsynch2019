@@ -10,11 +10,14 @@ import { Location } from '@angular/common';
 export class BannerComponent implements OnInit {
 
   version: string;
+  token: string;
 
   constructor(private ds: DatastoreService, private location: Location) { }
 
   ngOnInit() {
     this.version = this.ds.getVersion();
+
+    this.token = localStorage.getItem('token');
   }
 
   returnToMDIS(){

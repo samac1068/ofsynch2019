@@ -1,12 +1,11 @@
 import {DataService} from '../../services/data.service';
 import {CommService} from '../../services/comm.service';
 import {DatastoreService} from '../../services/datastore.service';
-import {Component, OnInit, ViewChild, ElementRef, HostListener, Renderer2, Input, ViewChildren, ChangeDetectorRef} from '@angular/core';
+import {Component, OnInit, ViewChild, ElementRef, ChangeDetectorRef} from '@angular/core';
 import {NgxSpinnerService} from 'ngx-spinner';
 import {MatDialog, MatDialogRef} from '@angular/material';
 import {OperationDialogComponent} from 'src/app/dialog/operation-dialog/operation-dialog.component';
 import {LocationsDialogComponent} from 'src/app/dialog/locations-dialog/locations-dialog.component';
-import { AGCheckBoxRendererComponent } from 'src/app/components/renderers/AGCheckBoxRendererComponent';
 
 @Component({
     selector: 'app-datawindow',
@@ -20,8 +19,6 @@ export class DatawindowComponent implements OnInit {
     dgData: any = []; // Currently loaded information
     dgDataRaw: any = []; // Contains the displayed list of information and is used to reset back to norm before a filter is applied
     localPamams: any;
-    //colData: any = []; // current column list
-    //colWidthData: string[] = [];
     colHeadData: string[] = [];
     colDefaults;
     showEditor = false;  // Display the edit panel or hide it.  Default is hidden
@@ -89,14 +86,13 @@ export class DatawindowComponent implements OnInit {
     }
 
     onGridReady(params) {
-        console.log("Setting the params");
          this.localPamams = params;
     }
 
     loadSelectedButton() {
         this.getSelectedOperationData(true);
 
-        // Load the necessary suboperation information for the selected operation
+        // Load the necessary sub-operation information for the selected operation
         switch (this.ds.curSelectedButton) {
             case 'damps':
                 this.subOpList = ['pay', 'tcs', 'conusa', 'operations', 'cycles'];
@@ -157,9 +153,9 @@ export class DatawindowComponent implements OnInit {
         this.spinner.show();
     }
 
-    sepClickHandler() {
+    /*sepClickHandler() {
         this.showEditor = !this.showEditor;
-    }
+    }*/
 
     setTableResize() {
         let totWidth = 0;

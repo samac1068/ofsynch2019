@@ -4,9 +4,11 @@ import { tap } from 'rxjs/operators';
 export class AuthInterceptorService implements HttpInterceptor {
 
     intercept(req: HttpRequest<any>, next: HttpHandler) {
-        // Enter if outgoing response for all data
+        // Enter if outgoing response for all data - add the bearer token to all requests
         if(req.url.indexOf('token') == -1) {
-            const curToken = localStorage.getItem("key");
+            //const curToken = localStorage.getItem("key");
+            const curToken = localStorage.getItem("token");
+            //console.log("token is " + curToken);
             const modBasicReq = req.clone({
                 headers: req.headers.append('Authorization', `Bearer ${curToken}`)
             });
@@ -15,7 +17,7 @@ export class AuthInterceptorService implements HttpInterceptor {
         }
         
         // Enter if outgoing response for token data only
-        else if(req.url.indexOf('token') > -1) {
+        else if(req.url.indexOf('token') != -1) {
             const modInitReq = req.clone({
                 headers: req.headers.append('Content-Type', 'application/x-www-form-urlencoded')
             });

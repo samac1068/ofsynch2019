@@ -4,7 +4,7 @@ export class Orders {
     op_id: number;
     cycle: string;
     cyc_id: number;
-    visible: number;
+    isVisible: boolean;
     fpop_id: number;
     Description: string;
     plan_id: number;

@@ -1,7 +1,7 @@
 <div class="container page">
   <div class="row">
         <div class="col-lg"><span class="setleft" style="font-weight: bold">ID: <span class="idtxt">{{ selRec.id }}</span></span></div>
-        <div class="col-lg"><mat-checkbox id="visible" class="setright" style="font-weight: bold" [(ngModel)]="selRec.visible" 
+        <div class="col-lg"><mat-checkbox id="visiblechk" class="setright" style="font-weight: bold" [(ngModel)]="selRec.isVisible"
           (change)="storeAllChanges($event)">Visible</mat-checkbox></div>
   </div>
 
@@ -12,7 +12,7 @@
             <mat-label>Operation</mat-label>
             <mat-select id="operation" [formControl]="opControl" required [(ngModel)]="selRec.op_id" (selectionChange)="storeAllChanges($event)">
               <mat-option>--</mat-option>
-              <mat-option *ngFor="let op of operations" [(value)]="op.op_id">
+              <mat-option *ngFor="let op of operations" [value]="op.op_id">
                 {{ op.operation }}
               </mat-option>
             </mat-select>
@@ -28,7 +28,7 @@
               <mat-label>Cycle</mat-label>
               <mat-select id="cycle" [formControl]="cycleControl" required [(ngModel)]="selRec.cyc_id" (selectionChange)="storeAllChanges($event)">
                 <mat-option>--</mat-option>
-                <mat-option *ngFor="let c of cycles" [(value)]="c.CYC_ID">
+                <mat-option *ngFor="let c of cycles" [value]="c.CYC_ID">
                   {{ c.cycle }}
                 </mat-option>
               </mat-select>
@@ -44,7 +44,7 @@
               <mat-label>Assigned Damps</mat-label>
               <mat-select id="damps" [formControl]="dampsControl" required [(ngModel)]="selRec.fpop_id" (selectionChange)="storeAllChanges($event)">
                 <mat-option>--</mat-option>
-                <mat-option *ngFor="let d of damps" [(value)]="d.ID">
+                <mat-option *ngFor="let d of damps" [value]="d.ID">
                   {{ d.Description | uppercase }}
                 </mat-option>
               </mat-select>
