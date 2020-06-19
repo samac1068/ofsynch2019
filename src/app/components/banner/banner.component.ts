@@ -22,8 +22,8 @@ export class BannerComponent implements OnInit {
 
   returnToMDIS(){
     console.log("go back to previous page");
-    if(this.ds.getAPILocation() == "PROD"){
+    //if(this.ds.getAPILocation() == "PROD"){
       this.location.back();
-    }
+    //}
   }
 }
