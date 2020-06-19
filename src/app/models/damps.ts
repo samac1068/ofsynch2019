@@ -15,6 +15,7 @@ export class Damps {
     ma12304: boolean;
     ma12304_a: boolean;
     ma12304_b: boolean;
+    ma12302_Corona: boolean;
     Op_ID: number;
     opShortName: string;
     opLongName: string;

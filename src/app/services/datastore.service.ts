@@ -12,7 +12,7 @@ export class DatastoreService {
   //Variables
   private _passKey: string = "4A3F6BD3-61FB-467B-83D0-0EFBAF72AFC4";
   private _connectid: string  = 'MobCopConnectionString';
-  private _appVersion: string = '2.0.20.0305';
+  private _appVersion: string = '2.0.20.0310';
   private _apiServer: string = "";
   private _apiLocation: string = "";
 
@@ -46,6 +46,7 @@ export class DatastoreService {
               {"headerName": "12304", "field": "ma12304", "cellRendererFramework": AGCheckBoxRendererComponent},
               {"headerName": "12304A", "field": "ma12304_a", "cellRendererFramework": AGCheckBoxRendererComponent},
               {"headerName": "12304B", "field": "ma12304_b", "cellRendererFramework": AGCheckBoxRendererComponent},
+              {"headerName": "12302 Corona", "field": "ma12302_Corona", "cellRendererFramework": AGCheckBoxRendererComponent},
               {"headerName": "MOBCAP", "field": "MOBCAP", "filter": true},
               {"headerName": "Cycle", "field": "Cycle", "filter": true},
               {"headerName": "Long Name", "field": "opLongName", "filter": true},

@@ -44,7 +44,8 @@ export class DampsComponent implements OnInit {
     ngOnInit() {
         this.comm.submitRecClicked.subscribe(() => {
             if (this.ds.curSelectedButton == 'damps') {
-                console.log(this.chgArr.length);
+                console.log("============================");
+                console.log("Changes selected", this.chgArr.length);
                 if (this.chgArr.length > 0) {
                     this.ValidateFormData();
                     console.log("selRec", this.selRec);
@@ -72,6 +73,7 @@ export class DampsComponent implements OnInit {
                 } else {
                     this.cds.acknowledge('DAMPS: Invalid Submission', 'You have not made any changes to this record.', 'OK');
                 }
+              console.log("============================");
             }
         });
 
@@ -94,6 +96,7 @@ export class DampsComponent implements OnInit {
         this.selRec.opHidden = 0;
         this.selRec.ma12301_d = 0;
         this.selRec.ma12302 = 0;
+        this.selRec.ma12302_Corona = 0;
         this.selRec.ma12304 = 0;
         this.selRec.ma12304_a = 0;
         this.selRec.ma12304_b = 0;
@@ -123,6 +126,8 @@ export class DampsComponent implements OnInit {
                 this.chgArr.splice(this.chgArr.indexOf(e.source.id), 1);
             }
         }
+
+        console.log('storeAllChanges', this.chgArr);
     }
 
     textChanges(e) {
@@ -158,5 +163,6 @@ export class DampsComponent implements OnInit {
         if (this.selRec.ma12304 == null) this.selRec.ma12304 = 0;
         if (this.selRec.ma12304_a == null) this.selRec.ma12304_a = 0;
         if (this.selRec.ma12304_b == null) this.selRec.ma12304_b = 0;
+        if (this.selRec.ma12302_Corona == null) this.selRec.ma12302_Corona = 0;
     }
 }
