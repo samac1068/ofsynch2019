@@ -18,6 +18,7 @@ export class AGEditIconRendererComponent {
     }
 
     onCogClick(){
-        this.comm.cogClicked.emit(this.params.data);
+      console.log("Cog Data:", this.params.data);
+      this.comm.cogClicked.emit(this.params.data);
     }
 }

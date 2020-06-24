@@ -74,6 +74,10 @@ export class CyclesComponent implements OnInit {
         if(this.selRec.opHidden == null) this.selRec.opHidden = 0;
         this.updateDataLoad();
     });
+
+    this.comm.cancelRecClicked.subscribe(() => {
+      this.chgArr = [];
+    });
   }
 
   setDefaultItems(){

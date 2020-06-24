@@ -29,12 +29,13 @@ export class MissionlocationComponent implements OnInit {
   displayControl = new FormControl('', [Validators.required]);
   countryControl = new FormControl('', [Validators.required]);
   stateControl = new FormControl('', [Validators.required]);
-  zipcodeControl = new FormControl('', [Validators.required]);
   installationControl = new FormControl('', [Validators.required]);
   geolocControl = new FormControl('', [Validators.required]);
   geocoordControl = new FormControl('', [Validators.required]);
   latitudeControl = new FormControl('', [Validators.required]);
   longitudeControl = new FormControl('', [Validators.required]);
+
+
 
   constructor(private comm: CommService, private ds: DatastoreService, private cds: ConfirmDialogService, private data: DataService) { }
 
@@ -71,16 +72,16 @@ export class MissionlocationComponent implements OnInit {
       }
     });
 
+    this.comm.editRecClicked.subscribe(() => {
+      this.chgArr = [];
+      this.selRec = this.ds.curSelectedRecord;
+      this.updateDataLoad();
+    });
+
     this.comm.createNewClicked.subscribe(() => {
       this.chgArr = [];
       this.selRec = new Locations();
       this.setDefaultItems();
-      this.updateDataLoad();
-    });
-
-    this.comm.editRecClicked.subscribe(() => {
-      this.chgArr = [];
-      this.selRec = this.ds.curSelectedRecord;
       this.updateDataLoad();
     });
   }
@@ -126,7 +127,6 @@ export class MissionlocationComponent implements OnInit {
       if (this.stateControl.invalid) this.invalidMsg.push('select a state');
     }
 
-    if (this.zipcodeControl.invalid) this.invalidMsg.push('enter a zip code');
     if (this.installationControl.invalid) this.invalidMsg.push('enter an installation');
     if (this.geolocControl.invalid) this.invalidMsg.push('enter a geographical location');
     if (this.geocoordControl.invalid) this.invalidMsg.push('enter a geo coordinate');
@@ -142,5 +142,7 @@ export class MissionlocationComponent implements OnInit {
     // Make sure value isn't null
     if (this.selRec.ID == null) this.selRec.ID = 0;
     if (this.selRec.opHidden == null) this.selRec.opHidden = 0;
+    if (this.selRec.CZ == null) this.selRec.CZ = 0;
+    if (this.selRec.ZipCode == null) this.selRec.ZipCode = 0;
   }
 }

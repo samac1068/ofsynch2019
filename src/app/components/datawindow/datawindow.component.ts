@@ -63,7 +63,8 @@ export class DatawindowComponent implements OnInit {
 
         //Cog was clicked
         this.comm.cogClicked.subscribe((results) => {
-            this.editRecordHandler(results);
+          console.log("Passed To Edit Window", results);
+          this.editRecordHandler(results);
         });
     }
 

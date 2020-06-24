@@ -73,6 +73,10 @@ export class ConusaComponent implements OnInit {
       this.selRec = this.ds.curSelectedRecord;
       this.updateDataLoad();
     });
+
+    this.comm.cancelRecClicked.subscribe(() => {
+      this.chgArr = [];
+    });
   }
 
   setDefaultItems() {

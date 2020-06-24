@@ -52,7 +52,7 @@
     <div class="col-lg">
         <mat-form-field style="width:100%">
             <mat-label>State</mat-label>
-            <mat-select id="state" [formControl]="stateControl" required [(ngModel)]="selRec.STATEAB" 
+            <mat-select id="state" [formControl]="stateControl" [(ngModel)]="selRec.STATEAB"
               (selectionChange)="storeAllChanges($event)" [disabled]="selRec.CountryCode != 'US'">
               <mat-option>--</mat-option>
               <mat-option *ngFor="let s of states" [(value)]="s.state_cd">
@@ -69,7 +69,7 @@
     <div class="col-lg">
       <mat-form-field appearance="outline" style="width:100%">
         <mat-label>Zip Code:</mat-label>
-        <input matInput id="zipcode" [formControl]="zipcodeControl" required [(ngModel)]="selRec.ZipCode" (focusout)="textChanges($event)">
+        <input matInput id="zipcode" [(ngModel)]="selRec.ZipCode" (focusout)="textChanges($event)">
       </mat-form-field>  
     </div>
   </div>
