@@ -6,4 +6,7 @@ export class Operation {
     CRC: boolean;
     toNIPR: boolean;
     assignedCnt: number;
+    sptcmd: number;
+    funding: string;
+    mobslide_opname: string;
 }

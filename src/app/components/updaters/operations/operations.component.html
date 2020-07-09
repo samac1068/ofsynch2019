@@ -12,7 +12,7 @@
     <div class="col-lg">
       <mat-form-field appearance="outline" style="width:100%">
         <mat-label>Operation Short:</mat-label>
-        <input matInput id="opshort" [formControl]="opshortControl" required [(value)]="selRec.operation" (focusout)="textChanges($event)">
+        <input matInput id="opshort" [formControl]="opshortControl" required [(ngModel)]="selRec.operation" (focusout)="textChanges($event)">
       </mat-form-field>  
     </div>
   </div>
@@ -22,8 +22,25 @@
     <div class="col-lg">
       <mat-form-field appearance="outline" style="width:100%">
         <mat-label>Operation Long:</mat-label>
-        <input matInput id="oplong" [formControl]="oplongControl" required [(value)]="selRec.operation_long" (focusout)="textChanges($event)">
+        <input matInput id="oplong" [formControl]="oplongControl" required [(ngModel)]="selRec.operation_long" (focusout)="textChanges($event)">
       </mat-form-field>  
+    </div>
+  </div>
+
+  <!-- Support Fields -->
+  <div id="supportFields">
+    <div class="row sptrow" >
+      <!-- New entry fields for the operation -->
+      <div class="col-4 fieldTitle">Support Command:</div>
+      <div class="col"><input matInput id="sptcmd" class="fieldInput" [(ngModel)]="selRec.sptcmd" (focusout)="textChanges($event)" /></div>
+    </div>
+    <div class="row sptrow">
+      <div class="col-4 fieldTitle">Funding:</div>
+      <div class="col"><input matInput id="funding" class="fieldInput" maxlength="10" size="10" [(ngModel)]="selRec.funding" (focusout)="textChanges($event)" /></div>
+    </div>
+    <div class="row sptrow">
+      <div class="col-4 fieldTitle">MOBSlide OpName:</div>
+      <div class="col"><input matInput id="mobslideopname" class="fieldInput" [(ngModel)]="selRec.mobslide_opname" (focusout)="textChanges($event)" /></div>
     </div>
   </div>
 

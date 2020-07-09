@@ -32,19 +32,49 @@
 }
 
 #leftlabel {
-    position: absolute;
-    top: 93px;
-    left: 90px;
-    font-weight: bold;
+  position: absolute;
+  top: 210px;
+  left: 70px;
+  font-weight: bold;
 }
 
 #rightlabel {
-    position: absolute;
-    top: 93px;
-    right: 90px;
-    font-weight: bold;
+  position: absolute;
+  top: 210px;
+  left: 350px;
+  font-weight: bold;
 }
 
 #spacer {
     height: 25px;
+}
+
+.fieldTitle {
+  font-weight: bold;
+  font-size: 11px;
+  width: 130px;
+  text-align: right;
+}
+
+.fieldInput {
+  border: 0.5px solid lightgray;
+  font-size: 11px;
+  color: black;
+  width: 250px;
+}
+
+#supportFields {
+  margin-left: 30px;
+}
+
+.localButton {
+  height: 25px !important;
+  margin-top:2px !important;
+  padding-top: 2px !important;
+  line-height: 0 !important;
+}
+
+
+#divOps {
+  margin-top: 10px;
 }

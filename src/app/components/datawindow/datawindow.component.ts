@@ -200,7 +200,7 @@ export class DatawindowComponent implements OnInit {
         // tslint:disable-next-line:triple-equals
         if (this.ds.curSelectedButton == 'operations') {     // Show Unique Operations Window
             this.showEditor = false;
-            this.operationDialogRef = this.dialog.open(OperationDialogComponent, {height: '600px', width: '620px'});
+            this.operationDialogRef = this.dialog.open(OperationDialogComponent, {height: '730px', width: '620px'});
         } else {    // Show standard window
             this.showEditor = true;
             this.comm.editRecClicked.emit();

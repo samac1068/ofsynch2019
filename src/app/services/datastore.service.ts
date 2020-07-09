@@ -101,7 +101,10 @@ export class DatastoreService {
               {"headerName": "LONG NAME", "field": "operation_long", "filter": true },
               {"headerName": "TO CRC", "field": "CRC", "cellRendererFramework": AGCheckBoxRendererComponent},
               {"headerName": "TO NIPR", "field": "toNIPR", "cellRendererFramework": AGCheckBoxRendererComponent },
-              {"headerName": "LOC ASGND", "field": "assignedCnt", "filter": true }
+              {"headerName": "LOC ASGND", "field": "assignedCnt", "filter": true },
+              {"headerName": "SPT CMD", "field": "sptcmd", "filter": true },
+              {"headerName": "FUNDING", "field": "funding", "filter": true },
+              {"headerName": "MOBSLIDE NAME", "field": "mobslide_opname", "filter": true }
           ],
       "cycles":
           [

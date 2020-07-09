@@ -1,5 +1,5 @@
-import { ConfirmDialogService } from './../../../dialog/confirm-dialog/confirm-dialog.service';
-import { CommService } from './../../../services/comm.service';
+import { ConfirmDialogService } from '../../../dialog/confirm-dialog/confirm-dialog.service';
+import { CommService } from '../../../services/comm.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { DatastoreService } from 'src/app/services/datastore.service';
@@ -23,9 +23,7 @@ export class OperationsComponent implements OnInit {
   //Form Validators
   opshortControl = new FormControl('', [Validators.required]);
   oplongControl = new FormControl('', [Validators.required]);
-  dadControl = new FormControl('', [Validators.required]);
-  
- 
+
   constructor(private comm:CommService, private ds: DatastoreService, private cds: ConfirmDialogService, private data: DataService) { }
 
   ngOnInit() {
@@ -77,7 +75,14 @@ export class OperationsComponent implements OnInit {
   }
 
   setDefaultItems(){
-    //this.selRec.ID = 0;  //Indication that this is a new record.
+    this.selRec.op_id = 0;  //Indication that this is a new record.
+    this.selRec.operation = "";
+    this.selRec.operation_long = "";
+    this.selRec.sptcmd = 0;
+    this.selRec.funding = "";
+    this.selRec.mobslide_opname = "";
+    this.selRec.toNIPR = 0;
+    this.selRec.unitrqmt_visible = 0;
   }
 
   // Used to get the latest batch of stored DDL information
@@ -105,6 +110,5 @@ export class OperationsComponent implements OnInit {
 
     if(this.opshortControl.invalid) this.invalidMsg.push("enter a short description");
     if(this.oplongControl.invalid) this.invalidMsg.push("enter a long description");
-    if(this.dadControl.invalid) this.invalidMsg.push("select a DAD");
   }
 }

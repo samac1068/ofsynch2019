@@ -17,3 +17,20 @@
 .idtxt {
     color: grey;
 }
+
+.fieldTitle {
+  font-weight: bold;
+  font-size: 12px;
+  width: 130px;
+}
+
+.fieldInput {
+  border: 0.5px solid lightgray;
+  font-size: 12px;
+  color: black;
+  width: 250px;
+}
+
+.sptrow {
+  margin-bottom: 10px;
+}
