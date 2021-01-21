@@ -21,7 +21,7 @@ export class OrdersComponent implements OnInit {
     selRec: any = {};
     chgArr: string[] = [];
     invalidMsg: string[] = [];
-    operations: Operation = null;
+    operations: Operation[] = [];
     cycles: Cycle[] = [];
     damps: Damps[] = [];
 
@@ -41,6 +41,7 @@ export class OrdersComponent implements OnInit {
                         this.cds.confirm('ORDERS - Submission', 'Confirm you want to submit the ' + this.chgArr.length + ' change(s)?', 'Yes', 'No')
                             .then((confirmed) => {
                                 if (confirmed) {
+                                    this.correctForAddOperations();
                                     console.log(this.selRec);
                                     this.ds.curSelectedRecord = this.selRec;
                                     this.data.modifyOrdersRecord()
@@ -122,7 +123,17 @@ export class OrdersComponent implements OnInit {
 
     correctForNulls() {
         // Make sure value isn't null
-        if (this.selRec.id == null) this.selRec.ID = 0;
-        if (this.selRec.isVisible == null) this.selRec.isVisible = 0;
+        if (this.selRec.id == null) this.selRec.id = 0;
+        if (this.selRec.isVisible == null) this.selRec.isVisible = false;
+    }
+
+    correctForAddOperations() {
+      this.selRec.plan_id = 0;
+      this.selRec.ord_id = null;
+      this.selRec.Description = null;
+
+      //Loop through an find the string for the respective id
+      this.selRec.operation = this.operations.find(o=> o.op_id == this.selRec.op_id).operation;
+      this.selRec.cycle = this.cycles.find(c=> c.cyc_id == this.selRec.cyc_id).cycle;
     }
 }

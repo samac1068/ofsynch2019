@@ -117,7 +117,7 @@ export class DatawindowComponent implements OnInit {
                 this.subOpList = ['fundtypes'];
                 break;
             case 'operations':
-                this.subOpList = ['missionlocations', 'missionAssign', 'locationid'];
+                this.subOpList = ['missionlocations', 'missionAssign', 'locationid', 'command'];
                 break;
             case 'tpfdd':
                 this.subOpList = ['operations'];

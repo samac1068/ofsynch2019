@@ -7,6 +7,7 @@ import {DualListComponent} from 'angular-dual-listbox';
 import {MatDialogRef} from '@angular/material';
 import {Operation} from 'src/app/models/operations';
 import {Locations} from 'src/app/models/locations';
+import {Command} from 'src/app/models/command';
 import {ConfirmDialogService} from '../confirm-dialog/confirm-dialog.service';
 
 @Component({
@@ -31,6 +32,7 @@ export class OperationDialogComponent implements OnInit {
   selOp: Operation = null;
   missionAssign: MissionAssign[] = [];
   locations: any = [];
+  commands: Command[] = [];
   availCount: number = 0;
   assignedCount: number = 0;
   assignedStorage: Locations[] = [];
@@ -48,6 +50,7 @@ export class OperationDialogComponent implements OnInit {
 
   updateDataLoad() {
     this.locations = this.ds.opsData['missionlocations'];
+    this.commands = this.ds.opsData['command'];
 
     // Update the mission assigned list to reflect the recent change
     this.data.getSubOperationData('missionAssign')

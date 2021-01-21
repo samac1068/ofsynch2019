@@ -14,15 +14,24 @@
         <div class="row" >
           <!-- New entry fields for the operation -->
           <div class="col-4 fieldTitle">Support Command:</div>
-          <div class="col"><input matInput id="sptcmd" class="fieldInput" [(ngModel)]="selOp.sptcmd" /></div>
+          <div class="col">
+            <mat-select id="sptcmd" [(value)]="selOp.sptcmdid"  class="fieldInput" >
+              <mat-option>--</mat-option>
+              <mat-option *ngFor="let c of commands" [(value)]="c.CommandID">
+                {{ c.CommandName }}
+              </mat-option>
+            </mat-select>
+          </div>
         </div>
         <div class="row">
           <div class="col-4 fieldTitle">Funding:</div>
-          <div class="col"><input matInput id="funding" class="fieldInput" [(ngModel)]="selOp.funding" /></div>
+          <div class="col"><input matInput id="funding" class="fieldInput" [(ngModel)]="selOp.funding"
+                                  oninput="this.value = this.value.toUpperCase()"/></div>
         </div>
         <div class="row" style="margin-bottom: 10px">
           <div class="col-4 fieldTitle">MOBSlide OpName:</div>
-          <div class="col"><input matInput id="mobslideopname" class="fieldInput" [(ngModel)]="selOp.mobslide_opname" /></div>
+          <div class="col"><input matInput id="mobslideopname" class="fieldInput" [(ngModel)]="selOp.mobslide_opname"
+                                  oninput="this.value = this.value.toUpperCase()"/></div>
         </div>
         <div class="row">
           <div class="col-4 fieldTitle" style="font-size: 9px;">Click UPDATE to submit changes.</div>

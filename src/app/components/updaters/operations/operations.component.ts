@@ -5,6 +5,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { DatastoreService } from 'src/app/services/datastore.service';
 import { DataService } from 'src/app/services/data.service';
 import { Operation } from 'src/app/models/operations';
+import {Command} from '../../../models/command';
 
 @Component({
   selector: 'app-operations',
@@ -19,6 +20,7 @@ export class OperationsComponent implements OnInit {
   selRec: any = {};
   chgArr: string[] = [];
   invalidMsg: string[] = [];
+  commands: Command[] = [];
 
   //Form Validators
   opshortControl = new FormControl('', [Validators.required]);
@@ -78,7 +80,8 @@ export class OperationsComponent implements OnInit {
     this.selRec.op_id = 0;  //Indication that this is a new record.
     this.selRec.operation = "";
     this.selRec.operation_long = "";
-    this.selRec.sptcmd = 0;
+    this.selRec.sptcmdid = 0;
+    this.selRec.sptcmd = "";
     this.selRec.funding = "";
     this.selRec.mobslide_opname = "";
     this.selRec.toNIPR = 0;
@@ -87,7 +90,7 @@ export class OperationsComponent implements OnInit {
 
   // Used to get the latest batch of stored DDL information
   updateDataLoad() {
-    // No sub operations needed
+    this.commands = this.ds.opsData['command'];
   }
 
   resetAllFields(){

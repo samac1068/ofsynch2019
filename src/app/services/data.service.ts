@@ -93,7 +93,7 @@ export class DataService {
   getOperationData(): Observable<any> {
     let fullDomain: string = this.identifyWSServer() + `/GetOperationData`;
     const params = new HttpParams().set('id', this.ds.getPassKey()).set('op', this.ds.curSelectedButton);
-    console.log('Selected operation is:', this.ds.curSelectedButton);
+    //console.log('Selected operation is:', this.ds.curSelectedButton);
     return (this.http.get<any>(fullDomain, {params})
         .pipe(catchError(DataService.errorHandler)));
   }

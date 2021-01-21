@@ -17,5 +17,5 @@ export class Locations {
     Longitude: string;
     ARLOC: string;
     UN_CC: string;
-    CZ: number;
+    CZ: boolean;
 }

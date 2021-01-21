@@ -101,6 +101,7 @@ export class DampsComponent implements OnInit {
     this.selRec.ma12301_d = 0;
     this.selRec.ma12302 = 0;
     this.selRec.ma12302_Corona = 0;
+    this.selRec.ma12302_Border = 0;
     this.selRec.ma12304 = 0;
     this.selRec.ma12304_a = 0;
     this.selRec.ma12304_b = 0;
@@ -168,5 +169,6 @@ export class DampsComponent implements OnInit {
     if (this.selRec.ma12304_a == null) this.selRec.ma12304_a = 0;
     if (this.selRec.ma12304_b == null) this.selRec.ma12304_b = 0;
     if (this.selRec.ma12302_Corona == null) this.selRec.ma12302_Corona = 0;
+    if (this.selRec.ma12302_Border == null) this.selRec.ma12302_Border = 0;
   }
 }

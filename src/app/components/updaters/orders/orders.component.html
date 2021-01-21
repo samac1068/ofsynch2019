@@ -28,7 +28,7 @@
               <mat-label>Cycle</mat-label>
               <mat-select id="cycle" [formControl]="cycleControl" required [(ngModel)]="selRec.cyc_id" (selectionChange)="storeAllChanges($event)">
                 <mat-option>--</mat-option>
-                <mat-option *ngFor="let c of cycles" [value]="c.CYC_ID">
+                <mat-option *ngFor="let c of cycles" [value]="c.cyc_id">
                   {{ c.cycle }}
                 </mat-option>
               </mat-select>

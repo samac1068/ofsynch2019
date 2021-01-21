@@ -46,6 +46,7 @@ export class DatastoreService {
               {"headerName": "12304", "field": "ma12304", "cellRendererFramework": AGCheckBoxRendererComponent},
               {"headerName": "12304A", "field": "ma12304_a", "cellRendererFramework": AGCheckBoxRendererComponent},
               {"headerName": "12304B", "field": "ma12304_b", "cellRendererFramework": AGCheckBoxRendererComponent},
+              {"headerName": "12302 Border", "field": "ma12302_Border", "cellRendererFramework": AGCheckBoxRendererComponent},
               {"headerName": "12302 Corona", "field": "ma12302_Corona", "cellRendererFramework": AGCheckBoxRendererComponent},
               {"headerName": "MOBCAP", "field": "MOBCAP", "filter": true},
               {"headerName": "Cycle", "field": "Cycle", "filter": true},
@@ -108,8 +109,8 @@ export class DatastoreService {
           ],
       "cycles":
           [
-              {"headerName": "Edit", "field": "CYC_ID", "cellRendererFramework": AGEditIconRendererComponent },
-              {"headerName": "CYCLE ID", "field": "CYC_ID", "filter": true },
+              {"headerName": "Edit", "field": "cyc_id", "cellRendererFramework": AGEditIconRendererComponent },
+              {"headerName": "CYCLE ID", "field": "cyc_id", "filter": true },
               {"headerName": "CYCLE", "field": "cycle", "filter": true },
               {"headerName": "FY", "field": "FY", "filter": true },
               {"headerName": "HIDDEN", "field": "opHidden", "cellRendererFramework": AGCheckBoxRendererComponent},
